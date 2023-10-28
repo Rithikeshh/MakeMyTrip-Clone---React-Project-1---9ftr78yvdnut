@@ -1,0 +1,138 @@
+.navbar-container{
+    position: absolute;
+    top: 87px;
+    width: 100%;
+}
+.navbar{
+    align-items: center;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 20px 0 rgba(0,0,0,.1);
+    display: flex;
+    height: 100px;
+    padding: 8px 30px;
+    box-sizing: border-box;
+}
+.headerIconsGap{
+    gap: 40px ;
+}
+.headerIcons{
+    text-decoration: none;
+    max-width: 75px;
+}
+.headerIconWrapper{
+    align-items: center;
+    display: flex;
+    height: 40px;
+    justify-content: center;
+    margin-bottom: 4px;
+    width: 52px;
+}
+.navbar .chSprite{
+    background-size: 260px 400px;
+}
+.chFlights{
+    background-position: -5px -4px;
+    height: 32px;
+    width: 42px;
+}
+.active .chFlights{
+    background-position: -5px -44px;
+}
+.chNavText{
+    border-bottom: 3px solid #fff;
+    border-radius: 10px;
+}
+.active .chNavText{
+   font-weight: 700;
+   background: transparent;
+   color: var(--color-primary,#008cff);
+   /* font-size: 17px; */
+}
+.headerIconTextAlignment {
+    font-size: calc(var(--font-scale, 1)*14px);
+    font-weight: 400;
+    line-height: 17px;
+    text-align: center;
+    /* word-break: break-word; */
+}
+.darkGreyText{
+    color: #4a4a4a;
+}
+.chHotels{
+    background-position: -60px 0;
+    height: 40px;
+    width: 36px;
+}
+.active .chHotels{
+    background-position: -62px -41.5px;
+}
+.chHomeStays{
+    background-position: -57px -83px;
+    height: 37px;
+    width: 44px;
+}
+.active .chHomeStays{
+    background-position: -56px -121.5px;
+}
+.chHolidays{
+    background-position: -109px -4px;
+    height: 33px;
+    width: 42px;
+}
+.active .chHolidays{
+    background-position: -109px -44px;
+}
+.chTrains{
+    background-position: -156.5px -3px;
+    height: 37px;
+    width: 47px;
+}
+.active .chTrains{
+    background-position: -156px -41px;
+}
+.chBuses{
+    background-position: -210.5px -2px;
+    height: 36px;
+    width: 43px;
+}
+.active .chBuses{
+    background-position: -209px -42px;
+}
+.chCabs{
+    background-position: -110px -82px;
+    height: 37px;
+    width: 49px;
+}
+.active .chCabs{
+    background-position: -110px -122px;
+}
+.chForex{
+    background-position: -167px -83px;
+    font-family: 'Lato' !important;
+    height: 34px;
+    width: 30px;
+}
+.active .chForex{
+    background-position: -167px -123px;
+}
+.chTravelInsurance{
+    background-position: -221px -86px;
+    height: 29px;
+    width: 25px;
+}
+.active .chTravelInsurance{
+    background-position: -221px -126px;
+}
+.navbar .active:after {
+    background: var(--color-primary,var(--color-primary,#008cff));
+    border-radius: 10px;
+    content: "";
+    display: inline-flex;
+    height: 3px;
+    left: 0;
+    position: absolute;
+    width: 100%;
+    z-index: 2;
+    bottom: -9px;
+}
