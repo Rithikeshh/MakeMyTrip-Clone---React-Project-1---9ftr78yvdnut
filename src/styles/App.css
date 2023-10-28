@@ -1,7 +1,13 @@
+*, html {
+  box-sizing: border-box;
+}
 h1, h2, h3, h4, h5, h6, p, ul {
   margin: 0;
   list-style: none;
   padding: 0;
+}
+a{
+  text-decoration: none;
 }
 .container{
   background-image: url("../assets/images/gradient-bg.webp");
@@ -90,7 +96,7 @@ h1, h2, h3, h4, h5, h6, p, ul {
   background-position: -225px -326px!important;
   background-size: 260px 400px!important;
   animation: circularAnimation 3s linear infinite;
-  animation-iteration-count: 3;
+  /* animation-iteration-count: 3; */
   
 }
 @keyframes circularAnimation {
@@ -108,14 +114,23 @@ h1, h2, h3, h4, h5, h6, p, ul {
 .gap-140{
   gap: 140px;
 }
+.gap-20{
+  gap: 20px;
+}
 .margin-y-3{
   margin: 3px 0px;
+}
+.margin-x-30{
+  margin: 0px 30px;
 }
 .margin-r-5{
   margin-right: 5px;
 }
 .margin-l-10{
   margin-left: 10px;
+}
+.p-r-8{
+  padding-right: 8px;
 }
 .bg-white{
   background-color: white;

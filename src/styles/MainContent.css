@@ -1,0 +1,19 @@
+.mainContent-container-wrapper{
+    width: 100%;
+}
+.mainContent-container{
+    background-color: white;
+    margin-top: 28px;
+    border-radius: 12px;
+    padding: 60px 30px 0px 30px;
+    width: 1200px;
+    /* flex-grow: 1; */
+}
+.flights-ticket-active{
+    background: #eaf5ff;
+    border-radius: 20px;
+    
+}
+.booking-details-container{
+    padding: 11px 0px;
+}

@@ -11,14 +11,17 @@
     display: flex;
     height: 100px;
     padding: 8px 30px;
-    box-sizing: border-box;
+    /* box-sizing: border-box; */
 }
 .headerIconsGap{
     gap: 40px ;
 }
 .headerIcons{
     text-decoration: none;
-    max-width: 75px;
+    max-width: 75px;  
+}
+.min-w-75{
+    min-width: 75px;
 }
 .headerIconWrapper{
     align-items: center;
@@ -54,7 +57,7 @@
     font-weight: 400;
     line-height: 17px;
     text-align: center;
-    /* word-break: break-word; */
+    
 }
 .darkGreyText{
     color: #4a4a4a;
