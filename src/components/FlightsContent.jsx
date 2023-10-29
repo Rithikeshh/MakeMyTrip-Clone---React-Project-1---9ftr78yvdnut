@@ -21,14 +21,14 @@ function FlightsContent() {
             {checkboxForTickets.map((item,index)=>(
                 <FormControlLabel className={`${value==item.id && ('flights-ticket-active')} p-r-8`} key={index}
                     control={
-                        <Checkbox
-                            checked={value==item.id}
-                            value={item.id}
-                            onChange={handleChange}
-                            inputProps={{ 'aria-label': 'controlled' }}
-                            defaultChecked
-                            sx={{ '& .MuiSvgIcon-root': { fontSize: 16 } }}
-                        />
+                      <Checkbox
+                        checked={value==item.id}
+                        value={item.id}
+                        onChange={handleChange}
+                        inputProps={{ 'aria-label': 'controlled' }}
+                        defaultChecked
+                        sx={{ '& .MuiSvgIcon-root': { fontSize: 16 } }}
+                      />
                     }
                     
                     label={item.name}
@@ -44,9 +44,55 @@ function FlightsContent() {
             </p>
         </div>
       </div>
-      <div className='booking-details-container'>
+      <div className='flight-booking-details-container'>
+        <div className='flight-booking-details makeFlex make-align-center makeRelative'>
+            <div className='flight-inputBox searchFromCity'>
+              <label htmlFor="fromCity">
+                <span className='label-input margin-b-10'>From</span>
+                <input 
+                  className='flight-inputField lineHeight-36 font30 strongBold-text' 
+                  type="text" 
+                  id='fromCity'
+                  value={"Delhi"}
+                />
+                <p 
+                  className='makeRelative'
+                  title={'DEL, Delhi Airport India'}
+                >
+                  <span title='' className='airPortName'>
+                    {'DEL, Delhi Airport India'}
+                  </span>
+                </p>
+              </label>
+            </div>
+            <span className='flightSwapCircle'>
+              <span className='flightsSprite flightSwapIcon'></span>
+            </span>
+            <div className='flight-inputBox searchToCity'>
+              <label htmlFor="toCity">
+                <span className='label-input margin-b-10'>To</span>
+                <input 
+                  className='flight-inputField lineHeight-36 font30 strongBold-text' 
+                  type="text" 
+                  id='toCity'
+                  value={"Mumbai"}
+                />
+                <p 
+                  className='makeRelative'
+                  title={'BOM, Chhatrapati Shivaji International Airport India'}
+                >
+                  <span title='' className='airPortName'>
+                    {'BOM, Chhatrapati Shivaji International Airport India'}
+                  </span>
+                </p>
+              </label>
+            </div>
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
         <div>
-            
+
         </div>
       </div>
     </div>

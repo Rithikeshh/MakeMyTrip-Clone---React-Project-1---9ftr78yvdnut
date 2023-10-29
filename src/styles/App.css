@@ -107,9 +107,15 @@ a{
     transform: rotate(360deg);
   }
 }
+.lineHeight-36{
+  line-height: 36px;
+}
 .font12{
   font-size: 12px;
   line-height: 12px;
+}
+.font30{
+  font-size: 30px;
 }
 .gap-140{
   gap: 140px;
@@ -128,6 +134,9 @@ a{
 }
 .margin-l-10{
   margin-left: 10px;
+}
+.margin-b-10{
+  margin-bottom: 10px;
 }
 .p-r-8{
   padding-right: 8px;
