@@ -4,9 +4,9 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
 import { Link } from 'react-router-dom';
 const checkboxForTickets = [
-    { id: 1, name: "One Way" },
-    { id: 2, name: "Round Trip" },
-    { id: 3, name: "Multi City" },
+  { id: 1, name: "One Way" },
+  { id: 2, name: "Round Trip" },
+  { id: 3, name: "Multi City" },
 ]
 function FlightsContent() {
 
@@ -62,30 +62,84 @@ function FlightsContent() {
             paraTitle = {'BOM, Chhatrapati Shivaji International Airport India'}
             inputValue = {'Mumbai'}
           />
-          <InputBoxForDate
+          <InputBoxForDateAndTravel
             mainDivClass='dates'
             inputId = 'departure'            
             spanText = 'Departure'
             lastParaValue = 'Wednseday'
           />
-          <InputBoxForDate
+          <InputBoxForDateAndTravel
             mainDivClass='dates'
             inputId = 'return'            
             spanText = 'Return'
             lastParaValue = 'Friday'
           />
-          <InputBoxForDate
+          <InputBoxForDateAndTravel
             mainDivClass='flightTravellers'
             inputId = 'travellers'            
             spanText = 'Travellers & Class'
             lastParaValue = 'Business'
           />
         </div>
-        <div>
-
+        <div className='flight-booking-fare makeFlex make make-align-center make-justify-space margin-b-20'>
+          <div className="makeFlex make-align-center">
+            <span className='selectFareText font12 bold-text margin-r-5 noShrink'>
+              Select A <br/> Fare Type:
+            </span>
+            <ul className='specialFareNew'>
+              {/* Edit Details */}
+              <FareItems/>  
+              <FareItems/> 
+              <FareItems/> 
+              <FareItems/> 
+              <FareItems/> 
+              <FareItems/> 
+            </ul>
+          </div>
+          <div className='recentSearchGrid margin-l-10 makeFlex make-align-center make-justify-center'>
+            <span className='bold-text font12'>Trending Searches:</span>
+              <ul className='fltRecentSearches makeFlex'>
+                <li>
+                  <a className='darkGreyText' href="">
+                    <p className='font12'>
+                      {"Mumbai"}
+                      <span className='fltBlueOnewayArrowIcon flightsSprite margin-x-5'></span>  
+                      {"Bangkok"}
+                    </p>
+                  </a>
+                </li>
+                <li>
+                  <a className='darkGreyText' href="">
+                    <p className='font12'>
+                      {"Dubai"}
+                      <span className='fltBlueOnewayArrowIcon flightsSprite margin-x-5'></span>  
+                      {"Delhi"}
+                    </p>
+                  </a>
+                </li>
+              </ul>
+          </div>
         </div>
+        <p className='makeFlex make-justify-center'>
+          <a className='primaryBtn widgetSearchBtn bold-text font24' href="">SEARCH</a>
+        </p>
       </div>
     </div>
+  )
+}
+function FareItems(){
+  return(
+    <li className='font12 wrapFilter '>
+      <p>{"Regular"}<br/>{"Fares"}</p>
+      <div className='specialFareTooltip whiteText'>
+        <p className="font12 bold-text margin-b-5">
+          {"Armed Forces Fares"}
+        </p>
+        <p className='font11'>
+          Applicable for serving and retired personnel of Armed Forces and Paramilitary Forces, their recognised dependants like spouses and children, and war widows. It is mandatory to show a valid ID or dependant card at the airport, without which boarding might be denied.
+        </p>
+      </div>
+    </li>
   )
 }
 function InputBoxForCity({
@@ -118,7 +172,7 @@ function InputBoxForCity({
   )
 }
 
-function InputBoxForDate({
+function InputBoxForDateAndTravel({
   mainDivClass,
   inputId,
   spanText,

@@ -57,6 +57,9 @@ a{
 .flexOne{
   flex: 1;
 }
+.noShrink {
+  flex-shrink: 0;
+}
 .column{
   flex-direction: column;
 }
@@ -132,6 +135,9 @@ a{
 .margin-x-30{
   margin: 0px 30px;
 }
+.margin-x-5{
+  margin: 0px 5px;
+}
 .margin-r-5{
   margin-right: 5px;
 }
@@ -140,6 +146,12 @@ a{
 }
 .margin-b-10{
   margin-bottom: 10px;
+}
+.margin-b-5{
+  margin-bottom: 5px;
+}
+.margin-b-20{
+  margin-bottom: 20px;
 }
 .p-r-8{
   padding-right: 8px;
@@ -151,12 +163,22 @@ a{
   font-size: 10px;
   line-height: 10px;
 }
+.font11{
+  font-size: 11px;
+}
 .font16{
   font-size: 16px;
   line-height: 16px;
 }
+.font24{
+  font-size: 24px;
+  line-height: 24px;
+}
 .whiteText{
   color: #ffffff;
+}
+.darkGreyText {
+  color: #4a4a4a;
 }
 .grayText{
   color: #c2c2c2;
