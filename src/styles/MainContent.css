@@ -116,3 +116,27 @@ p[title]:hover:after {
     padding-left: 20px;
     margin-left: -18px;
 }
+.flight-booking-details .dates{
+    width: 158px;
+    height: 112px;
+    border-right: solid 1px #e7e7e7;
+}
+.flight-booking-details .dates .label-input::after, .flight-booking-details .flightTravellers .label-input::after {
+    border: solid #008cff;
+    border-width: 0 2px 2px 0;
+    display: inline-block;
+    padding: 3px;
+    content: '';
+    transform: rotate(45deg);
+    -webkit-transform: rotate(45deg);
+    vertical-align: top;
+    margin: 3px 0 0 8px;
+    transition: all 0.3s ease-in-out;
+}
+.shortYear::before {
+    content: "'";
+}
+.flightTravellers{
+    width: 214px;
+    border-radius: 0 10px 10px 0;
+}
