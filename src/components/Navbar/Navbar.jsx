@@ -1,5 +1,5 @@
 import React from 'react'
-import './styles/Navbar.css'
+import '../../styles/Navbar.css'
 import { NavLink } from 'react-router-dom'
 const navbarElements = [
     { name: "Flights", cssClassForHeaderIcons: "chFlights", path: "/flights" },

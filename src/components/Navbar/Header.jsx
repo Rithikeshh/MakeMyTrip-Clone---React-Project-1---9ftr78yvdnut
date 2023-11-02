@@ -1,6 +1,7 @@
 import React from 'react'
-import allLogo from './assets/images/allLogos.png'
-import mmtLogo from './assets/images/mmtLogoWhite.png'
+// import allLogo from './assets/images/allLogos.png'
+import mmtLogo from '../../assets/images/mmtLogoWhite.png'
+import Profile from '../Profile'
 
 function Header() {
   return (
@@ -35,12 +36,7 @@ function Header() {
                     <p className="font10 margin-y-3 grayText">Manage your bookings</p>
                     </div>
                 </li>
-                <li className="header-userList-item makeFlex make-align-center login-user userLoggedOut font10">
-                    <span className="myIcon landingSprite"></span>
-                    <div className="flexOne whiteText bold-text">
-                    <p>Login or Create Account</p>
-                    </div>
-                </li>
+                <Profile/>
                 <li className="header-userList-item makeFlex make-align-center geoSwitcher">
                     <div>
                     <div className="whiteText makeFlex makeCenter langSlct">
