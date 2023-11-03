@@ -156,6 +156,12 @@ a{
 .p-r-8{
   padding-right: 8px;
 }
+.p-r-6{
+  padding-right: 6px;
+}
+.p-l-6{
+  padding-left: 6px;
+}
 .bg-white{
   background-color: white;
 }

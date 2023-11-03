@@ -10,15 +10,56 @@
     border-radius: 10px;
     border: 1px solid #e7e7e7;
     z-index: 5 !important;
+    overflow: hidden;
+    >div{
+        position: relative;
+        >label{
+            >span{
+                padding-bottom: 8px;
+                white-space: nowrap;
+            }
+            >input{
+                border: none;
+                outline: none;
+                background:none;
+                font-weight: 900;
+                font-size: 30px;
+                line-height: 36px;
+                max-width: 200px;
+            }
+        }
+    }
+    >div:not(:first-child){
+        border-left: 1px solid #e7e7e7;
+    }
 }
 .booking-inputBox{
     padding: 10px 20px;
     display: flex;
     flex-direction: column;
+    cursor: pointer;
+    height: 100%;
+    .dropdown::after{
+        border: solid #008cff;
+        border-width: 0 2px 2px 0;
+        display: inline-block;
+        padding: 3px;
+        content: '';
+        transform: rotate(45deg);
+        -webkit-transform: rotate(45deg);
+        vertical-align: top;
+        margin: 3px 0 0 8px;
+        transition: all 0.3s ease-in-out;
+    }
 }
 .hotel-booking-details-container{
     display: grid;
-    grid-template-columns: 8fr 4fr 4fr 6fr 4fr;
+    grid-template-columns: 12fr 6fr 6fr 8fr 6fr;
+    
+}
+.booking-inputBox:hover{
+    background: #eaf5ff;
+    
 }
 
 
@@ -45,4 +86,18 @@
             }
         }
     }
+    .booking-details-container{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        >div{
+            flex-grow: 1;
+            width: 100%;
+        }
+        >div:not(:first-child){
+            border: none;
+            border-top: 1px solid #e7e7e7;
+        }
+    }
+    
 }
