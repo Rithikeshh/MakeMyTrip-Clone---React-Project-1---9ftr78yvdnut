@@ -14,6 +14,5 @@ function LoginModalProvider({children}) {
 export default LoginModalProvider
 
 export function useLoginModalContext(){
-    console.log(useContext(LoginModalContext))
     return useContext(LoginModalContext)
 }

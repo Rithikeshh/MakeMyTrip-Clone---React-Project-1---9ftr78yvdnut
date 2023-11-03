@@ -1,6 +1,6 @@
 import React from 'react'
 import '../../styles/Navbar.css'
-import { NavLink } from 'react-router-dom'
+import { NavLink, useLocation } from 'react-router-dom'
 const navbarElements = [
     { name: "Flights", cssClassForHeaderIcons: "chFlights", path: "/flights" },
     { name: "Hotels", cssClassForHeaderIcons: "chHotels", path: "/hotels" },
@@ -13,6 +13,7 @@ const navbarElements = [
     { name: "Travel Insurance", cssClassForHeaderIcons: "chTravelInsurance", path: "/insurance" },
 ]
 function Navbar() {
+    const location = useLocation()
   return (
     <div className='navbar-container makeFlex make-justify-center make-align-center'>
         <div className='navbarWrapper makeFlex make-justify-center make-align-center'>
@@ -22,7 +23,8 @@ function Navbar() {
                     <li className='makeRelative'>
                         <NavLink to={item.path} className={({isActive})=>{
                             let classNames = 'makeFlex column make-align-center headerIcons'
-                            index == 7 && (classNames+=' min-w-75')  
+                            index == 7 && (classNames+=' min-w-75'); 
+                            location.pathname == '/' && index == 0 && (classNames+=' active');   
                             return isActive ? classNames+' active' : classNames
                         } }>
                             <span className='headerIconWrapper'>

@@ -1,32 +1,32 @@
 import React, { useState } from 'react'
-import FormGroup from '@mui/material/FormGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
 import { Link } from 'react-router-dom';
+import TicketCheckboxContainer from '../components/MainContentsComponents/TicketCheckboxContainer';
 const checkboxForTickets = [
   { id: 1, name: "One Way" },
   { id: 2, name: "Round Trip" },
   { id: 3, name: "Multi City" },
 ]
+const paraText = 'Book International Flights'
 function FlightsContent() {
 
-    const [value, setValue] = useState(1);
-    const handleChange = (event) => {
-      setValue(event.target.value);
-    };
   return (
     <div>
+      {/* <TicketCheckboxContainer 
+        checkboxForTickets={checkboxForTickets}
+        paraText={paraText}
+      /> */}
+      {/* Replace above code with below code when you make this ui responsive */}
       <div className='makeFlex make-align-center make-justify-space '>
         <div className='makeFlex gap-20 '>
             {checkboxForTickets.map((item,index)=>(
-                <FormControlLabel className={`${value==item.id && ('flights-ticket-active')} p-r-8`} key={index}
+                <FormControlLabel className={`${index == 0 && ('checkbox-ticket-active')} p-r-8`} key={index}
                   control={
                     <Checkbox
-                      checked={value==item.id}
-                      value={item.id}
-                      onChange={handleChange}
-                      inputProps={{ 'aria-label': 'controlled' }}
+                      checked={index == 0}
                       defaultChecked
+                      disabled = {index != 0}
                       sx={{ '& .MuiSvgIcon-root': { fontSize: 16 } }}
                     />
                   }

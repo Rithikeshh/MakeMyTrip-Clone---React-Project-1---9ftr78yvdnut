@@ -3,12 +3,14 @@ import React from 'react'
 import mmtLogo from '../../assets/images/mmtLogoWhite.png'
 import Profile from '../Profile'
 import LoginModalProvider from '../../provider/LoginModalProvider'
+import { useNavigate } from 'react-router-dom'
 
 function Header() {
+    const navigate = useNavigate();
   return (
     <div className='makeFlex make-justify-center'>
         <div className='makeFlex make-align-center make-justify-space gap-140 padding-t-5 padding-b-50'>
-            <div>
+            <div style={{cursor:'pointer'}} onClick={()=>navigate('/')}>
                 <img className='mainLogo' src={mmtLogo} />
             </div>
             <div>

@@ -9,11 +9,12 @@ import { useLoginModalContext } from '../provider/LoginModalProvider'
 
 
 function Profile() {
+    
     const {isLoggedIn} = useAuth()
     const {isLoginModalVisible, setIsLoginModalVisible} = useLoginModalContext()
     const [isProfileModalVisible, setIsProfileModalVisible] = useState(false);
     const userDetails = JSON.parse(sessionStorage.getItem("userDetails"));
-    console.log(isLoginModalVisible);
+
     function handleModal(){
 
         if(isLoggedIn){
