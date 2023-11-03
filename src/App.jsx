@@ -4,23 +4,22 @@ import mmtLogo from './assets/images/mmtLogoWhite.png'
 import Header from "./components/Navbar/Header";
 import Navbar from "./components/Navbar/Navbar";
 import MainContent from "./MainContent";
-import { createContext, useState } from "react";
+import AuthProvider from "./provider/AuthProvider";
 
-export const AuthContext = createContext();
+
 
 function App() {
 
-  const [isLoggedIn, setIsLoggedIn] = useState(
-    sessionStorage.getItem("userDetails") ? true : false
-  )
+ 
 
   return (
     <div className="container" >
-      <AuthContext.Provider value={{isLoggedIn, setIsLoggedIn}}>
+      <AuthProvider>
         <Header/>
         <Navbar/>
         <MainContent/>
-      </AuthContext.Provider>
+      </AuthProvider>
+      
     </div>
   );
 }

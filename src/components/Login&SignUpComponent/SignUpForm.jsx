@@ -1,12 +1,12 @@
-import React,{useState, useEffect, useContext} from 'react'
-import { ModalContext } from './Profile';
-import { AuthContext } from '../App';
+import React,{useState, useEffect, useContext, useRef} from 'react'
+import { useLoginModalContext } from '../../provider/LoginModalProvider';
+import { useAuth } from '../../provider/AuthProvider';
 
 
-function SignUp() {
+function SignUpForm() {
 
-    const {setIsLoggedIn} = useContext(AuthContext)
-    const {setIsLoginModalVisible} = useContext(ModalContext)
+    const {setIsLoggedIn} = useAuth()
+    const {setIsLoginModalVisible} = useLoginModalContext()
     const initialUserData = {
         name: "",
         email: "",
@@ -14,7 +14,13 @@ function SignUp() {
     };
     
     const [userDetails, setUserDetails] = useState(initialUserData);
-    const [isButtonActive, setButtonActive] = useState(false)
+    const isButtonActive = useRef(false)
+    if(userDetails.name && userDetails.email && userDetails.password){
+        isButtonActive.current=true;
+    }
+    else{
+        isButtonActive.current=false;
+    }
     
       async function createUser(){
         const config = {
@@ -55,14 +61,14 @@ function SignUp() {
       function handleInputChange(e){
         setUserDetails({...userDetails,[e.target.name]: e.target.value})
       }
-      useEffect(()=>{
-        if(userDetails.name && userDetails.email && userDetails.password){
-            setButtonActive(true)
-        }
-        else{
-            setButtonActive(false)
-        }
-      },[userDetails])
+    //   useEffect(()=>{
+    //     if(userDetails.name && userDetails.email && userDetails.password){
+    //         setButtonActive(true)
+    //     }
+    //     else{
+    //         setButtonActive(false)
+    //     }
+    //   },[userDetails])
 
       function handleSubmit(e){
         e.preventDefault();
@@ -98,9 +104,9 @@ function SignUp() {
                 onChange={handleInputChange}
                 value={userDetails.password}
             />
-            <input className={`loginBtn ${isButtonActive && 'active-loginBtn'}`} disabled={!isButtonActive} type="submit" value='CONTINUE'/>
+            <input className={`loginBtn ${isButtonActive.current && 'active-loginBtn'}`} disabled={!isButtonActive.current} type="submit" value='CONTINUE'/>
         </form>
     )
 }
 
-export default SignUp
+export default SignUpForm

@@ -1,19 +1,20 @@
 import React, { useState, createContext, useContext } from 'react'
 import {createPortal} from 'react-dom'
 import '../styles/LoginModal.css'
-import LoginModal from './LoginModal'
+import LoginModal from './Login&SignUpComponent/LoginModal'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faUser } from '@fortawesome/free-regular-svg-icons'
-import { AuthContext } from '../App'
+import { useAuth } from '../provider/AuthProvider'
+import { useLoginModalContext } from '../provider/LoginModalProvider'
 
-export const ModalContext = createContext(null);
 
 function Profile() {
-    const {isLoggedIn} = useContext(AuthContext)
-    const [isLoginModalVisible , setIsLoginModalVisible] = useState(false);
+    const {isLoggedIn} = useAuth()
+    const {isLoginModalVisible, setIsLoginModalVisible} = useLoginModalContext()
     const [isProfileModalVisible, setIsProfileModalVisible] = useState(false);
     const userDetails = JSON.parse(sessionStorage.getItem("userDetails"));
-    function handleModal(e){
+    console.log(isLoginModalVisible);
+    function handleModal(){
 
         if(isLoggedIn){
             setIsProfileModalVisible(!isProfileModalVisible)
@@ -23,7 +24,7 @@ function Profile() {
         }
     }
   return (
-    <ModalContext.Provider value={{isLoginModalVisible, setIsLoginModalVisible}}>
+    
         <li 
             onClick={handleModal} 
             className="header-userList-item makeFlex make-align-center login-user userLoggedOut font10"
@@ -37,32 +38,29 @@ function Profile() {
             </div>
             </>}
             {isLoggedIn &&
-            <>
-                <FontAwesomeIcon 
-                    style={{
-                        height:'20px',
-                        backgroundColor: "#a3a2a2",
-                        borderRadius:"100%",
-                        padding: '8px'
-                    }} 
-                    icon={faUser} />
-                <div className="flexOne whiteText bold-text">
-                    <p style={{paddingLeft: '8px', fontSize:"1rem",color:"#3f3f3f"}}>{userDetails.name}</p>
-                </div>
-            </>
-
+                <>
+                    <FontAwesomeIcon 
+                        style={{
+                            height:'20px',
+                            backgroundColor: "#a3a2a2",
+                            borderRadius:"100%",
+                            padding: '8px'
+                        }} 
+                        icon={faUser} 
+                    />
+                    <div className="flexOne whiteText bold-text">
+                        <p style={{paddingLeft: '8px', fontSize:"1rem",color:"#3f3f3f"}}>{userDetails.name}</p>
+                    </div>
+                </>
             }
             {isLoginModalVisible && <LoginPortal/>}
             {isProfileModalVisible && <ProfileModal setIsProfileModalVisible={setIsProfileModalVisible}/>}
-        </li>
-        
-    </ModalContext.Provider>
+        </li> 
   )
 }
 
-export default Profile
 // Profile exported to Header
-
+export default Profile
 
 function LoginPortal(){
     
@@ -75,8 +73,9 @@ function LoginPortal(){
         </>
     )
 }
+
 function ProfileModal({setIsProfileModalVisible}){
-    const {setIsLoggedIn} = useContext(AuthContext)
+    const {setIsLoggedIn} = useAuth()
     const logout = () => {
         sessionStorage.removeItem("userToken");
         sessionStorage.removeItem("userDetails");

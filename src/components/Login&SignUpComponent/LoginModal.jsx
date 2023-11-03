@@ -1,10 +1,10 @@
-import React,{useState, useContext, useRef} from 'react'
-import {ModalContext} from './Profile'
-import LoginOrSignUpContainer from './LoginOrSignUpContainer'
+import React,{useState, useRef} from 'react'
+import LoginOrSignUpFormContainer from './LoginOrSignUpFormContainer'
+import { useLoginModalContext } from '../../provider/LoginModalProvider'
 
 function LoginModal() {
   
-    const {setIsLoginModalVisible} = useContext(ModalContext)
+    const {setIsLoginModalVisible} = useLoginModalContext()
     return(
         <div 
             onClick={()=>setIsLoginModalVisible(false)} 
@@ -16,7 +16,7 @@ function LoginModal() {
             >
                 <Carousel/>
                 {/* <LoginForm/> */}
-                <LoginOrSignUpContainer/>
+                <LoginOrSignUpFormContainer/>
             </div>
         </div>
     )
