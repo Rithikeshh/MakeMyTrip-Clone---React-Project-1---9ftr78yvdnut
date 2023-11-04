@@ -23,10 +23,15 @@ function Navbar() {
                     <li className='makeRelative'>
                         <NavLink to={item.path} className={({isActive})=>{
                             let classNames = 'makeFlex column make-align-center headerIcons'
-                            index == 7 && (classNames+=' min-w-75'); 
+                            index == 7 && (classNames+=' min-w-75');
+                            index != 0 && index !=1 && index != 4 && (classNames += ' not-allowed') 
                             location.pathname == '/' && index == 0 && (classNames+=' active');   
                             return isActive ? classNames+' active' : classNames
-                        } }>
+                        } }
+                            onClick={(e)=>{
+                                if(index != 0 && index !=1 && index != 4)e.preventDefault()
+                            }}
+                        >
                             <span className='headerIconWrapper'>
                                 <span className={`chSprite ${item.cssClassForHeaderIcons}`}></span>
                             </span>

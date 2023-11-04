@@ -10,7 +10,6 @@ function LoginModalProvider({children}) {
   )
 }
 
-
 export default LoginModalProvider
 
 export function useLoginModalContext(){

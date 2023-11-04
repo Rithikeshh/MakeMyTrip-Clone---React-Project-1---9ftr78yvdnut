@@ -1,6 +1,9 @@
-import React from 'react'
+import React, { useReducer } from 'react'
 import '../styles/GenericMainContent.css'
 import TicketCheckboxContainer from '../components/MainContentsComponents/TicketCheckboxContainer';
+// import hotelReducer,{hotalBookingDetails} from '../reducer/hotelReducer';
+import { useHotelBookingDetailsContext } from '../provider/HotelBookingDetailsProvider';
+import LocationInputContainer from '../components/MainContentsComponents/LocationInputContainer';
 
 
 // Most css written in genericMainContent.css
@@ -10,6 +13,8 @@ const checkboxForTickets = [
 ]
 const paraText = 'Fix this text to make responsive; Book Domestic and International Property Online. To list your property '
 function HotelsContent() {
+  const{hotelBookingState, dispatchHotelBookingState} = useHotelBookingDetailsContext()
+  console.log(hotelBookingState)
   return (
     <div style={{paddingBottom:'11px'}}>
       <TicketCheckboxContainer 
@@ -17,13 +22,21 @@ function HotelsContent() {
         paraText={paraText}
       />
       <section className='hotel-booking-details-container booking-details-container'>
-        <div key={0}>
+        {/* <div key={0}>
            <label htmlFor='location' className='booking-inputBox'>
               <span>City, Property Name Or Location</span>
               <input type="text" id='location' value={'Goa'}/>
               <span>{'India'}</span>
            </label>
-        </div>
+        </div> */} {/*This div is replaced by LocationInputContainer*/}
+        <LocationInputContainer 
+          inputId={'location'} 
+          spanHeading={'City, Property Name Or Location'}
+          dispatch={dispatchHotelBookingState}
+          state={hotelBookingState}
+          type={'hotelLocation'}
+        />
+        
         <div key={1}>
           <label htmlFor='checkIn' className='booking-inputBox'>
             <span className='dropdown'>Check-In</span>

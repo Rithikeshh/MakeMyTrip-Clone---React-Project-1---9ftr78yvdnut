@@ -139,3 +139,6 @@
     z-index: 2;
     bottom: -9px;
 }
+.not-allowed{
+    cursor: not-allowed;
+}

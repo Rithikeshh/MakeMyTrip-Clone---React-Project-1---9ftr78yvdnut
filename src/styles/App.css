@@ -99,7 +99,7 @@ a{
   background-position: -225px -326px!important;
   background-size: 260px 400px!important;
   animation: circularAnimation 3s linear infinite;
-  /* animation-iteration-count: 3; */
+  animation-iteration-count: 3;
   
 }
 @keyframes circularAnimation {

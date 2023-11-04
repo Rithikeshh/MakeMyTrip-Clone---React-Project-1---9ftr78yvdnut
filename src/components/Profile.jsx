@@ -6,6 +6,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faUser } from '@fortawesome/free-regular-svg-icons'
 import { useAuth } from '../provider/AuthProvider'
 import { useLoginModalContext } from '../provider/LoginModalProvider'
+import { useNavigate } from 'react-router-dom'
 
 
 function Profile() {
@@ -76,13 +77,14 @@ function LoginPortal(){
 }
 
 function ProfileModal({setIsProfileModalVisible}){
+    const navigate = useNavigate()
     const {setIsLoggedIn} = useAuth()
     const logout = () => {
         sessionStorage.removeItem("userToken");
         sessionStorage.removeItem("userDetails");
         setIsLoggedIn(false);
         setIsProfileModalVisible(false)
-        // navigateHandler("/login");
+        navigate('/')
     };
     return(
         <div className='profile-modal' onClick={(e)=>e.stopPropagation()}>
