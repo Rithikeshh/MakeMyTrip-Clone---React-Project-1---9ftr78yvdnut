@@ -4,7 +4,7 @@ import Checkbox from '@mui/material/Checkbox';
 import { Link } from 'react-router-dom';
 import '../../styles/GenericMainContent.css'
 
-function TicketCheckboxContainer({checkboxForTickets, paraText}) {
+function TicketCheckboxContainer({checkboxForTickets, paraText, spanText}) {
   return (
     <div className='checkbox-ticket-container'>
         <div className='makeFlex gap-20 '>
@@ -22,10 +22,11 @@ function TicketCheckboxContainer({checkboxForTickets, paraText}) {
                 />
             ))}
         </div>
-        <div>
+        <div style={{textAlign:'center'}}>
             <p>
-                {paraText}
+              {paraText}
             </p>
+            {spanText && <span style={{color:'gray', fontSize:'14px', position:'relative', top:'-4px'}}>{spanText}</span>}
         </div>
       </div>
   )

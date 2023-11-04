@@ -15,8 +15,11 @@
         position: relative;
         >label{
             >span{
+                max-width: 300px;
                 padding-bottom: 8px;
                 white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
             }
             >input{
                 border: none;
@@ -25,7 +28,7 @@
                 font-weight: 900;
                 font-size: 30px;
                 line-height: 36px;
-                max-width: 200px;
+                width: 100%;
             }
         }
     }
@@ -34,7 +37,7 @@
     }
 }
 .booking-inputBox{
-    padding: 10px 20px;
+    padding: 10px 16px;
     display: flex;
     flex-direction: column;
     cursor: pointer;
@@ -60,6 +63,10 @@
 .booking-inputBox:hover{
     background: #eaf5ff;
     
+}
+.train-booking-details-container{
+    display: grid;
+    grid-template-columns: 2fr 2fr 1fr 1fr;
 }
 
 
@@ -92,7 +99,13 @@
         align-items: center;
         >div{
             flex-grow: 1;
+            max-width: 100%;
             width: 100%;
+            >label{
+                >span{
+                    max-width: 100%;
+                }
+            }
         }
         >div:not(:first-child){
             border: none;

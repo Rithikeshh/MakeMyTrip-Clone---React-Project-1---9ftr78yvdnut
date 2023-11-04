@@ -8,7 +8,7 @@ const checkboxForTickets = [
     { id: 1, name: "Upto 4 Rooms" },
     { id: 2, name: "Group Deal" },
 ]
-const paraText = 'Book Domestic and International Property Online. To list your property '
+const paraText = 'Fix this text to make responsive; Book Domestic and International Property Online. To list your property '
 function HotelsContent() {
   return (
     <div style={{paddingBottom:'11px'}}>
@@ -21,7 +21,7 @@ function HotelsContent() {
            <label htmlFor='location' className='booking-inputBox'>
               <span>City, Property Name Or Location</span>
               <input type="text" id='location' value={'Goa'}/>
-              <span>India</span>
+              <span>{'India'}</span>
            </label>
         </div>
         <div key={1}>
