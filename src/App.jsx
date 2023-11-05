@@ -10,6 +10,7 @@ import FlightsContent from "./pages/FlightsContent";
 import HotelsContent from "./pages/HotelsContent";
 import RailwaysContent from "./pages/RailwaysContent";
 import HotelBookingDetailsProvider from "./provider/HotelBookingDetailsProvider";
+import TrainBookingDetailsProvider from "./provider/TrainBookingDetailsProvider";
 
 
 
@@ -21,6 +22,7 @@ function App() {
     <div className="container" >
       <AuthProvider>
         <HotelBookingDetailsProvider>
+        <TrainBookingDetailsProvider>
         <Header/>
         <Navbar/>
         <div className='mainContent-container-wrapper makeFlex make-justify-center'>
@@ -36,6 +38,7 @@ function App() {
         {/* <Routes>
         
         </Routes> */}
+      </TrainBookingDetailsProvider>
       </HotelBookingDetailsProvider>
       </AuthProvider>
       

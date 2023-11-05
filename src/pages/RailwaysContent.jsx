@@ -1,5 +1,7 @@
 import React from 'react'
 import TicketCheckboxContainer from '../components/MainContentsComponents/TicketCheckboxContainer';
+import LocationInputContainer from '../components/MainContentsComponents/LocationInputContainer';
+import { useTrainBookingDetailsContext } from '../provider/TrainBookingDetailsProvider';
 
 const checkboxForTickets = [
     { id: 1, name: "Book Train Tickets" },
@@ -8,6 +10,7 @@ const checkboxForTickets = [
 ]
 const paraText = 'Train Ticket Booking'
 function RailwaysContent() {
+    const {trainBookingState, dispatchTrainBookingState} = useTrainBookingDetailsContext()
   return (
     <div style={{paddingBottom:'11px'}}>
         <TicketCheckboxContainer
@@ -16,20 +19,30 @@ function RailwaysContent() {
             spanText={'IRCTC Authorized e-ticketing'}
         />
         <section className='train-booking-details-container booking-details-container'>
-            <div key={0} >
+            {/* <div key={0} >
                 <label htmlFor='fromCity' className='booking-inputBox'>
                     <span>From</span>
                     <input type="text" id='fromCity' value={'New Delhi'}/>
                     <span>{'NSDL, New Delhi Railway Station'}</span>
                 </label>
-            </div>
-            <div key={1} >
-                <label htmlFor='toCity' className='booking-inputBox'>
-                    <span>To</span>
-                    <input type="text" id='toCity' value={'Kolkata'}/>
-                    <span>{'HWH, Kolkata Howrah Junction'}</span>
-                </label>
-            </div>
+            </div> */}
+            <LocationInputContainer
+                key={0}
+                inputId={'fromCity'}
+                spanHeading={'From'}
+                value={trainBookingState.fromCity}
+                dispatch={dispatchTrainBookingState}
+                type={'trainFromCity'}
+            />
+            <LocationInputContainer
+                key={1}
+                inputId={'fromCity'}
+                spanHeading={'From'}
+                value={trainBookingState.toCity}
+                dispatch={dispatchTrainBookingState}
+                type={'trainToCity'}
+            />
+            
             
             <div key={2}>
                 <label htmlFor='travelDate' className='booking-inputBox'>

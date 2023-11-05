@@ -32,8 +32,8 @@ function HotelsContent() {
         <LocationInputContainer 
           inputId={'location'} 
           spanHeading={'City, Property Name Or Location'}
+          value={hotelBookingState.city}
           dispatch={dispatchHotelBookingState}
-          state={hotelBookingState}
           type={'hotelLocation'}
         />
         
