@@ -2,6 +2,7 @@ import React from 'react'
 import TicketCheckboxContainer from '../components/MainContentsComponents/TicketCheckboxContainer';
 import LocationInputContainer from '../components/MainContentsComponents/LocationInputContainer';
 import { useTrainBookingDetailsContext } from '../provider/TrainBookingDetailsProvider';
+import CalendarInputContainer from '../components/MainContentsComponents/CalendarInputContainer';
 
 const checkboxForTickets = [
     { id: 1, name: "Book Train Tickets" },
@@ -33,28 +34,26 @@ function RailwaysContent() {
                 value={trainBookingState.fromCity}
                 dispatch={dispatchTrainBookingState}
                 type={'trainFromCity'}
-            />
+            >
+                <span className='flightSwapCircle'>
+                    <span className='flightsSprite flightSwapIcon'></span>
+                </span>
+            </LocationInputContainer>
             <LocationInputContainer
                 key={1}
-                inputId={'fromCity'}
-                spanHeading={'From'}
+                inputId={'toCity'}
+                spanHeading={'To'}
                 value={trainBookingState.toCity}
                 dispatch={dispatchTrainBookingState}
                 type={'trainToCity'}
             />
-            
-            
-            <div key={2}>
-                <label htmlFor='travelDate' className='booking-inputBox'>
-                    <span className='dropdown'>Travel Date</span>
-                    <div className='font20 lineHeight-36'>
-                        <span className='p-r-6 lineHeight-36 font30 strongBold-text'>{1}</span>
-                        <span>{'Nov'}</span>
-                        <span className='shortYear'>{23}</span>
-                    </div>
-                    <span>{'Sunday'}</span>
-                </label>
-            </div>
+            <CalendarInputContainer
+                labelFor={'travelDate'}
+                spanHeading={'Travel Date'}
+                value={trainBookingState.travelDate}
+                dispatch={dispatchTrainBookingState}
+                type={'trainTravelDate'}
+            />
             <div key={3}>
                 <label htmlFor='class' className='booking-inputBox'>
                     <span className='dropdown'>Class</span>

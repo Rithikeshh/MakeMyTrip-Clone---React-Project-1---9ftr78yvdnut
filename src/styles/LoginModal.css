@@ -66,13 +66,14 @@
         >span{
             border-radius: 2rem;
             padding: 5px 20px;
-            cursor: pointer;
+            cursor: not-allowed;
             color: #3f3f3f;
         }
         >span:first-child{
             color: #fff;
             background-color: #1065F5;
             border-radius: 2rem;
+            cursor: pointer;
         }
     }
     >.login-account-form, .signup-account-form{

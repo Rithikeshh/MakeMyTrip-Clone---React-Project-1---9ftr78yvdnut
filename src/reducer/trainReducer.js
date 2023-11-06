@@ -1,11 +1,13 @@
+import { getDay, getMonth } from "../utils/dateFunctions";
+
 export const trainBookingDetails = {
    fromCity: "New Delhi",
    toCity: "Kolkata",
-   travel: {
-        date: 7,
-        month: "Nov",
-        year: 23,
-        day: 'Monday'
+   travelDate: {
+    date: new Date().getDate(),
+    month: getMonth(new Date().getMonth()),
+    year: new Date().getFullYear()%100,
+    day: getDay(new Date().getDay())
     },
     ticketClass:{
         head: 'All',
@@ -25,6 +27,17 @@ export default function trainReducer(state, action){
             return {
                 ...state,
                 toCity: action.payload
+            }
+        case 'trainTravelDate' :
+            return{
+                ...state,
+                travel: {
+                    ...state.travel,
+                    date: action.payload.date,
+                    month: getMonth(action.payload.month),
+                    year: action.payload.year%100,
+                    day: getDay(action.payload.day)
+                }
             }
         default:
             return {...state};

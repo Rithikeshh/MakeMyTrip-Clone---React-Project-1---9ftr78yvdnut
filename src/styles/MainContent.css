@@ -14,10 +14,7 @@
     border-radius: 20px;
     
 }
-.flight-booking-details-container{
-    padding: 11px 0px;
-}
-.flight-booking-details{
+/* .flight-booking-details{
     width: 100%;
     border-radius: 10px;
     margin: 0 auto 20px;
@@ -81,8 +78,12 @@ p[title]:hover:after {
     padding: 8px;
     font-size: 10px;
     
-}
+} */
 .flightSwapCircle{
+    position: absolute;
+    top: 50%;
+    left: 100%;
+    transform: translateY(-50%);
     width: 40px;
     height: 40px;
     flex-shrink: 0;
@@ -262,4 +263,12 @@ p[title]:hover:after {
     margin-bottom: -32px;
     opacity: 1;
 }
-
+@media only screen and (max-width:940px) {
+    .flightSwapCircle{
+        top: 100%;
+        left: 50%;
+    }
+    .flightSwapIcon{
+        transform: rotate(90deg);
+    }
+}

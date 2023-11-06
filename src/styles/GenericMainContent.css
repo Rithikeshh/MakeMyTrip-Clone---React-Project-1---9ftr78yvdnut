@@ -12,6 +12,7 @@
     z-index: 5 !important;
     overflow: hidden;
     >div{
+        
         position: relative;
         >label{
             >span{
@@ -22,6 +23,7 @@
                 text-overflow: ellipsis;
             }
             >input{
+                text-transform: capitalize;
                 border: none;
                 outline: none;
                 background:none;
@@ -67,6 +69,10 @@
 .train-booking-details-container{
     display: grid;
     grid-template-columns: 2fr 2fr 1fr 1fr;
+}
+.flight-booking-details-container{
+    display: grid;
+    grid-template-columns: 2fr 2fr 1fr 1fr;   
 }
 
 

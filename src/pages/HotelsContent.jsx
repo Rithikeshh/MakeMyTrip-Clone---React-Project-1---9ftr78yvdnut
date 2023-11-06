@@ -1,9 +1,10 @@
-import React, { useReducer } from 'react'
+import React, { useReducer, useRef } from 'react'
 import '../styles/GenericMainContent.css'
 import TicketCheckboxContainer from '../components/MainContentsComponents/TicketCheckboxContainer';
 // import hotelReducer,{hotalBookingDetails} from '../reducer/hotelReducer';
 import { useHotelBookingDetailsContext } from '../provider/HotelBookingDetailsProvider';
 import LocationInputContainer from '../components/MainContentsComponents/LocationInputContainer';
+import CalendarInputContainer from '../components/MainContentsComponents/CalendarInputContainer';
 
 
 // Most css written in genericMainContent.css
@@ -13,8 +14,9 @@ const checkboxForTickets = [
 ]
 const paraText = 'Fix this text to make responsive; Book Domestic and International Property Online. To list your property '
 function HotelsContent() {
+
   const{hotelBookingState, dispatchHotelBookingState} = useHotelBookingDetailsContext()
-  console.log(hotelBookingState)
+
   return (
     <div style={{paddingBottom:'11px'}}>
       <TicketCheckboxContainer 
@@ -36,19 +38,21 @@ function HotelsContent() {
           dispatch={dispatchHotelBookingState}
           type={'hotelLocation'}
         />
-        
-        <div key={1}>
-          <label htmlFor='checkIn' className='booking-inputBox'>
-            <span className='dropdown'>Check-In</span>
-            <div className='font20 lineHeight-36'>
-              <span className='p-r-6 lineHeight-36 font30 strongBold-text'>1</span>
-              <span>{'Nov'}</span>
-              <span className='shortYear'>{23}</span>
-            </div>
-            <span>{'Sunday'}</span>
-          </label>
-        </div>
-        <div key={2}>
+        <CalendarInputContainer
+          labelFor={'checkIn'}
+          spanHeading={'Check-In'}
+          value={hotelBookingState.checkIn}
+          dispatch={dispatchHotelBookingState}
+          type={'hotleCheckIn'}
+        />
+        <CalendarInputContainer
+          labelFor={'checkOut'}
+          spanHeading={'Check-Out'}
+          value={hotelBookingState.checkOut}
+          dispatch={dispatchHotelBookingState}
+          type={'hotleCheckOut'}
+        />
+        {/* <div key={2}>
           <label htmlFor='checkOut' className='booking-inputBox'>
             <span className='dropdown'>Check-Out</span>
             <div className='font20 lineHeight-36'>
@@ -58,7 +62,7 @@ function HotelsContent() {
             </div>
             <span>{'Sunday'}</span>
           </label>
-        </div>
+        </div> */}
         <div key={3}>
           <label htmlFor='rooms' className='booking-inputBox'>
             <span className='dropdown'>Rooms & Guests</span>
