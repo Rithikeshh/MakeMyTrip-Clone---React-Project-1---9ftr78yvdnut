@@ -22,25 +22,6 @@ function LoginModal() {
     )
   
 }
-// function LoginForm(){
-//     return(
-//         <div className='login-form-container'>
-//             <div className='login-account-type'>
-//                 <span>PERSONAL ACCOUNT</span>
-//                 <span title='currently disabled'>MYBIZ ACCOUNT</span>
-//             </div>
-//         <form className='login-account-form' action="">
-//             <label htmlFor="userId">Email or Mobile Number</label>
-//             <input 
-//                 type="text" 
-//                 name="userId" id="userId"
-//                 placeholder='Enter email or mobile number'
-//             />
-//             <input disabled type="submit" value='CONTINUE'/>
-//         </form>
-//         </div>
-//     )
-// }
 function Carousel(){
     const images = [
         'https://imgak.mmtcdn.com/pwa_v3/pwa_header_assets/loginPersuassionRoad.webp',

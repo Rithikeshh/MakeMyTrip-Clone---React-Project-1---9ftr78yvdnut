@@ -1,6 +1,6 @@
 import React from 'react'
 
-function LocationInputContainer({children, inputId, spanHeading, value, dispatch, type, paddingLeft}) {
+function LocationInputContainer({children, inputId, spanHeading, value, dispatch, type}) {
   return (
     <div>
         <label  htmlFor={inputId} className='booking-inputBox'>

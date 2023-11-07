@@ -142,3 +142,9 @@
 .not-allowed{
     cursor: not-allowed;
 }
+.searchNavbar{
+    background-color: #fff;
+    padding: 1rem;
+    display: flex;
+    align-items: center;
+}

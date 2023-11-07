@@ -31,13 +31,19 @@ export default function trainReducer(state, action){
         case 'trainTravelDate' :
             return{
                 ...state,
-                travel: {
-                    ...state.travel,
+                travelDate: {
+                    ...state.travelDate,
                     date: action.payload.date,
                     month: getMonth(action.payload.month),
                     year: action.payload.year%100,
                     day: getDay(action.payload.day)
                 }
+            }
+        case 'swap' :
+            return {
+                ...state,
+                fromCity: state.toCity,
+                toCity: state.fromCity
             }
         default:
             return {...state};

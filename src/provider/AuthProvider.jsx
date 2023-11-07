@@ -1,6 +1,7 @@
 import React, { createContext, useContext, useState } from 'react'
 
 const AuthContext = createContext();
+
 function AuthProvider({children}) {
     const [isLoggedIn, setIsLoggedIn] = useState(
         sessionStorage.getItem("userDetails") ? true : false

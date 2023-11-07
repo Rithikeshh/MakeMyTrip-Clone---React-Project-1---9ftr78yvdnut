@@ -35,7 +35,9 @@ function RailwaysContent() {
                 dispatch={dispatchTrainBookingState}
                 type={'trainFromCity'}
             >
-                <span className='flightSwapCircle'>
+                <span onClick={()=>{
+                    dispatchTrainBookingState({type:'swap'})
+                }} className='flightSwapCircle'>
                     <span className='flightsSprite flightSwapIcon'></span>
                 </span>
             </LocationInputContainer>

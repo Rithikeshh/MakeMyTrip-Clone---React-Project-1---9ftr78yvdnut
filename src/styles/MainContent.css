@@ -263,6 +263,7 @@ p[title]:hover:after {
     margin-bottom: -32px;
     opacity: 1;
 }
+
 @media only screen and (max-width:940px) {
     .flightSwapCircle{
         top: 100%;
@@ -270,5 +271,13 @@ p[title]:hover:after {
     }
     .flightSwapIcon{
         transform: rotate(90deg);
+    }
+    .flight-booking-fare{
+        flex-direction: column;
+        gap: 10px;
+        align-items: flex-start;
+    }
+    .recentSearchGrid{
+        margin: 0;
     }
 }
