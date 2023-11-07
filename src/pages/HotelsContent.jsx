@@ -5,6 +5,7 @@ import TicketCheckboxContainer from '../components/MainContentsComponents/Ticket
 import { useHotelBookingDetailsContext } from '../provider/HotelBookingDetailsProvider';
 import LocationInputContainer from '../components/MainContentsComponents/LocationInputContainer';
 import CalendarInputContainer from '../components/MainContentsComponents/CalendarInputContainer';
+import { Link } from 'react-router-dom';
 
 
 // Most css written in genericMainContent.css
@@ -24,13 +25,7 @@ function HotelsContent() {
         paraText={paraText}
       />
       <section className='hotel-booking-details-container booking-details-container'>
-        {/* <div key={0}>
-           <label htmlFor='location' className='booking-inputBox'>
-              <span>City, Property Name Or Location</span>
-              <input type="text" id='location' value={'Goa'}/>
-              <span>{'India'}</span>
-           </label>
-        </div> */} {/*This div is replaced by LocationInputContainer*/}
+
         <LocationInputContainer 
           inputId={'location'} 
           spanHeading={'City, Property Name Or Location'}
@@ -52,17 +47,6 @@ function HotelsContent() {
           dispatch={dispatchHotelBookingState}
           type={'hotleCheckOut'}
         />
-        {/* <div key={2}>
-          <label htmlFor='checkOut' className='booking-inputBox'>
-            <span className='dropdown'>Check-Out</span>
-            <div className='font20 lineHeight-36'>
-              <span className='p-r-6 lineHeight-36 font30 strongBold-text'>{1}</span>
-              <span>{'Nov'}</span>
-              <span className='shortYear'>{23}</span>
-            </div>
-            <span>{'Sunday'}</span>
-          </label>
-        </div> */}
         <div key={3}>
           <label htmlFor='rooms' className='booking-inputBox'>
             <span className='dropdown'>Rooms & Guests</span>
@@ -86,7 +70,7 @@ function HotelsContent() {
       </section>
       <section>
         <p className='makeFlex make-justify-center'>
-            <a className='primaryBtn widgetSearchBtn bold-text font24' href="">SEARCH</a>
+            <Link className='primaryBtn widgetSearchBtn bold-text font24' to="/hotel/search">SEARCH</Link>
         </p>
       </section>
     </div>

@@ -20,7 +20,7 @@ function Navbar() {
         <nav className='bg-white navbar'>
             <ul className=' makeFlex font12 headerIconsGap'>
                 {navbarElements.map((item, index)=>(
-                    <li className='makeRelative'>
+                    <li className='makeRelative' key={index}>
                         <NavLink to={item.path} className={({isActive})=>{
                             let classNames = 'makeFlex column make-align-center headerIcons'
                             index == 7 && (classNames+=' min-w-75');

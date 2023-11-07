@@ -3,6 +3,7 @@ import TicketCheckboxContainer from '../components/MainContentsComponents/Ticket
 import LocationInputContainer from '../components/MainContentsComponents/LocationInputContainer';
 import { useTrainBookingDetailsContext } from '../provider/TrainBookingDetailsProvider';
 import CalendarInputContainer from '../components/MainContentsComponents/CalendarInputContainer';
+import { Link } from 'react-router-dom';
 
 const checkboxForTickets = [
     { id: 1, name: "Book Train Tickets" },
@@ -68,7 +69,7 @@ function RailwaysContent() {
         </section>
         <section>
             <p className='makeFlex make-justify-center'>
-                <a className='primaryBtn widgetSearchBtn bold-text font24' href="">SEARCH</a>
+                <Link className='primaryBtn widgetSearchBtn bold-text font24' to="/railway/search">SEARCH</Link>
             </p>
       </section>
     </div>

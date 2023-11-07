@@ -13,7 +13,7 @@ function TicketCheckboxContainer({checkboxForTickets, paraText, spanText}) {
                   control={
                     <Checkbox
                       checked={index == 0}
-                      defaultChecked
+                      
                       disabled = {index != 0}
                       sx={{ '& .MuiSvgIcon-root': { fontSize: 16 } }}
                     />

@@ -1,17 +1,17 @@
 import React, { useEffect } from 'react'
-import { useNavbarToggleContext } from '../App'
+import Profile from '../components/Profile'
+import LoginModalProvider from '../provider/LoginModalProvider'
+import SearchNavbar from '../components/Navbar/SearchNavbar'
+import { useParams } from 'react-router-dom'
+
 
 function FlightSearch() {
-    const{setNavbar} = useNavbarToggleContext()
-    useEffect(()=>{
-
-        return ()=>{
-            setNavbar(true)
-        }
-    },[])
+  const {section} = useParams()
+  console.log(section);
   return (
     <div>
-      Flight
+      
+      <SearchNavbar/>
     </div>
   )
 }

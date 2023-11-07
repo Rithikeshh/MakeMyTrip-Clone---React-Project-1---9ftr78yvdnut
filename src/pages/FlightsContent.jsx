@@ -1,12 +1,12 @@
 import React, { useState } from 'react'
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
-import { Link } from 'react-router-dom';
+import { Link, useSearchParams } from 'react-router-dom';
 import TicketCheckboxContainer from '../components/MainContentsComponents/TicketCheckboxContainer';
 import LocationInputContainer from '../components/MainContentsComponents/LocationInputContainer';
 import CalendarInputContainer from '../components/MainContentsComponents/CalendarInputContainer';
 import { useFlightBookingDetailsContext } from '../provider/FlightBookingDetailsProvider';
-import { useNavbarToggleContext } from '../App';
+
 const checkboxForTickets = [
   { id: 1, name: "One Way" },
   { id: 2, name: "Round Trip" },
@@ -15,9 +15,9 @@ const checkboxForTickets = [
 const paraText = 'Book International Flights'
 function FlightsContent() {
 
+  const [search, setSearch] = useSearchParams();
   const {flightBookingState, dispatchFlightBookingState} = useFlightBookingDetailsContext()
-  const {setNavbar} = useNavbarToggleContext();
-
+  
   return (
     <div style={{paddingBottom:'11px'}}>
         <TicketCheckboxContainer 
@@ -107,9 +107,12 @@ function FlightsContent() {
          </section>
         <section>
             <p className='makeFlex make-justify-center'>
-                <Link className='primaryBtn widgetSearchBtn bold-text font24' to="/flight/search"
-                  onClick={()=>{setNavbar(false)}}
-                >SEARCH</Link>
+                <Link 
+                  className='primaryBtn widgetSearchBtn bold-text font24'
+                  to="/flight/search"
+                >
+                  SEARCH
+                </Link>
             </p>
       </section>
     </div>

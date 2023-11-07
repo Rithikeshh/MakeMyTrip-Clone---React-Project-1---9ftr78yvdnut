@@ -15,7 +15,7 @@ function Header() {
             </div>
             <div>
                 <ul className="header-userLists makeFlex">
-                <li className="header-userList-item makeFlex makeCenter">
+                <li key={0} className="header-userList-item makeFlex makeCenter">
                     <span className="headerOfferIcon-container">
                     <span className="headerOfferIcon-text">%</span>
                     <span className="headerOfferIcon-logo chSprite"></span>
@@ -25,7 +25,7 @@ function Header() {
                     <p className="font10 margin-y-3 grayText ">Explore great deals & offers</p>
                     </div>
                 </li>
-                <li className="header-userList-item makeFlex makeCenter">
+                <li key={1} className="header-userList-item makeFlex makeCenter">
                     <span className="myBizIcon landingSprite"></span>
                     <div className="margin-r-5">
                     <p className="font16 whiteText bold-text">Introducing myBiz</p>
@@ -33,19 +33,19 @@ function Header() {
                     </div>
                 </li>
                 {/* Protected Route */}
-                <li className="header-userList-item makeFlex makeCenter">
+                <li key={2} className="header-userList-item makeFlex makeCenter">
                     <span className="myTripIcon landingSprite"></span>
                     <div className="margin-r-5">
                     <p className="font12 whiteText bold-text">My Trips</p>
                     <p className="font10 margin-y-3 grayText">Manage your bookings</p>
                     </div>
                 </li>
-                <LoginModalProvider><Profile/></LoginModalProvider>
-                <li className="header-userList-item makeFlex make-align-center geoSwitcher">
+                <LoginModalProvider key={3}><Profile/></LoginModalProvider>
+                <li key={4} className="header-userList-item makeFlex make-align-center geoSwitcher">
                     <div>
                     <div className="whiteText makeFlex makeCenter langSlct">
                         <span className="flags flagSprite margin-r-5 ind"></span>
-                        <span class="bold-text capText font12">
+                        <span className="bold-text capText font12">
                         <span>IN</span>
                         {" |"}
                         <span> eng</span>
