@@ -6,7 +6,7 @@ export const trainBookingDetails = {
    travelDate: {
     date: new Date().getDate(),
     month: getMonth(new Date().getMonth()),
-    year: new Date().getFullYear()%100,
+    year: new Date().getFullYear(),
     day: getDay(new Date().getDay())
     },
     ticketClass:{
@@ -35,7 +35,7 @@ export default function trainReducer(state, action){
                     ...state.travelDate,
                     date: action.payload.date,
                     month: getMonth(action.payload.month),
-                    year: action.payload.year%100,
+                    year: action.payload.year,
                     day: getDay(action.payload.day)
                 }
             }

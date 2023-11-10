@@ -13,6 +13,8 @@ import FlightBookingDetailsProvider from "./provider/FlightBookingDetailsProvide
 import { createContext, useContext, useEffect, useState } from "react";
 import FlightSearch from "./pages/FlightSearch";
 import SearchNavbar from "./components/Navbar/SearchNavbar";
+import SearchContent from "./SearchContent";
+import HotelsListProvider from "./provider/HotelsListProvider";
 
 
 
@@ -25,11 +27,12 @@ function App() {
       <HotelBookingDetailsProvider>
       <TrainBookingDetailsProvider>
       <FlightBookingDetailsProvider>
+        <HotelsListProvider>
           <Routes>
-            <Route path="/" element={<MainContent/>}/>
-            <Route path="/:section" element={<MainContent/>}/>
-            <Route path="/:section/search" element={<FlightSearch/>}/>
+            <Route path="/*" element={<MainContent/>}/>
+            <Route path="/:section/search" element={<SearchContent/>}/>
           </Routes>
+          </HotelsListProvider>
       </FlightBookingDetailsProvider>
       </TrainBookingDetailsProvider>
       </HotelBookingDetailsProvider>

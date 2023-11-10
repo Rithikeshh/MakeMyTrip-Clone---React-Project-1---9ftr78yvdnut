@@ -10,8 +10,8 @@ function FlightSearch() {
   console.log(section);
   return (
     <div>
+      {/* <SearchNavbar/> */}
       
-      <SearchNavbar/>
     </div>
   )
 }

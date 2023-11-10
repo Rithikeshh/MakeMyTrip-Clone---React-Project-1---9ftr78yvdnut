@@ -1,4 +1,4 @@
-import React, { useReducer, useRef } from 'react'
+import React, { useReducer, useRef, useState } from 'react'
 import '../styles/GenericMainContent.css'
 import TicketCheckboxContainer from '../components/MainContentsComponents/TicketCheckboxContainer';
 // import hotelReducer,{hotalBookingDetails} from '../reducer/hotelReducer';
@@ -6,6 +6,8 @@ import { useHotelBookingDetailsContext } from '../provider/HotelBookingDetailsPr
 import LocationInputContainer from '../components/MainContentsComponents/LocationInputContainer';
 import CalendarInputContainer from '../components/MainContentsComponents/CalendarInputContainer';
 import { Link } from 'react-router-dom';
+import { useHotelsListContext } from '../provider/HotelsListProvider';
+import getHotelList from '../utils/getHotelList';
 
 
 // Most css written in genericMainContent.css
@@ -17,7 +19,10 @@ const paraText = 'Fix this text to make responsive; Book Domestic and Internatio
 function HotelsContent() {
 
   const{hotelBookingState, dispatchHotelBookingState} = useHotelBookingDetailsContext()
+  const{setHotelList} = useHotelsListContext()
 
+
+  
   return (
     <div style={{paddingBottom:'11px'}}>
       <TicketCheckboxContainer 
@@ -70,7 +75,9 @@ function HotelsContent() {
       </section>
       <section>
         <p className='makeFlex make-justify-center'>
-            <Link className='primaryBtn widgetSearchBtn bold-text font24' to="/hotel/search">SEARCH</Link>
+            <Link onClick={()=>{
+              getHotelList(setHotelList, hotelBookingState.city)
+            }} className='primaryBtn widgetSearchBtn bold-text font24' to="/hotel/search">SEARCH</Link>
         </p>
       </section>
     </div>

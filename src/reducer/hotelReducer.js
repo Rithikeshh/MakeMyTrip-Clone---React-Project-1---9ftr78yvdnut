@@ -1,11 +1,11 @@
 import { getDay, getMonth } from "../utils/dateFunctions";
 
 export const hotalBookingDetails={
-    city: 'Goa',
+    city: 'Mumbai',
     checkIn: {
         date: new Date().getDate(),
         month: getMonth(new Date().getMonth()),
-        year: new Date().getFullYear()%100,
+        year: new Date().getFullYear(),
         day: getDay(new Date().getDay())
     },
     checkOut: {
@@ -33,7 +33,7 @@ export default function hotelReducer(state, action){
                     ...state.checkIn,
                     date: action.payload.date,
                     month: getMonth(action.payload.month),
-                    year: action.payload.year%100,
+                    year: action.payload.year,
                     day: getDay(action.payload.day)
                 },    
             }
@@ -44,7 +44,7 @@ export default function hotelReducer(state, action){
                     ...state.checkOut,
                     date: action.payload.date,
                     month: getMonth(action.payload.month),
-                    year: action.payload.year%100,
+                    year: action.payload.year,
                     day: getDay(action.payload.day)
                 },    
             }

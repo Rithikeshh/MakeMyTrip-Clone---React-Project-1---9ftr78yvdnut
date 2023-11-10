@@ -7,13 +7,8 @@ import RailwaysContent from './pages/RailwaysContent';
 import Header from './components/Navbar/Header';
 import Navbar from './components/Navbar/Navbar';
 
-const sections = {
-  flights: <FlightsContent />,
-  hotels: <HotelsContent />,
-  railways: <RailwaysContent />
-}
 function MainContent() {
-  const {section} = useParams()
+
 
   return (
     <div className="container" >
@@ -21,15 +16,17 @@ function MainContent() {
       <Navbar/>
     <div className='mainContent-container-wrapper makeFlex make-justify-center'>
       <div className='mainContent-container'>
-        {!sections[section] ? <FlightsContent/> : sections[section]}
+        
+        <Routes>
+          <Route path='/' element={<FlightsContent/>}/>
+          <Route path='flights' element={<FlightsContent/>}/>
+          <Route path='hotels' element={<HotelsContent/>}/>
+          <Route path='railways' element={<RailwaysContent/>}/>
+          <Route path='*' element={<div>Page Not Found!!</div>}/>
+        </Routes>
       </div>
     </div>
-    {/* <Routes>
-      <Route path='/' element={<FlightsContent/>}/>
-      <Route path='/flights' element={<FlightsContent/>}/>
-      <Route path='/hotels' element={<HotelsContent/>}/>
-      <Route path='/railways' element={<RailwaysContent/>}/>
-    </Routes> */}
+    
     </div>
   )
 }

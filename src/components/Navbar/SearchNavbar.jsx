@@ -46,6 +46,7 @@ function SearchNavbar() {
       <section>
         <LoginModalProvider><Profile/></LoginModalProvider>
       </section>
+      <section className='searchPage-bg'></section>
     </div>
   )
 }

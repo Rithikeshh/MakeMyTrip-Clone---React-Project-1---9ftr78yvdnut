@@ -46,7 +46,7 @@ function CalendarInputContainer({labelFor, spanHeading, value, dispatch, type}) 
           />
           <span className='p-r-6 lineHeight-36 font30 strongBold-text'>{value.date}</span>
           <span>{value.month}</span>
-          <span className='shortYear'>{value.year}</span>
+          <span className='shortYear'>{value.year%100}</span>
         </div>
         <span>{value.day}</span>
       </label>
