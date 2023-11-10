@@ -40,7 +40,7 @@ function Header() {
                     <p className="font10 margin-y-3 grayText">Manage your bookings</p>
                     </div>
                 </li>
-                <LoginModalProvider key={3}><Profile/></LoginModalProvider>
+                <Profile key={3}/>
                 <li key={4} className="header-userList-item makeFlex make-align-center geoSwitcher">
                     <div>
                     <div className="whiteText makeFlex makeCenter langSlct">

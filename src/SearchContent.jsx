@@ -3,6 +3,7 @@ import SearchNavbar from './components/Navbar/SearchNavbar'
 import { Route, Routes, useParams } from 'react-router-dom'
 import FlightSearch from './pages/FlightSearch'
 import HotelSearch from './pages/HotelSearch'
+import { useLoginModalContext } from './provider/LoginModalProvider'
 
 const sections = {
     flight: <FlightSearch />,
@@ -11,6 +12,8 @@ const sections = {
   }
 function SearchContent() {
     const {section} = useParams()
+    const {isLoginModalVisible, setIsLoginModalVisible} = useLoginModalContext()
+    console.log(isLoginModalVisible)
     console.log(section)
   return (
     <div>

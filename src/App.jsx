@@ -15,6 +15,7 @@ import FlightSearch from "./pages/FlightSearch";
 import SearchNavbar from "./components/Navbar/SearchNavbar";
 import SearchContent from "./SearchContent";
 import HotelsListProvider from "./provider/HotelsListProvider";
+import LoginModalProvider from "./provider/LoginModalProvider";
 
 
 
@@ -24,6 +25,7 @@ function App() {
   return (
     
       <AuthProvider>
+      <LoginModalProvider>
       <HotelBookingDetailsProvider>
       <TrainBookingDetailsProvider>
       <FlightBookingDetailsProvider>
@@ -36,6 +38,7 @@ function App() {
       </FlightBookingDetailsProvider>
       </TrainBookingDetailsProvider>
       </HotelBookingDetailsProvider>
+      </LoginModalProvider>
       </AuthProvider>
       
     

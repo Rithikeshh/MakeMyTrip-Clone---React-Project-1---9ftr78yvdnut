@@ -2,13 +2,16 @@ import React from 'react'
 import SearchPageHeaderForHotel from '../components/Navbar/SearchPageHeaderForHotel'
 import { useHotelsListContext } from '../provider/HotelsListProvider'
 import { useHotelBookingDetailsContext } from '../provider/HotelBookingDetailsProvider'
+import { useAuth } from '../provider/AuthProvider'
+import { useLoginModalContext } from '../provider/LoginModalProvider'
+import HotelCard from '../components/HotelCard'
 
 
 function HotelSearch() {
     
   const{hotelList} = useHotelsListContext()
   const{hotelBookingState} = useHotelBookingDetailsContext()
-  console.log(hotelList)
+  
 
   return (
     <div>
@@ -61,10 +64,11 @@ function HotelSearch() {
           :
           <ul className='hotel-card-container'>
             <li className='bold-text font24'>Showing Properties in {hotelBookingState.city}</li>
-            <li className='hotel-card'>
-              <img src={hotelList[0].images[0]} alt="" />
-              <span>{hotelList[0].name}</span>
-            </li>
+            {
+              hotelList.map((item) => (
+                <HotelCard key={item._id} hotel={item}/>
+              ))
+            }
           </ul>
         }
       </div>

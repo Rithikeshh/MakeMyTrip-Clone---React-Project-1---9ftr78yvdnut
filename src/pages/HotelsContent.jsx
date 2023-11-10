@@ -6,8 +6,7 @@ import { useHotelBookingDetailsContext } from '../provider/HotelBookingDetailsPr
 import LocationInputContainer from '../components/MainContentsComponents/LocationInputContainer';
 import CalendarInputContainer from '../components/MainContentsComponents/CalendarInputContainer';
 import { Link } from 'react-router-dom';
-import { useHotelsListContext } from '../provider/HotelsListProvider';
-import getHotelList from '../utils/getHotelList';
+
 
 
 // Most css written in genericMainContent.css
@@ -19,7 +18,6 @@ const paraText = 'Fix this text to make responsive; Book Domestic and Internatio
 function HotelsContent() {
 
   const{hotelBookingState, dispatchHotelBookingState} = useHotelBookingDetailsContext()
-  const{setHotelList} = useHotelsListContext()
 
 
   
@@ -75,9 +73,7 @@ function HotelsContent() {
       </section>
       <section>
         <p className='makeFlex make-justify-center'>
-            <Link onClick={()=>{
-              getHotelList(setHotelList, hotelBookingState.city)
-            }} className='primaryBtn widgetSearchBtn bold-text font24' to="/hotel/search">SEARCH</Link>
+            <Link className='primaryBtn widgetSearchBtn bold-text font24' to="/hotel/search">SEARCH</Link>
         </p>
       </section>
     </div>
