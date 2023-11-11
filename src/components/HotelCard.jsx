@@ -33,7 +33,10 @@ function HotelCard({hotel}) {
                 </div>
                 {
                   !isLoggedIn && 
-                  <span onClick={handleModal}>Login to unlock the best deals</span>
+                  <span onClick={(e)=>{
+                    e.stopPropagation()
+                    handleModal()
+                  }}>Login to unlock the best deals</span>
                 }
               </section>
             </li>

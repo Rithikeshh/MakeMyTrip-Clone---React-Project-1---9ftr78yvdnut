@@ -13,8 +13,7 @@ const sections = {
 function SearchContent() {
     const {section} = useParams()
     const {isLoginModalVisible, setIsLoginModalVisible} = useLoginModalContext()
-    console.log(isLoginModalVisible)
-    console.log(section)
+
   return (
     <div>
         <SearchNavbar/>

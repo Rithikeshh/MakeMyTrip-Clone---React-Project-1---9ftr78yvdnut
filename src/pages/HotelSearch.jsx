@@ -11,7 +11,7 @@ function HotelSearch() {
     
   const{hotelList} = useHotelsListContext()
   const{hotelBookingState} = useHotelBookingDetailsContext()
-  
+  console.log(hotelList);
 
   return (
     <div>

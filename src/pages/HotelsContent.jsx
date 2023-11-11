@@ -19,7 +19,7 @@ function HotelsContent() {
 
   const{hotelBookingState, dispatchHotelBookingState} = useHotelBookingDetailsContext()
 
-
+  
   
   return (
     <div style={{paddingBottom:'11px'}}>

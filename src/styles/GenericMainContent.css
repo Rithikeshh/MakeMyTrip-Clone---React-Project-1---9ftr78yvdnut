@@ -126,9 +126,11 @@
     
     >ul{
         display: flex;
+        flex-wrap: wrap;
         justify-content: space-around;
         >li{
             position: relative;
+            cursor: pointer;
         }
         >.active span:after{
             
@@ -155,6 +157,7 @@
     align-items: center;
     width: 100%;
     gap: 1rem;
+    margin-bottom: 2rem;
     >li{
         flex-grow: 1;
         width: 80%;
@@ -251,7 +254,28 @@
 
 
 
-
+@media only screen and (max-width: 700px){
+    .hotels-filter-bar{
+        >ul{
+            flex-direction: column;
+            gap: 0.7rem;
+            margin: 0 2rem;
+            border: 1px solid grey;
+            padding: 4px;
+            border-radius: 0.25rem;
+            >li{
+                width: fit-content;
+            }
+            >.active span:after{
+                background: none;
+                
+            }
+            >.active{
+                color: #0084ff;
+            }
+        }
+    }
+}
 @media only screen and (max-width:940px) {
     .checkbox-ticket-container{
         flex-direction: column;

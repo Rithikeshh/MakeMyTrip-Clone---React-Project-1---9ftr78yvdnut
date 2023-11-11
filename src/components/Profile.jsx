@@ -25,7 +25,7 @@ function Profile() {
             setIsLoginModalVisible(!isLoginModalVisible)
         }
     }
-    console.log(isLoginModalVisible)
+    
   return (
     
         <li 

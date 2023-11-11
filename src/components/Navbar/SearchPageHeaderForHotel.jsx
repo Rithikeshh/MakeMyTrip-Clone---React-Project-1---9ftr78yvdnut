@@ -9,12 +9,36 @@ import { useHotelsListContext } from '../../provider/HotelsListProvider'
 function SearchPageHeaderForHotel() {
     const {hotelBookingState, dispatchHotelBookingState} = useHotelBookingDetailsContext()
     const{setHotelList} = useHotelsListContext()
-    const [active, setActive] = useState(0);
+    const [active, setActive] = useState(1);
 
     useEffect(()=>{
         getHotelList(setHotelList ,hotelBookingState.city)
     },[])
-
+    function handlePopularFilter(){
+        setActive(1)
+        getHotelList(setHotelList ,hotelBookingState.city)
+    }
+    function handleRatingFilter(){
+        setHotelList((oldList)=>{
+            const newList = oldList.sort((item1,item2)=>item2.rating-item1.rating)
+            return [...newList]
+        })
+        setActive(2)
+    }
+    function handlePriceHighestFirst(){
+        setActive(3)
+        setHotelList((oldList)=>{
+            const newList = oldList.sort((item1, item2)=>item2.rooms[0].costDetails.baseCost - item1.rooms[0].costDetails.baseCost)
+            return [...newList]
+        })
+    }
+    function handlePriceLowestFirst(){
+        setActive(4)
+        setHotelList((oldList)=>{
+            const newList = oldList.sort((item1, item2)=>item1.rooms[0].costDetails.baseCost - item2.rooms[0].costDetails.baseCost)
+            return [...newList]
+        })
+    }
   return (
     <>
     <div className='searchPage-header-container'>
@@ -65,16 +89,16 @@ function SearchPageHeaderForHotel() {
       <div className='hotels-filter-bar'>
             <ul>
                 <li className='bold-text'>SORT BY:</li>
-                <li className={`${active == 1 ? 'active' : ''} `}>
+                <li onClick={handlePopularFilter} className={`${active == 1 ? 'active' : ''} `}>
                     <span>Popular</span>
                 </li>
-                <li className={`${active == 2 ? 'active' : ''}`}>
+                <li onClick={handleRatingFilter} className={`${active == 2 ? 'active' : ''}`}>
                     <span>User Rating (Highest First)</span>
                 </li>
-                <li className={`${active == 3 ? 'active' : ''}`}>
+                <li onClick={handlePriceHighestFirst} className={`${active == 3 ? 'active' : ''}`}>
                     <span>Price (Highest First)</span>
                 </li>
-                <li className={`${active == 4 ? 'active' : ''}`}>
+                <li onClick={handlePriceLowestFirst} className={`${active == 4 ? 'active' : ''}`}>
                     <span>Price (Lowest First)</span>
                 </li>
             </ul>
