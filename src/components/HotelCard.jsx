@@ -1,16 +1,25 @@
 import React from 'react'
 import { useAuth } from '../provider/AuthProvider'
 import { useLoginModalContext } from '../provider/LoginModalProvider'
+import { useNavigate } from 'react-router-dom'
+import { useHotelBookingDetailsContext } from '../provider/HotelBookingDetailsProvider'
 
 function HotelCard({hotel}) {
   const {isLoggedIn} = useAuth()
+  
   const {setIsLoginModalVisible} = useLoginModalContext()
+  const navigate = useNavigate()
+
+  function handleNavigation(){
+    navigate(`/hotel/${hotel._id}`)
+    
+  }
 
   function handleModal(){
     setIsLoginModalVisible(true) 
   }
   return (
-    <li className='hotel-card'>
+    <li className='hotel-card' onClick={handleNavigation}>
               <img src={hotel.images[0]} alt="" />
               <div>
                 <h2>{hotel.name}</h2>

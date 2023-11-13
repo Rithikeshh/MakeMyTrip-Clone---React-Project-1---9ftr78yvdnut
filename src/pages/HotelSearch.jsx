@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useRef } from 'react'
 import SearchPageHeaderForHotel from '../components/Navbar/SearchPageHeaderForHotel'
 import { useHotelsListContext } from '../provider/HotelsListProvider'
 import { useHotelBookingDetailsContext } from '../provider/HotelBookingDetailsProvider'
@@ -12,6 +12,7 @@ function HotelSearch() {
   const{hotelList} = useHotelsListContext()
   const{hotelBookingState} = useHotelBookingDetailsContext()
   console.log(hotelList);
+  const hotelCityRef = useRef(hotelBookingState.city)
 
   return (
     <div>
@@ -56,14 +57,14 @@ function HotelSearch() {
         </p>
       </section>
       </div> */}
-      <SearchPageHeaderForHotel/>
+      <SearchPageHeaderForHotel hotelCityRef={hotelCityRef}/>
       <div className='hotelList-container'>
         {
           hotelList.length == 0 ? 
           <div style={{color:'white', textAlign:'center'}}>Oops No Hotel Found In This City!!</div> 
           :
           <ul className='hotel-card-container'>
-            <li className='bold-text font24'>Showing Properties in {hotelBookingState.city}</li>
+            <li className='bold-text font24'>Showing Properties in {hotelCityRef.current}</li>
             {
               hotelList.map((item) => (
                 <HotelCard key={item._id} hotel={item}/>

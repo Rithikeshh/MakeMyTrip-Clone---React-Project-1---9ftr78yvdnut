@@ -6,11 +6,11 @@ import { Link } from 'react-router-dom'
 import getHotelList from '../../utils/getHotelList'
 import { useHotelsListContext } from '../../provider/HotelsListProvider'
 
-function SearchPageHeaderForHotel() {
+function SearchPageHeaderForHotel({hotelCityRef}) {
     const {hotelBookingState, dispatchHotelBookingState} = useHotelBookingDetailsContext()
     const{setHotelList} = useHotelsListContext()
     const [active, setActive] = useState(1);
-
+    
     useEffect(()=>{
         getHotelList(setHotelList ,hotelBookingState.city)
     },[])
@@ -81,6 +81,7 @@ function SearchPageHeaderForHotel() {
             <p className='makeFlex make-justify-center'>
                 <button onClick={()=>{
                     getHotelList(setHotelList ,hotelBookingState.city)
+                    hotelCityRef.current = hotelBookingState.city
                 }} className='primaryBtn widgetSearchBtn bold-text' to="/hotel/search">SEARCH</button>
             </p>
         </section>
