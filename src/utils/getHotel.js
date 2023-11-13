@@ -1,4 +1,4 @@
-export default async function getHotel(id, setHotel, setName){
+export default async function getHotel(id, setHotel, setName, setLoading){
 
     const config = {
       Method : "GET",
@@ -20,4 +20,5 @@ export default async function getHotel(id, setHotel, setName){
     catch(error){
       console.log('error', error)
     }
+    setLoading(false)
   }

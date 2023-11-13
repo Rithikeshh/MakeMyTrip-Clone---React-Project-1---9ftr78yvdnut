@@ -243,5 +243,6 @@
     >div:nth-child(1){
         display: flex;
         gap: 6rem;
+        padding-bottom: 10px;
     }
 }

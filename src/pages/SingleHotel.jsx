@@ -1,5 +1,5 @@
  import React, { useEffect, useState } from 'react'
-import { useNavigate, useParams } from 'react-router-dom'
+import { Link, useNavigate, useParams } from 'react-router-dom'
 import SearchNavbar from '../components/Navbar/SearchNavbar';
 import SearchPageLocationInputContainer from '../components/SearchContentComponent/SearchPageLocationInputContainer';
 import SearchPageCalendarInputContainer from '../components/SearchContentComponent/SearchPageCalendarInputContainer';
@@ -12,10 +12,12 @@ import getHotel from '../utils/getHotel';
     const {hotelBookingState, dispatchHotelBookingState} = useHotelBookingDetailsContext()
     const navigate = useNavigate()
     const [hotel, sethotel] = useState(null)
-    const [hotelName, setHotelName] = useState(null);
+    const [loading, setLoading] = useState(true);
+    const [hotelName, setHotelName] = useState('');
     console.log(hotelId);
     useEffect(()=>{
-      getHotel(hotelId, sethotel, setHotelName)
+      getHotel(hotelId, sethotel, setHotelName, setLoading)
+      
     },[])
    return (
      <div>
@@ -65,8 +67,25 @@ import getHotel from '../utils/getHotel';
                 }} className='primaryBtn widgetSearchBtn bold-text' to="/hotel/search">SEARCH</button>
             </p>
         </section>
+        <div className='paths'>
+            <Link to={'/'}><span>Home {" > "}</span></Link>
+            <Link to={'/hotel/search'}><span>Hotels In {hotelBookingState.city} {" > "}</span></Link>
+            <Link><span>{hotelName}</span></Link>
+          </div>
+        </div>
       </div>
-     </div>
+      {loading ? 
+        <div>Loading...</div> :
+        <div id='carousel' className='hotel-cover-container'>
+
+          {hotel.images.map((image, index)=>(
+            <picture key={index} className='carousel-picture'>
+              <img src={image} alt='cover'/>
+            </picture>
+          ))}
+          
+        </div>
+      }
      </div>
    )
  }
