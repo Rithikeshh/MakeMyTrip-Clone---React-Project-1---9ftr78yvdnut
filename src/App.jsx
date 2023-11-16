@@ -17,6 +17,7 @@ import SearchContent from "./SearchContent";
 import HotelsListProvider from "./provider/HotelsListProvider";
 import LoginModalProvider from "./provider/LoginModalProvider";
 import SingleHotel from "./pages/SingleHotel";
+import FlightListProvider from "./provider/FlightListProvider";
 
 
 
@@ -31,11 +32,13 @@ function App() {
       <TrainBookingDetailsProvider>
       <FlightBookingDetailsProvider>
         <HotelsListProvider>
+          <FlightListProvider>
           <Routes>
             <Route path="/*" element={<MainContent/>}/>
             <Route path="/:section/search" element={<SearchContent/>}/>
             <Route path="/hotel/:hotelId" element={<SingleHotel/>}/>
           </Routes>
+          </FlightListProvider>
           </HotelsListProvider>
       </FlightBookingDetailsProvider>
       </TrainBookingDetailsProvider>

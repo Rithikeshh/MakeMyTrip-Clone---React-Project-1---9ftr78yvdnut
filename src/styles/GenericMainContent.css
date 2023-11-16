@@ -113,10 +113,12 @@
     background: #ffffff1a;
     border-radius: 4px;
     padding: 4px 8px;
+    position: relative;
 }
 .searchPage-booking-details-container{
     display: flex;
     gap: 0.4rem;
+    align-items: center;
     margin-left: 1.6rem;
 }
 .hotels-filter-bar{
@@ -273,10 +275,21 @@
         font-weight: 700;
     }
 }
-
-
-
-
+.swap-icon{
+    background: url('https://jsak.mmtcdn.com/flights/assets/media/Listing_sprite.png');
+    display: inline-block;
+    background-position: -66px -448px;
+    width: 15px;
+    height: 11px;
+    cursor: pointer;
+}
+.flightList-container{
+    display: flex;
+    justify-content: center;
+    >div{
+        width: 80%;
+    }
+}
 
 
 
