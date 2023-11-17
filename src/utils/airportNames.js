@@ -27,5 +27,6 @@ export default function getAirportShortName(city){
         case 'jaipur': return 'JAI'
         case 'lucknow': return 'LKO'
         case 'cochin': return 'COK'
+        case 'vadodara': return 'BDQ'
     }
 }
