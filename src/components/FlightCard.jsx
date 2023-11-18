@@ -1,44 +1,59 @@
 import React from 'react'
+import { useNavigate } from 'react-router-dom'
+import { airportAndCity } from '../utils/airportNames'
 
-const flightIcons = [
-    ["https://imgak.mmtcdn.com/flights/assets/media/dt/common/icons/6E.png?v=17", 'IndiGo'],
-    ["https://imgak.mmtcdn.com/flights/assets/media/dt/common/icons/UK.png?v=17", 'Vistara'],
-    ["https://imgak.mmtcdn.com/flights/assets/media/dt/common/icons/AI.png?v=17", 'Air India'],
-    ["https://imgak.mmtcdn.com/flights/assets/media/dt/common/icons/SG.png?v=17", 'Spice Jet']
-]
+const flightIcons = {
+    '6E' :{img: "https://imgak.mmtcdn.com/flights/assets/media/dt/common/icons/6E.png?v=17", name: 'IndiGo'},
+    'UK' :{img: "https://imgak.mmtcdn.com/flights/assets/media/dt/common/icons/UK.png?v=17", name: 'Vistara'},
+    'AI' :{img: "https://imgak.mmtcdn.com/flights/assets/media/dt/common/icons/AI.png?v=17", name: 'Air India'},
+    'SG' :{img: "https://imgak.mmtcdn.com/flights/assets/media/dt/common/icons/SG.png?v=17", name: 'Spice Jet'},
+    'G8' :{img: 'https://airhex.com/images/airline-logos/go-first.png', name: 'Go First'}
+}
 
 function FlightCard({flight}) {
 
-    const iconIndex = Math.floor((Math.random() * 4))
+    const navigate = useNavigate()
+   
 
+    function handleNavigation(){
+        navigate(`/flight/${flight._id}`)
+        
+    }
   return (
     <li className='flight-card'>
-        
-        <div className='flightIcon-container'>
-            <img className='flightIcon' src={flightIcons[iconIndex][0]} alt="" />
+        <div>
+            <div className='flightIcon-container'>
+                <img className='flightIcon' src={flightIcons[flight.flightID.slice(0,2)].img} alt="" />
+                <div>
+                    <h5>{flightIcons[flight.flightID.slice(0,2)].name}</h5>
+                    <span className='font12'>{flight.flightID.slice(0,2) +" "+flight.flightID.slice(-3)}</span>
+                </div>
+            </div>
             <div>
-                <h5>{flightIcons[iconIndex][1]}</h5>
-                <span className='font12'>{flight.flightID.split('-')[1]}</span>
+                <h3>{flight.departureTime}</h3>
+                <span>{airportAndCity[flight.source].city}</span>
+            </div>
+            <div>
+                <span className='font12'>{`0${flight.duration} h`}</span>
+                <span>{flight.stops ? flight.stops : 'Non'} stop</span>
+            </div>
+            <div>
+                <h3>{flight.arrivalTime}</h3>
+                <span>{airportAndCity[flight.destination].city}</span>
+            </div>
+            <div>
+                <div>
+                    <h3>₹ {flight.ticketPrice}</h3>
+                    <span className='font12'>per traveller</span>
+                </div>
+                <div>
+                    <span>{flight.availableSeats} seats left</span>
+                    <button onClick={handleNavigation}>BOOK NOW</button>
+                </div>
             </div>
         </div>
         <div>
-            <h3>{flight.departureTime}</h3>
-            <span>{flight.source}</span>
-        </div>
-        <div>
-            <span className='font12'>{`0${flight.duration} h`}</span>
-            <span>Non stop</span>
-        </div>
-        <div>
-            <h3>{flight.arrivalTime}</h3>
-            <span>{flight.destination}</span>
-        </div>
-        <div>
-            <div>
-                <h3>₹ {flight.ticketPrice}</h3>
-                <span className='font12'>per traveller</span>
-            </div>
-            <button>BOOK NOW</button>
+            <p className='alertMsg'>Get Rs 150 off using MMTBONUS*</p>
         </div>
     </li>
   )

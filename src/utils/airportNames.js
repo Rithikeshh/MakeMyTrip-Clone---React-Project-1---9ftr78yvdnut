@@ -1,16 +1,68 @@
+// const airportAndCity = [
+//     {airport:'IXJ',city:'jammu'},
+//     {airport:'CCU',city:'kolkata'},
+//     {airport:'MAA',city:'chennai'},
+//     {airport:'ATQ',city:'punjab'},
+//     {airport:'BLR',city:'bengaluru'},
+//     {airport:'BBI',city:'bhubaneswar'},
+//     {airport:'PAT',city:'patna'},
+//     {airport:'DEL',city:'new delhi'},
+//     {airport:'BOM',city:'mumbai'},
+//     {airport:'NAG',city:'nagpur'},
+//     {airport:'PNQ',city:'pune'},
+//     {airport:'DED',city:'dehradun'},
+//     {airport:'GOI',city:'goa'},
+//     {airport:'GAU',city:'guwahati'},
+//     {airport:'RPR',city:'chhattisgarh'},
+//     {airport:'IXM',city:'madurai'},
+//     {airport:'GAY',city:'gaya'},
+//     {airport:'AMD',city:'ahmedabad'},
+//     {airport:'BDQ',city:'vadodara'},
+//     {airport:'STV',city:'surat'},
+//     {airport:'IXE',city:'mangaluru'},
+//     {airport:'JAI',city:'jaipur'},
+//     {airport:'LKO',city:'lucknow'},
+//     {airport:'COK',city:'cochin'},
+// ]
+export const airportAndCity = {
+    'IXJ':{city:'jammu'},
+    'CCU':{city:'kolkata'},
+    'MAA':{city:'chennai'},
+    'ATQ':{city:'punjab'},
+    'BLR':{city:'bengaluru'},
+    'BBI':{city:'bhubaneswar'},
+    'PAT':{city:'patna'},
+    'DEL':{city:'new delhi'},
+    'BOM':{city:'mumbai'},
+    'NAG':{city:'nagpur'},
+    'PNQ':{city:'pune'},
+    'DED':{city:'dehradun'},
+    'GOI':{city:'goa'},
+    'GAU':{city:'guwahati'},
+    'RPR':{city:'chhattisgarh'},
+    'IXM':{city:'madurai'},
+    'GAY':{city:'gaya'},
+    'AMD':{city:'ahmedabad'},
+    'BDQ':{city:'vadodara'},
+    'STV':{city:'surat'},
+    'IXE':{city:'mangaluru'},
+    'JAI':{city:'jaipur'},
+    'LKO':{city:'lucknow'},
+    'COK':{city:'cochin'},
+}
+
 export default function getAirportShortName(city){
     const cityInLowerCase = city.toLowerCase()
     switch(cityInLowerCase){
 
         case 'jammu' : return 'IXJ'
         case 'kolkata' : return 'CCU'
-        case 'jammu and kashmir' : return 'CCU'
         case 'chennai' : return 'MAA'
         case 'punjab' : return 'ATQ'
         case 'bengaluru' : return 'BLR'
         case 'bhubaneswar' : return 'BBI'
         case 'patna' : return 'PAT'
-        case 'new Delhi' : return 'DEL'
+        case 'new delhi' : return 'DEL'
         case 'mumbai' : return 'BOM'
         case 'nagpur' : return 'NAG'
         case 'pune' : return 'PNQ'
@@ -21,7 +73,6 @@ export default function getAirportShortName(city){
         case 'madurai' : return 'IXM'
         case 'gaya' : return 'GAY'
         case 'ahmedabad' : return 'AMD'
-        case 'vadodara' : return 'VDQ'
         case 'surat' : return 'STV'
         case 'mangaluru' : return 'IXE'
         case 'jaipur': return 'JAI'
@@ -29,4 +80,9 @@ export default function getAirportShortName(city){
         case 'cochin': return 'COK'
         case 'vadodara': return 'BDQ'
     }
+}
+
+export function getCityNameByAirportName(airport){
+    
+
 }
