@@ -19,6 +19,9 @@ function FlightBookingPage() {
     const [loading, setLoading] = useState(true);
     const {flightBookingState} = useFlightBookingDetailsContext()
 
+    const [showBaseFare, setShowBaseFare] = useState(false)
+    const [showTaxes, setShowTaxes] = useState(false)
+
     useEffect(()=>{
         getFlight(flightId, setFlight, setLoading)
         document.body.style.backgroundColor = '#E5EEF4'
@@ -26,6 +29,12 @@ function FlightBookingPage() {
         document.body.style.backgroundColor = ''
         }
     },[])
+    function handleBaseFare(){
+        setShowBaseFare(!showBaseFare)
+    }
+    function handleTaxes(){
+        setShowTaxes(!showTaxes)
+    }
 
   return (
     <div>
@@ -87,10 +96,90 @@ function FlightBookingPage() {
                         </div>
                     </div>
                 </div>
-                <div>alok</div>
+                <div className='flightBookingPage-imp-info'>
+                    <h3>Important Information</h3>
+                    <div>
+                        <img style={{width:'20px', height:'20px', marginRight:'10px'}} src="https://imgak.mmtcdn.com/flights/assets/media/dt/rta_assets/imp-info.png" alt="" />
+                        <h5>Check travel guidelines and baggage information below:</h5>
+                    </div>
+                    <ul>
+                        <li><span>Carry no more than 1 check-in baggage and 1 hand baggage per passenger. If violated, airline may levy extra charges.</span></li>
+                        <li><span>Wearing a mask/face cover is no longer mandatory. However, all travellers are advised to do so as a precautionary measure.</span></li>
+                    </ul>
+                </div>
+                <div className='flightBookingPage-bookingDetails'>
+
+                </div>
+                <div className='flightBookingPage-pincodeAndState'>
+                    <div>
+                        <span>Your pincode and state </span>
+                        <span>(Required for generating your invoice.)</span>
+                    </div>
+                    <div>
+                        <div>
+                            <span>Pincode</span>
+                            <input type="text" placeholder='Postal Code'/>
+                        </div>
+                        <div>
+                            <span>State</span>
+                            <input type="text" placeholder='Your State'/>
+                        </div>
+                        <div>
+                            <span>Address</span>
+                            <input type="text" placeholder='Your Address (Optional)' />
+                        </div>
+                    </div>
+                </div>
             </div>
             <div>
-                <div className='flightBookingPage-fareDetails'></div>
+                <div className='non-scrollable'>
+                    <div className='flightBookingPage-fareDetails'>
+                        <h3>Fare Summary</h3>
+                        <div onClick={handleBaseFare}>
+                            <div>
+                                <div>
+                                    {!showBaseFare ? 
+                                        <img className='flightBookingPage-addIcon' src="https://jsak.mmtcdn.com/flights/assets/media/ic_expand.68dc8068.png" alt="" />
+                                        :
+                                        <img className='flightBookingPage-addIcon' src="https://jsak.mmtcdn.com/flights/assets/media/ic_collapse.83c3e92a.png" alt=""/>
+                                    }
+                                    <span>Base Fare</span>
+                                </div>
+                                {!showBaseFare && 
+                                    <div>₹ {flight.ticketPrice}</div> 
+                                }{/**price depend on number of travellers */}
+                            </div>
+                            {showBaseFare && 
+                                <div>
+                                    <span> Adult(s) ({`1 X ₹ ${flight.ticketPrice}`})</span>
+                                    <div>₹ {flight.ticketPrice}</div>
+                                </div>
+                            }
+                        </div>
+                        <div onClick={handleTaxes}>
+                            <div>
+                                <div>
+                                    {!showTaxes ? 
+                                        <img className='flightBookingPage-addIcon' src="https://jsak.mmtcdn.com/flights/assets/media/ic_expand.68dc8068.png" alt="" />
+                                        :
+                                        <img className='flightBookingPage-addIcon' src="https://jsak.mmtcdn.com/flights/assets/media/ic_collapse.83c3e92a.png" alt=""/>
+                                    }
+                                    <span>Taxes and Surcharges</span>
+                                </div>
+                                {!showTaxes &&<div>₹ 0</div>} 
+                            </div>
+                            {showTaxes && <div>
+                               <span>Airline Taxes and Surcharges</span>
+                               <div>₹ 0</div>
+                            </div>}
+                        </div>
+                        <div>
+                            <span>Total Amount</span>
+                            <span>₹ {flight.ticketPrice}</span>
+                        </div>
+                    </div>
+                    alok
+                </div>
             </div>
         </div>
       }
