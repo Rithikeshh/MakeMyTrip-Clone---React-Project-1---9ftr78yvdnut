@@ -52,7 +52,7 @@ function SearchPageHeaderForFlight({flightSourceRef, flightDestinationRef}) {
                         <label htmlFor='class' className='searchPage-booking-inputBox'>
                             <span className='dropdown'>PASSENGERS & CLASS</span>
                             <div>
-                                <span >{'1'}{' Traveller, '}</span>
+                                <span >{flightBookingState.travellers}{' Traveller, '}</span>
                                 <span>{'All Class'}</span>
                             </div>
                         </label>

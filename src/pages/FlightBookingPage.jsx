@@ -25,6 +25,10 @@ function FlightBookingPage() {
 
     const [showStateModal, setShowStateModal] = useState(false);
     const [stateValue, setStateValue] = useState("");
+
+    const [addedTravellers, setAddedTravellers] = useState([]);
+    const [travellerLimitExceed, setTravellerLimitExceed] = useState(false);
+    console.log(addedTravellers);
     useEffect(()=>{
         document.addEventListener('click',()=>{
             setShowStateModal(false)
@@ -40,6 +44,23 @@ function FlightBookingPage() {
     }
     function handleTaxes(){
         setShowTaxes(!showTaxes)
+    }
+    function handleAddTraveller(){
+        if(addedTravellers.length < flightBookingState.travellers){
+            setAddedTravellers(oldValue=>{
+                return [...oldValue, {
+                    firstName: "",
+                    lastName: "",
+                    gender: ""
+                }]
+            })
+        }
+        else{
+            setTravellerLimitExceed(true)
+            setTimeout(()=>{
+                setTravellerLimitExceed(false)
+            },3000)
+        }
     }
 
   return (
@@ -113,8 +134,57 @@ function FlightBookingPage() {
                         <li><span>Wearing a mask/face cover is no longer mandatory. However, all travellers are advised to do so as a precautionary measure.</span></li>
                     </ul>
                 </div>
-                <div className='flightBookingPage-bookingDetails'>
-
+                <div className='flightBookingPage-userDetails'>
+                    <h3>Traveller Details</h3>
+                    <div>
+                        <div className='flightBookingPage-traveller-icon-container'>
+                            <img style={{width:'28px'}} src="	https://imgak.mmtcdn.com/flights/assets/media/dt/rta_assets/traveller-placeholder2.png" alt="" />
+                            <span>Traveller</span>
+                            {travellerLimitExceed && <span style={{fontSize:'10px'}}>You have already selected 2 ADULT. Remove before adding a new one.</span>}
+                        </div>
+                        <div>
+                            <span>{addedTravellers.length}/{flightBookingState.travellers}</span>
+                            <span> added</span>
+                        </div>
+                    </div>
+                    <div>
+                        <span>Important: </span>
+                        <span>Enter name as mentioned on your passport or Government approved IDs.</span>
+                    </div>
+                    <div className='flightBookingPage-userNameAndGender'>
+                        {!addedTravellers.length && <div>
+                            <span className='font12'>You have not added any adults to the list</span>
+                        </div>}
+                        {
+                            addedTravellers.map((item, index)=>(
+                                <UserNameAndGender key={index} traveller={item} index={index} setAddedTravellers={setAddedTravellers}/>
+                            ))
+                        }
+                        <div>
+                            <button onClick={handleAddTraveller}>
+                                + ADD NEW TRAVELLER
+                            </button>
+                        </div>
+                    </div>
+                    <div className='flightBookingPage-details-sent-to'>
+                        <div>
+                            <span>Booking details will be sent to </span>
+                        </div>
+                        <div>
+                            <div>
+                                <span>Country Code</span>
+                                <input type="text" disabled value={'India(91)'}/>
+                            </div>
+                            <div>
+                                <span>Mobile No</span>
+                                <input type="text" placeholder='Mobile No' />
+                            </div>
+                            <div>
+                                <span>Email</span>
+                                <input type="email" placeholder='Email' />
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <div className='flightBookingPage-pincodeAndState'>
                     <div>
@@ -157,13 +227,13 @@ function FlightBookingPage() {
                                     <span>Base Fare</span>
                                 </div>
                                 {!showBaseFare && 
-                                    <div>₹ {flight.ticketPrice}</div> 
+                                    <div>₹ {flightBookingState.travellers*flight.ticketPrice}</div> 
                                 }{/**price depend on number of travellers */}
                             </div>
                             {showBaseFare && 
                                 <div>
-                                    <span> Adult(s) ({`1 X ₹ ${flight.ticketPrice}`})</span>
-                                    <div>₹ {flight.ticketPrice}</div>
+                                    <span> Traveller(s) ({`${flightBookingState.travellers} X ₹ ${flight.ticketPrice}`})</span>
+                                    <div>₹ {flightBookingState.travellers*flight.ticketPrice}</div>
                                 </div>
                             }
                         </div>
@@ -186,10 +256,10 @@ function FlightBookingPage() {
                         </div>
                         <div>
                             <span>Total Amount</span>
-                            <span>₹ {flight.ticketPrice}</span>
+                            <span>₹ {flightBookingState.travellers*flight.ticketPrice}</span>
                         </div>
                     </div>
-                    alok
+                    {/**Add coupons here */}
                 </div>
             </div>
         </div>
@@ -198,7 +268,39 @@ function FlightBookingPage() {
   )
 }
 
+function UserNameAndGender({setAddedTravellers, index, traveller}){
 
+    function handleInput(e){
+        setAddedTravellers((prev) =>{
+            const name = e.target.name;
+            prev[index][name] = e.target.value;
+            return [...prev];
+        })
+    }
+    function handleGender(e){
+        setAddedTravellers((prev) =>{
+            prev[index].gender = e.target.innerText;
+            return [...prev];
+        })
+    }
+    return(
+        <>
+            <span style={{paddingLeft:'0.6rem', paddingTop:'0.6rem', display:"inline-block"}}>TRAVELLER {index+1}</span>
+            <div className='flightBookingPage-userNameAndGender-input-container'>
+                <div>
+                    <input onChange={handleInput} name='firstName' type="text" value={traveller.firstName} placeholder='First & Middle Name'/>
+                </div>
+                <div>
+                    <input onChange={handleInput} name="lastName" type="text" value={traveller.lastName} placeholder='Last Name'/>
+                </div>
+                <div>
+                    <span onClick={handleGender} className={`${traveller.gender == 'MALE' && 'genderActive'}`}>MALE</span>
+                    <span onClick={handleGender} className={`${traveller.gender == 'FEMALE' && 'genderActive'}`}>FEMALE</span>
+                </div>
+            </div>
+        </>
+    )
+}
 
 function StateModal({setStateValue, stateValue}){
     const states = [

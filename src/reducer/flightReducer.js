@@ -12,7 +12,8 @@ export const flightBookingDetails = {
     ticketClass:{
         head: 'All',
         text: 'All Class'
-    } 
+    },
+    travellers: 2
 }
 export default function flightReducer(state, action){
     switch(action.type){

@@ -606,7 +606,7 @@
         }
     }
 }
-.flightBookingPage-pincodeAndState{
+.flightBookingPage-pincodeAndState, .flightBookingPage-details-sent-to{
     background-color: #fff;
     padding: 1rem;
     border-radius: 0.18rem;
@@ -704,8 +704,125 @@
     margin: 3px 0 0 8px;
     transition: all 0.2s ease-in-out;
 }
+.flightBookingPage-userDetails{
+    background-color: #fff;
+    padding: 1rem;
+    border-radius: 0.18rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+    >div:nth-child(2){
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        >div:nth-child(2){
+            >span:nth-child(1){
+                font-weight: 600;
+            }
+            >span:nth-child(2){
+                color: grey;
+                font-size: 14px;
+                font-weight: 500;
 
-
+            }
+        }
+    }
+    >div:nth-child(3){
+        font-size: 12px;
+        background-color: #FFEDD1;
+        padding: 0.6rem;
+        border-radius: 0.25rem;
+        >span:nth-child(1){
+            font-weight: bold;
+            color: rgb(78, 78, 78);
+        }
+        >span:nth-child(2){
+            font-weight: 500;
+            color: rgb(85, 84, 84);
+        }
+    }
+}
+.flightBookingPage-traveller-icon-container{
+    display: flex;
+    align-items: center;
+    >span{
+        font-weight: 600;
+        font-size: 18px;
+        padding-left: 8px;
+    }
+    >span:nth-child(3){
+        position: relative;
+        top: 2px;
+        color: red;
+    };
+}
+.flightBookingPage-userNameAndGender{
+    box-shadow: 0px 0px 1px 1px rgba(0,0,0, 0.1);
+    background-color: #fff;
+    border-radius: 0.25rem;
+    margin-bottom: 1rem;
+    >div{
+        padding: 0.6rem;
+    }
+    >div:not(:last-child){
+        border-bottom: 1px solid lightgrey;
+    }
+}
+.flightBookingPage-userNameAndGender button{
+    border: none;
+    background-color: #fff;
+    font-size: 12px;
+    font-weight: 600;
+    color: #0084ff;
+    cursor: pointer;
+}
+.flightBookingPage-userNameAndGender-input-container{
+    display: flex;
+    gap: 0.5rem;
+    >div{
+        width: 33.33%;
+        >input{
+            width: 100%;
+            padding: 0.5rem;
+            font-size: 16px;
+            font-weight: 300;
+            color: rgb(96, 96, 96);
+            border-radius: 0.25rem;
+            border: 1px solid rgb(179, 178, 178);
+        }
+        >input:focus{
+            outline: none;
+            border: 1px solid #008cff;
+        }
+    }
+    >div:last-child{
+        border: 1px solid rgb(179, 178, 178);
+        border-radius: 0.25rem;
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+        overflow: hidden;
+        >span{
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+        }
+        .genderActive{
+            background-color:#EAF5FF;
+            font-weight: 500;
+            border-bottom: 3px solid #0084ff;
+        }
+    }
+    
+}
+.flightBookingPage-details-sent-to{
+    border-top: 1px solid rgb(198, 198, 198);
+    padding-top: 1rem;
+    
+}
 
 
 
