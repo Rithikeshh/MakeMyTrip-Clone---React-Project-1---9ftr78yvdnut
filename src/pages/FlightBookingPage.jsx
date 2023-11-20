@@ -14,6 +14,7 @@ const flightIcons = {
 }
 
 function FlightBookingPage() {
+
     const {flightId} = useParams()
     const [flight, setFlight] = useState(null)
     const [loading, setLoading] = useState(true);
@@ -22,7 +23,12 @@ function FlightBookingPage() {
     const [showBaseFare, setShowBaseFare] = useState(false)
     const [showTaxes, setShowTaxes] = useState(false)
 
+    const [showStateModal, setShowStateModal] = useState(false);
+    const [stateValue, setStateValue] = useState("");
     useEffect(()=>{
+        document.addEventListener('click',()=>{
+            setShowStateModal(false)
+        })
         getFlight(flightId, setFlight, setLoading)
         document.body.style.backgroundColor = '#E5EEF4'
         return ()=>{
@@ -122,7 +128,12 @@ function FlightBookingPage() {
                         </div>
                         <div>
                             <span>State</span>
-                            <input type="text" placeholder='Your State'/>
+                            <input type="text" placeholder='Your State' value={stateValue} onClick={(e)=>{
+                                e.stopPropagation();
+                                setShowStateModal(true)
+                            }}/>
+                            <span className={showStateModal ? 'dropdown-active': 'dropdown'}></span>
+                            {showStateModal && <StateModal setStateValue={setStateValue} stateValue={stateValue}/>}
                         </div>
                         <div>
                             <span>Address</span>
@@ -187,4 +198,64 @@ function FlightBookingPage() {
   )
 }
 
+
+
+function StateModal({setStateValue, stateValue}){
+    const states = [
+        'Haryana',
+        'Andaman and Nicobar',
+        'Delhi',
+        'Dadra and Nagar Haveli',
+        'Chhattisgarh',
+        'Assam',
+        'Arunachal Pradesh',
+        'Nagaland',
+        'Ladakh',
+        'Lakshadweep',
+        'Northern Areas',
+        'Telangana',
+        'Sikkim',
+        'West Bengal',
+        'Jharkhand',
+        'Meghalaya',
+        'Odisha',
+        'Uttarakhand',
+        'Jammu and Kashmir',
+        'Tripura',
+        'Mizoram',
+        'Rajasthan',
+        'Manipur',
+        'Gujarat',
+        'Goa',
+        'Bihar',
+        'Andhra Pradesh',
+        'Karnataka',
+        'Daman and Diu',
+        'Maharashtra',
+        'Madhya Pradesh',
+        'Uttar Pradesh',
+        'Kerala',
+        'Chandigarh',
+        'Tamil Nadu',
+        'Puducherry',
+        'Punjab',
+        'Himachal Pradesh',
+        'Others'
+    ]
+    return(
+        <div className='state-modal'>
+            <ul>
+                {states.map((state, index) => (
+                    <li onClick={()=>{
+                        setStateValue(state);
+                    }} 
+                        key={index}
+                        className = {stateValue == state && 'state-modal-active-state'}
+                    >{state}
+                    </li>
+                ))}
+            </ul>
+        </div>
+    )
+}
 export default FlightBookingPage
