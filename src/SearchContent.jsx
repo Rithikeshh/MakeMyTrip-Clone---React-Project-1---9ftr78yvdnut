@@ -4,11 +4,12 @@ import { Route, Routes, useParams } from 'react-router-dom'
 import FlightSearch from './pages/FlightSearch'
 import HotelSearch from './pages/HotelSearch'
 import { useLoginModalContext } from './provider/LoginModalProvider'
+import RailwaySearch from './pages/RailwaySearch'
 
 const sections = {
     flight: <FlightSearch />,
     hotel: <HotelSearch />,
-    // railway: <RailwaysContent />
+    railway: <RailwaySearch />
   }
 function SearchContent() {
     const {section} = useParams()

@@ -16,7 +16,7 @@ function FlightCard({flight}) {
    
 
     function handleNavigation(){
-        navigate(`/flight/${flight._id}`)
+        navigate(`/flight/${flight._id}`,{target:'_blank'})
         
     }
   return (

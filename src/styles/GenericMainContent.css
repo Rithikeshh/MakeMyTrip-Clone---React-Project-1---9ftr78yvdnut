@@ -641,7 +641,7 @@
                 font-weight: 300;
                 color: rgb(96, 96, 96);
                 border-radius: 0.25rem;
-                border: 1px solid black;
+                border: 1px solid rgb(179, 178, 178)
             }
             >input:focus{
                 border: none;
@@ -810,6 +810,9 @@
             justify-content: center;
             cursor: pointer;
         }
+        >span:last-child{
+            border-left: 1px solid rgb(179, 178, 178);
+        }
         .genderActive{
             background-color:#EAF5FF;
             font-weight: 500;
@@ -822,6 +825,17 @@
     border-top: 1px solid rgb(198, 198, 198);
     padding-top: 1rem;
     
+}
+.flightBookingPage-submitBtn{
+    margin-bottom: 10rem;
+    margin-top: 1rem;
+    padding: 0.7rem 2rem;
+    border-radius: 20px;
+    border: none;
+    font-weight: 600;
+    background-image: linear-gradient(97deg,#53b2fe,#065af3 130%);
+    color: #fff;
+    cursor: pointer;
 }
 
 

@@ -28,6 +28,18 @@ function FlightBookingPage() {
 
     const [addedTravellers, setAddedTravellers] = useState([]);
     const [travellerLimitExceed, setTravellerLimitExceed] = useState(false);
+    const [bookingDetailsSentTo, setBookingDetailsSentTo] = useState({
+        number:"",
+        email:""
+    })
+    const [address, setAddress] = useState({
+        pincode:"",
+        state:"",
+        address:"",
+        checked: false
+    })
+    const [checkAllField, setCheckAllField] = useState(false);
+
     console.log(addedTravellers);
     useEffect(()=>{
         document.addEventListener('click',()=>{
@@ -59,10 +71,48 @@ function FlightBookingPage() {
             setTravellerLimitExceed(true)
             setTimeout(()=>{
                 setTravellerLimitExceed(false)
-            },3000)
+            },5000)
         }
     }
+    function showMsg(){
+        setCheckAllField(true);
+        setTimeout(()=>{
+            setCheckAllField(false);
+        },5000)
+    }
+    function checkDetails(){
 
+        if(addedTravellers.length != flightBookingState.travellers){
+            showMsg();
+            return null;
+        }
+
+        
+        for(const property in bookingDetailsSentTo){
+            if(!bookingDetailsSentTo[property]){
+                showMsg();
+                return;
+            }
+        }
+        for(const property in address){
+            if(!address[property] && property != 'address'){;
+                showMsg();
+                return;
+            }
+        }
+        for(const element of addedTravellers){
+            console.log(element);
+            for(const property in element){
+                if(!element[property]){
+                    showMsg();
+                    return null;
+                }
+            }
+        }
+        
+
+    }
+    console.log(address.state);
   return (
     <div>
       <SearchNavbar/>
@@ -177,11 +227,19 @@ function FlightBookingPage() {
                             </div>
                             <div>
                                 <span>Mobile No</span>
-                                <input type="text" placeholder='Mobile No' />
+                                <input onChange={(e)=>{
+                                    setBookingDetailsSentTo(prev=>{
+                                        return {...prev, number: e.target.value}
+                                    })
+                                }} value={bookingDetailsSentTo.number} style={{caretColor:"ActiveBorder"}} type="text" placeholder='Mobile No' />
                             </div>
                             <div>
                                 <span>Email</span>
-                                <input type="email" placeholder='Email' />
+                                <input onChange={(e)=>{
+                                    setBookingDetailsSentTo(prev=>{
+                                        return {...prev, email: e.target.value}
+                                    })
+                                }} value={bookingDetailsSentTo.email} type="email" placeholder='Email' />
                             </div>
                         </div>
                     </div>
@@ -194,7 +252,11 @@ function FlightBookingPage() {
                     <div>
                         <div>
                             <span>Pincode</span>
-                            <input type="text" placeholder='Postal Code'/>
+                            <input onChange={(e)=>{
+                                setAddress(prev=>{
+                                    return {...prev, pincode: e.target.value}
+                                })
+                            }} value={address.pincode} type="text" placeholder='Postal Code'/>
                         </div>
                         <div>
                             <span>State</span>
@@ -203,13 +265,32 @@ function FlightBookingPage() {
                                 setShowStateModal(true)
                             }}/>
                             <span className={showStateModal ? 'dropdown-active': 'dropdown'}></span>
-                            {showStateModal && <StateModal setStateValue={setStateValue} stateValue={stateValue}/>}
+                            {showStateModal && <StateModal setStateValue={setStateValue} stateValue={stateValue} setAddress={setAddress}/>}
                         </div>
                         <div>
                             <span>Address</span>
-                            <input type="text" placeholder='Your Address (Optional)' />
+                            <input onChange={(e)=>{
+                                setAddress(prev=>{
+                                    return {...prev, address: e.target.value}
+                                })
+                            }} value={address.address} type="text" placeholder='Your Address (Optional)' />
                         </div>
                     </div>
+                    <div>
+                        <input onChange={(e)=>{
+                            setAddress(prev=>{
+                                console.log((e.target.checked));
+                                return {...prev, checked: e.target.checked}
+                            })
+                        }} type="checkbox" name="" id="confirm" />
+                        <label style={{paddingLeft:"4px", fontSize:"14px", cursor:"pointer"}} htmlFor="confirm">Confirm</label>
+                    </div>
+                </div>
+                <div>
+                    {checkAllField && <span style={{fontSize:'10px', color:"red", fontWeight:"600"}}>Please provide all details mentioned above.</span>}<br/>
+                    <button onClick={checkDetails} className='flightBookingPage-submitBtn'>
+                        CONTINUE
+                    </button>
                 </div>
             </div>
             <div>
@@ -302,7 +383,7 @@ function UserNameAndGender({setAddedTravellers, index, traveller}){
     )
 }
 
-function StateModal({setStateValue, stateValue}){
+function StateModal({setStateValue, stateValue, setAddress}){
     const states = [
         'Haryana',
         'Andaman and Nicobar',
@@ -350,6 +431,9 @@ function StateModal({setStateValue, stateValue}){
                 {states.map((state, index) => (
                     <li onClick={()=>{
                         setStateValue(state);
+                        setAddress(prev=>{
+                            return {...prev, state: state}
+                        })
                     }} 
                         key={index}
                         className = {stateValue == state && 'state-modal-active-state'}
