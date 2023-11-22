@@ -13,7 +13,7 @@ function CalendarInputContainer({labelFor, spanHeading, value, dispatch, type}) 
     let currentDate = `${year}-${month}-${day}`
 
     function handleInputChange(e){
-
+      console.log(e.target.value)
       const value = e.target.value
       const valueArr = value.split('-')
       dispatch(

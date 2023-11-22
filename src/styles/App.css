@@ -268,3 +268,129 @@ a{
     padding: 3px;
     transform: rotate(45deg);
 }
+.fullPageLoader {
+  display: flex;
+  background: #f2f2f2;
+  width: 100%;
+  height: calc(100vh - 148px);
+  margin-top: 5px
+}
+
+.loadingContent {
+  width: 100%;
+  text-align: center;
+  margin-top: 150px;
+  font-size: calc(var(--font-scale, 1)*20px);
+  color: #000;
+  font-weight: 800
+}
+
+.loadingContent img {
+  height: 126px
+}
+
+.loadingIcon {
+  margin-bottom: 20px
+}
+
+.fullPageLoader.v2Loader {
+  background-color: #d5e8fb
+}
+
+.fullPageLoader.v2Loader .loadingContent {
+  position: relative;
+  margin-top: 20px
+}
+
+.myBiz .fullPageLoader.v2Loader {
+  background-color: #dfdfdf
+}
+
+html[dir=rtl] .loadingContent img {
+  transform: scaleX(-1)
+}
+
+.myPartner .fullPageLoader.v2Loader {
+  background-color: #f2f2f2
+}
+
+.fliListLdr {
+  width: auto;
+  margin: 0 auto;
+  display: table;
+  position: relative;
+  left: -40px
+}
+
+.fliListLdrWrap {
+  animation: flight 2s .4s infinite;
+  position: relative;
+  display: flex
+}
+
+.fliListLdrIcon {
+  background: url(https://imgak.mmtcdn.com/flights/assets/media/dt/listing/fliIcon.png) no-repeat;
+  background-size: 161px 58px;
+  width: 162px;
+  height: 57px;
+  position: relative;
+  display: inline-block
+}
+
+html[dir=rtl] .fliListLdrIcon {
+  transform: scaleX(-1)
+}
+
+.fliListBigLineLdr {
+  width: 100px;
+  position: relative;
+  overflow: hidden;
+  top: 42px;
+  left: 5px
+}
+
+.fliListSmallLineLdr {
+  width: 70px;
+  position: relative;
+  overflow: hidden;
+  top: 30px;
+  left: 20px
+}
+
+.fliListLineLdr {
+  background: url(https://imgak.mmtcdn.com/flights/assets/media/dt/listing/strip.png) no-repeat;
+  background-size: 100px 5px;
+  width: 96px;
+  height: 2px;
+  animation: lineH .2s .4s infinite;
+  left: 97px;
+  position: relative
+}
+
+@keyframes flight {
+  0% {
+      transform: scale(1)
+  }
+
+  50% {
+      transform: scale(1.05)
+  }
+
+  to {
+      transform: scale(1)
+  }
+}
+
+@keyframes lineH {
+  0% {
+      left: 30px
+  }
+
+  50% {
+      left: 5px
+  }
+
+  to {
+      left: -30px
+  }
+}
