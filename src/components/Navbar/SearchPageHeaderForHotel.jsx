@@ -82,7 +82,7 @@ function SearchPageHeaderForHotel({hotelCityRef}) {
                 <button onClick={()=>{
                     getHotelList(setHotelList ,hotelBookingState.city)
                     hotelCityRef.current = hotelBookingState.city
-                }} className='primaryBtn widgetSearchBtn bold-text' to="/hotel/search">SEARCH</button>
+                }} className='primaryBtn widgetSearchBtn bold-text' >SEARCH</button>
             </p>
         </section>
       </div>

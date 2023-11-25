@@ -51,6 +51,49 @@ export const airportAndCity = {
     'COK':{city:'cochin'},
 }
 
+export const fromStations = [
+    'Secunderabad', 
+    'Katpadi',
+    'Howrah',
+    'Nagpur',
+    'Ahmedabad',
+    'Delhi',
+    'Surat',
+    'Chandigarh',
+    'Dhanbad',
+    'Moradabad',
+    'Pune',
+    'Kanpur',
+    'Kollam',
+    'Agra Cantonment',
+    'Ludhiana',
+    'Guwahati',
+    'Manmad',
+    
+    // 'Lucknow',
+    // 'Mughal Sarai',
+    // 'Thiruvananthapuram',
+]
+export const toStations = [
+    'Varanasi',
+    'Vadodara',
+    'Chandigarh',
+    'Barddhaman',
+    'Udaipur',
+    'Salem',
+    'Howrah',
+    'Coimbatore',
+    'Hubli',
+    'Pune',
+    'Thrissur',
+    'Dhanbad',
+    'Vijayawada',
+    'Anand',
+    'Kharagpur',
+    'Ahmedabad',
+    'Gorakhpur',
+]
+
 export default function getAirportShortName(city){
     const cityInLowerCase = city.toLowerCase()
     switch(cityInLowerCase){

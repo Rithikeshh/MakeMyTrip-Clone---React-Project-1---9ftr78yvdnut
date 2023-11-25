@@ -1,5 +1,10 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
+import FormControlLabel from '@mui/material/FormControlLabel';
+import Checkbox from '@mui/material/Checkbox';
 import SearchPageHeaderForTrain from '../components/Navbar/SearchPageHeaderForTrain'
+import FlightLoader from '../components/FlightLoader'
+import { useTrainListContext } from '../provider/TrainListProvider';
+import { useTrainBookingDetailsContext } from '../provider/TrainBookingDetailsProvider';
 
 function RailwaySearch() {
   
@@ -31,11 +36,84 @@ function RailwaySearch() {
   //   })
 
   // },[])
-
+  const {trainBookingState, dispatchTrainBookingState} = useTrainBookingDetailsContext()
+  const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
+  const {trainList} = useTrainListContext()
+  const [loading, setLoading] = useState(true)
   return (
     <div>
-      <SearchPageHeaderForTrain/>
-      <div class="fullPageLoader v2Loader"><div class="loadingContent"><div class="fliListLdr"><div class="fliListLdrWrap"><div><div class="fliListSmallLineLdr"><p class="fliListLineLdr"></p></div><div class="fliListBigLineLdr"><p class="fliListLineLdr"></p></div></div><span class="fliListLdrIcon"></span></div></div><p class="blackFont fontSize22 textCenter appendTop65">Hold on, we’re fetching flights for you</p></div></div>
+      <SearchPageHeaderForTrain setLoading={setLoading}/>
+      {loading && <FlightLoader/>}
+      <div className='trainSearchPage-main-container'>
+        <div className='trainSearchPage-filter-container'>
+          <h3 style={{fontWeight:'600'}}>Filters</h3>
+          <div className='trainSearchPage-filter-items'>
+            <FormControlLabel 
+              control={
+                <Checkbox
+                  checked={false}
+                  sx={{ '& .MuiSvgIcon-root': { fontSize: 20 } }}
+                />
+              }
+              label={'AC'}
+            />
+            <FormControlLabel 
+              control={
+                <Checkbox
+                  checked={false}
+                  sx={{ '& .MuiSvgIcon-root': { fontSize: 20 } }}
+                />
+              }
+              label={'AC'}
+            />
+          </div>
+        </div>
+        <div className='trainSearchPage-card-container'>
+              {trainList.map((train)=>(
+                <div className='train-card'>
+                  <div className='train-details'>
+                      <div>
+                        <div>
+                          <h3>{train.trainName}</h3>
+                        </div>
+                        <div className='train-depart-days'>
+                          <span>#{train.trainNumber}</span>{" "}
+                          <span>|</span>{" "}
+                          <span>Departs on: {days.map((day)=>(
+                            <span
+                              className={`${train.daysOfOperation.find(element=> element == day) ? 'trainOnDay' : ''} train-days`}
+                            >{day.substring(0,1)}</span>
+                          ))}</span>
+                        </div>
+                      </div>
+                      <div>
+                        <div>
+                          <h4>{train.departureTime}, {trainBookingState.travelDate.day.substring(0,3)}</h4>
+                        </div>
+                        <div className='source-station'>
+                          <span>{train.source}</span>
+                        </div>
+                      </div>
+                      <div>
+                        <div className='travel-duration'>
+                          <span>____ </span>
+                          <span>{train.travelDuration}</span>
+                          <span> ____</span>
+                        </div>
+                      </div>
+                      <div>
+                        <div>
+                          <h4>{train.arrivalTime}, {trainBookingState.travelDate.day.substring(0,3)}</h4>
+                        </div>
+                        <div className='source-station'>
+                          <span>{train.destination}</span>
+                        </div>
+                      </div>
+                  </div>
+                </div>
+              )) }
+        </div>
+      </div>
     </div>
   )
 }

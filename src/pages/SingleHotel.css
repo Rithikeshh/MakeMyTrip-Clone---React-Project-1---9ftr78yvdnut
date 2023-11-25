@@ -1,0 +1,461 @@
+.carousel-scroll-left{
+    background-color: initial;
+    border-bottom: 3px solid #fff;
+    border-left: 3px solid #fff;
+    border-right: 0;
+    border-top: 0;
+    cursor: pointer;
+    height: 18px;
+    outline: 0;
+    width: 18px;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%) rotate(45deg);
+    left: 1rem;
+    
+}
+.carousel-scroll-right{
+    background-color: initial;
+    border-bottom: 3px solid #fff;
+    border-left: 3px solid #fff;
+    border-right: 0;
+    border-top: 0;
+    cursor: pointer;
+    height: 18px;
+    outline: 0;
+    width: 18px;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%) rotate(-135deg);
+    right: 1rem;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* * {
+    font-family: sans-serif;
+    box-sizing: border-box;
+
+}
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, font, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, caption {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    outline: 0;
+}
+.emt_form_wrap, .emt_main_wrap {
+    width: 92%;
+    margin: 0 auto;
+    padding: 0 15px;
+}
+.sidebar {
+    width: 24.2%;
+    float: left;
+    position: relative;
+    will-change: min-height;
+}
+.sidebar .sidebar__inner {
+    padding: 12px;
+    background: #fff;
+    position: relative;
+    transform: translate(0, 0);
+    transform: translate3d(0, 0, 0);
+    will-change: position, transform;
+    border-radius: 15px;
+    border: 1px solid #C2E4F8;
+    float: left;
+    margin-top: 17px;
+}
+.resetAll {
+    float: right;
+    cursor: pointer;
+    font-size: 12px;
+    text-align: right;
+    margin: 0;
+    display: block;
+    color: #4263c1;
+    padding: 0;
+    width: 100%;
+}
+.dividernw {
+    margin: 12px 0;
+    float: left;
+    width: 100%;
+}
+.right-content {
+    width: 75.8%;
+    float: right;
+    position: relative;
+    padding-left: 20px;
+    padding-top: 0px;
+}
+.pdlhtl15 {
+    margin: 15px auto;
+}
+
+
+.mrel {
+    position: relative; 
+    height: 100%;
+}
+
+.mrel {
+    position: relative;
+}
+.result-item {
+    padding: 8px;
+    position: relative;
+    border: 1px solid #c9d7e1;
+    -moz-border-radius: 10px;
+    -webkit-border-radius: 10px;
+    border-radius: 15px;
+    margin: 0px;
+    background: #fff;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    min-height: auto;
+    align-content: flex-start;
+    box-shadow: rgb(0 0 0 / 20%) 0px 3px 7px;
+}
+.hotel-box {
+    display: flex;
+    align-items: flex-start;
+    flex-direction: row;
+}
+.hotel-image {
+    width: 33%;
+    float: left;
+    height: 100%;
+    -moz-border-radius: 10px 0 0 10px;
+    -webkit-border-radius: 10px 0 0 10px;
+    border-radius: 10px 0 0 10px;
+}
+.big_img {
+    width: 100%;
+    height: 202px;
+    overflow: hidden;
+    position: relative;
+    border-radius: 10px;
+}
+
+ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+ul.big_img li img {
+    object-fit: cover;
+    width: 100%;
+    height: 232px;
+}
+.hotel-content-dtl {
+    width: 67%;
+    height: 100%;
+    margin-left: auto;
+    padding: 10px;
+    display: table;
+}
+.content-dtl {
+    width: 70%;
+    padding: 0 5px;
+    display: table-cell;
+    height: 183px;
+    vertical-align: top;
+}
+.type-rating {
+    display: flex;
+    align-items: center;
+    margin-bottom: 2px;
+}
+.clrbg1 {
+    background-color: #0c6be9;
+}
+
+
+.rtyphr2 {
+    position: relative;
+    height: 15px;
+    
+    top: 5px;
+    left: 0;
+    border-radius: 3px;
+    width: 4px;
+    float: left;
+    margin-right: 6px;
+}
+.htl_ttl {
+    font-size: 16px;
+    font-weight: 600;
+    display: block;
+}
+.star-rating {
+    margin-left: 3px;
+    display: inline-flex;
+}
+.lft_str {
+    margin-left: 3px;
+}
+.starImg {
+    font-size: 10px;
+    color: #f99e00;
+    vertical-align: middle;
+    filter: invert(70%) sepia(99%) saturate(732%) hue-rotate(352deg) brightness(100%) contrast(103%);
+}
+.star-rating img {
+    width: 12px;
+}
+
+.starImg img {
+    width: 12px;
+    margin-right: 1px;
+}
+img {
+    max-width: 100%;
+}
+.address {
+    font-size: 13px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    max-width: 385px;
+    overflow: hidden;
+    margin-top: 5px;
+    color: #808080;
+}
+.address::before {
+    content: '';
+    background: url(https://www.easemytrip.com/hotels/images/placeholderloc.svg);
+    width: 11px;
+    height: 17px;
+    float: left;
+    background-size: 11px 17px;
+    background-repeat: no-repeat;
+    margin-right: 4px;
+}
+.high_lt {
+    font-size: 11px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    max-width: 385px;
+    margin-top: 5px;
+    color: #808080;
+    font-weight: 600;
+    position: relative;
+    overflow: hidden;
+}
+.toltptxt {
+    visibility: hidden;
+    width: auto;
+    background-color: #3a3a3a;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 10px;
+    position: absolute;
+    z-index: 999;
+    left: 0;
+    top: 25px;
+    font-size: 11px;
+}
+.price-dtl {
+    width: 30%;
+    padding: 0 8px;
+    position: relative;
+    border-left: 1px solid #ebebeb;
+    display: table-cell;
+    height: 100%;
+}
+.deal-timer {
+    margin-bottom: 10px;
+    width: 100%;
+}
+.top_deal {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+.top_deal span {
+    background: linear-gradient(to left, #0078ff, #333c9f);
+    color: #fff;
+    font-size: 11px;
+    text-align: center;
+    padding: 3px 10px;
+    float: right;
+    border-radius: 40px;
+}
+.act_price {
+    width: 100%;
+    float: right;
+    font-size: 24px;
+    text-align: right;
+    font-weight: 600;
+}
+.black_INR {
+    width: 20px;
+    height: 20px;
+    background: url(https://hotels.easemytrip.com/newhotel/Content/img/rupee_new_black.svg);
+    background-size: 30px 20px;
+    display: inline-block;
+}
+.prntax {
+    text-align: right;
+    font-size: 11px;
+    color: #000;
+    width: 100%;
+    display: block;
+}
+.smalltx_INR {
+    width: 10px;
+    height: 9px;
+    background: url(https://hotels.easemytrip.com/newhotel/Content/img/rupee_new_black.svg);
+    background-size: 10px 10px;
+    display: inline-block;
+}
+.prn {
+    text-align: right;
+    font-size: 11px;
+    color: #737373;
+    width: 100%;
+    display: block;
+}
+.viewBtn {
+    padding: 7px 0px;
+    text-align: center;
+    font-size: 14px;
+    color: #fff;
+    background-color: #ef6614;
+    text-decoration: none;
+    border-radius: 40px;
+    float: right;
+    width: 90%;
+    margin-top: 30px;
+    cursor: pointer;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+}
+.accordion {
+    background-color: #fff;
+    color: #000000;
+    cursor: pointer;
+    padding: 0 10px;
+    width: 100%;
+    border: none;
+    text-align: left;
+    outline: none;
+    font-size: 15px;
+    transition: 0.4s;
+    font-weight: 600;
+    float: left;
+}
+.panel {
+    padding: 0 10px;
+    background-color: white;
+    overflow: hidden;
+    transition: max-height 0.2s ease-out;
+    box-shadow: none!important;
+    padding-top: 10px;
+}
+.container_fil {
+    float: left;
+    position: relative;
+    padding-left: 30px;
+    margin: 5px 0;
+    cursor: pointer;
+    font-size: 13px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    line-height: 18px;
+    width: 100%;
+}
+.grey_INR {
+    width: 11px;
+    height: 11px;
+    background: url(https://hotels.easemytrip.com/newhotel/Content/img/rupee_new_grey.svg);
+    background-size: 12px 12px;
+    display: inline-block;
+}
+.container_fil input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+}
+.checkmark_fil {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 19px;
+    width: 19px;
+    background-color: #ffffff;
+    border-radius: 3px;
+    border: 1px solid #d0d0d0;
+}
+label .fltr {
+    float: right;
+    color: #737373;
+}
+.container_fil input:checked ~ .checkmark_fil {
+    background-color: #2196f3;
+    border: 1px solid #2196f3;
+}
+
+.container_fil input:checked ~ .checkmark_fil:after {
+    display: block;
+}
+.container_fil .checkmark_fil:after {
+    left: 5px;
+    top: 1px;
+    width: 6px;
+    height: 12px;
+    border: solid white;
+    border-width: 0 2px 2px 0;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+}
+.checkmark_fil:after {
+    content: "";
+    position: absolute;
+    display: none;
+} */

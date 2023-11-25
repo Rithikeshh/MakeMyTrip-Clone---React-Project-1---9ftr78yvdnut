@@ -1,4 +1,4 @@
-export default async function getHotel(id, setHotel, setName, setLoading){
+export default async function getHotel(id, setHotel, setName, setLoading, dispatch){
 
     const config = {
       Method : "GET",
@@ -15,6 +15,7 @@ export default async function getHotel(id, setHotel, setName, setLoading){
       let result = await response.json();
       console.log(result);
       setName(result.data.name)
+      // dispatch({type:'hotelLocation', payload:result.data.name})
       setHotel(result.data)
     }
     catch(error){

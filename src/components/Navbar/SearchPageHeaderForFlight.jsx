@@ -6,12 +6,12 @@ import getFlightList from '../../utils/getFlightList'
 import { useFlightListContext } from '../../provider/FlightListProvider'
 import getAirportShortName from '../../utils/airportNames'
 
-function SearchPageHeaderForFlight({flightSourceRef, flightDestinationRef}) {
+function SearchPageHeaderForFlight({flightSourceRef, flightDestinationRef, setLoading}) {
 
     const {flightBookingState, dispatchFlightBookingState} = useFlightBookingDetailsContext()
     const {setFlightList} = useFlightListContext()
     useEffect(()=>{
-        getFlightList(getAirportShortName(flightBookingState.fromCity), getAirportShortName(flightBookingState.toCity), flightBookingState.travelDate.day.substring(0,3), setFlightList)
+        getFlightList(getAirportShortName(flightBookingState.fromCity), getAirportShortName(flightBookingState.toCity), flightBookingState.travelDate.day.substring(0,3), setFlightList, setLoading)
     },[])
   return (
     <>
@@ -63,11 +63,12 @@ function SearchPageHeaderForFlight({flightSourceRef, flightDestinationRef}) {
                         <button onClick={()=>{
                             const source = getAirportShortName(flightBookingState.fromCity)
                             const destination = getAirportShortName(flightBookingState.toCity);
-                            getFlightList(source, destination, flightBookingState.travelDate.day.substring(0,3), setFlightList)
+                            setLoading(true)
+                            getFlightList(source, destination, flightBookingState.travelDate.day.substring(0,3), setFlightList, setLoading)
                             flightSourceRef.current = flightBookingState.fromCity
                             flightDestinationRef.current = flightBookingState.toCity
 
-                        }} className='primaryBtn widgetSearchBtn bold-text' to="/hotel/search">SEARCH</button>
+                        }} className='primaryBtn widgetSearchBtn bold-text'>SEARCH</button>
                     </p>
                 </section>
             </div>

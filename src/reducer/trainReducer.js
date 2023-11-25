@@ -1,8 +1,8 @@
 import { getDay, getMonth } from "../utils/dateFunctions";
 
 export const trainBookingDetails = {
-   fromCity: "New Delhi",
-   toCity: "Kolkata",
+   fromCity: "Howrah",
+   toCity: "Chandigarh",
    travelDate: {
     date: new Date().getDate(),
     month: getMonth(new Date().getMonth()),

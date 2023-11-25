@@ -19,6 +19,7 @@ import LoginModalProvider from "./provider/LoginModalProvider";
 import SingleHotel from "./pages/SingleHotel";
 import FlightListProvider from "./provider/FlightListProvider";
 import FlightBookingPage from "./pages/FlightBookingPage";
+import TrainListProvider from "./provider/TrainListProvider";
 
 
 
@@ -34,12 +35,14 @@ function App() {
       <FlightBookingDetailsProvider>
         <HotelsListProvider>
           <FlightListProvider>
+            <TrainListProvider>
           <Routes>
             <Route path="/*" element={<MainContent/>}/>
             <Route path="/:section/search" element={<SearchContent/>}/>
             <Route path="/hotel/:hotelId" element={<SingleHotel/>}/>
             <Route path="/flight/:flightId" element={<FlightBookingPage/>}/>
           </Routes>
+          </TrainListProvider>
           </FlightListProvider>
           </HotelsListProvider>
       </FlightBookingDetailsProvider>

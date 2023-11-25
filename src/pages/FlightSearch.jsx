@@ -8,6 +8,7 @@ import SearchPageHeaderForFlight from '../components/Navbar/SearchPageHeaderForF
 import { useFlightListContext } from '../provider/FlightListProvider'
 import { useFlightBookingDetailsContext } from '../provider/FlightBookingDetailsProvider'
 import FlightCard from '../components/FlightCard'
+import FlightLoader from '../components/FlightLoader'
 
 
 function FlightSearch() {
@@ -24,12 +25,13 @@ function FlightSearch() {
     return ()=>{
       document.body.style.backgroundColor = ''
     }
-  })
+  },[])
   return (
     <div>
       {/* <SearchNavbar/> */}
-      <SearchPageHeaderForFlight flightSourceRef={flightSourceRef} flightDestinationRef={flightDestinationRef}/>
+      <SearchPageHeaderForFlight flightSourceRef={flightSourceRef} flightDestinationRef={flightDestinationRef} setLoading={setLoading}/>
       <div className='flightList-container'>
+        
         <div>
           <div className='bold-text font24' style={{color:'#fff'}}>Flights from {flightSourceRef.current} to {flightDestinationRef.current}</div>
           <div className='flight-add-bar'>
@@ -58,7 +60,9 @@ function FlightSearch() {
               </div>
             </div>
           </div>
-
+          
+          {loading  ? <FlightLoader/> :
+          <>
           {
             flightList.length == 0 ? 
             <div style={{color:'white', textAlign:'center'}}>Oops No Hotel Found In This City!!</div> 
@@ -71,7 +75,7 @@ function FlightSearch() {
                 ))          
               }
             </ul>
-          }
+          }</>}
         </div>
       </div>
     </div>

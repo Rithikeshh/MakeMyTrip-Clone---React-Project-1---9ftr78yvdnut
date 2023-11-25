@@ -1,6 +1,6 @@
 import axios from "axios";
 
-export default async function getFlightList(source, destination, day, setFlightList){
+export default async function getFlightList(source, destination, day, setFlightList, setLoading){
 
     const config = {
         headers : {
@@ -15,4 +15,7 @@ export default async function getFlightList(source, destination, day, setFlightL
     )
     console.log(result.data.data.flights);
     setFlightList(result.data.data.flights);
+    setTimeout(()=>{
+        setLoading(false)
+    },1000)
 }
