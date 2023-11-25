@@ -12,7 +12,7 @@ export default async function getTrainList(source, destination, day, setTrainLis
     console.log('destination', destination);
     console.log('day', day);
     try{
-        const result = await axios.get(`https://academics.newtonschool.co/api/v1/bookingportals/train?search={"source":"${source}","destination":"${destination}"}&day=${day}`,
+        const result = await axios.get(`https://academics.newtonschool.co/api/v1/bookingportals/train?search={"source":"${""}","destination":"${""}"}&day=${day}`,
             config
         )
         console.log(result.data.data.trains);

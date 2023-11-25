@@ -5,6 +5,7 @@ import SearchPageHeaderForTrain from '../components/Navbar/SearchPageHeaderForTr
 import FlightLoader from '../components/FlightLoader'
 import { useTrainListContext } from '../provider/TrainListProvider';
 import { useTrainBookingDetailsContext } from '../provider/TrainBookingDetailsProvider';
+import TrainCard from '../components/TrainCard';
 
 function RailwaySearch() {
   
@@ -70,47 +71,7 @@ function RailwaySearch() {
         </div>
         <div className='trainSearchPage-card-container'>
               {trainList.map((train)=>(
-                <div className='train-card'>
-                  <div className='train-details'>
-                      <div>
-                        <div>
-                          <h3>{train.trainName}</h3>
-                        </div>
-                        <div className='train-depart-days'>
-                          <span>#{train.trainNumber}</span>{" "}
-                          <span>|</span>{" "}
-                          <span>Departs on: {days.map((day)=>(
-                            <span
-                              className={`${train.daysOfOperation.find(element=> element == day) ? 'trainOnDay' : ''} train-days`}
-                            >{day.substring(0,1)}</span>
-                          ))}</span>
-                        </div>
-                      </div>
-                      <div>
-                        <div>
-                          <h4>{train.departureTime}, {trainBookingState.travelDate.day.substring(0,3)}</h4>
-                        </div>
-                        <div className='source-station'>
-                          <span>{train.source}</span>
-                        </div>
-                      </div>
-                      <div>
-                        <div className='travel-duration'>
-                          <span>____ </span>
-                          <span>{train.travelDuration}</span>
-                          <span> ____</span>
-                        </div>
-                      </div>
-                      <div>
-                        <div>
-                          <h4>{train.arrivalTime}, {trainBookingState.travelDate.day.substring(0,3)}</h4>
-                        </div>
-                        <div className='source-station'>
-                          <span>{train.destination}</span>
-                        </div>
-                      </div>
-                  </div>
-                </div>
+                <TrainCard key={train._id} train={train}/>
               )) }
         </div>
       </div>

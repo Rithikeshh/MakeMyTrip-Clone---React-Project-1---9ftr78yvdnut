@@ -846,13 +846,14 @@
     padding: 3rem 10%;
 }
 .trainSearchPage-filter-container{
-    min-width: 260px;
+    min-width: 220px;
 }
 .trainSearchPage-card-container{
     flex-grow: 1;
     display: flex;
     flex-direction: column;
     gap: 1rem;
+    overflow: hidden;
 }.trainSearchPage-filter-items{
     margin-top: 1rem;
     display: flex;
@@ -865,12 +866,13 @@
     border-radius: 0.3rem;
     display: flex;
     flex-direction: column;
+    gap: 1.5rem;
 }
 .train-details{
     display: flex;
     align-items: center;
+    justify-content: space-between;
     >div{
-        flex-grow: 1;
         display: flex;
         flex-direction: column;
         gap: 0.4rem;
@@ -891,7 +893,7 @@
     font-size: 13px;
 }
 .travel-duration{
-
+    width: max-content;
     >span:nth-child(odd){
         position: relative;
         top: -6px;
@@ -903,7 +905,40 @@
     }
     color: rgb(174, 174, 174);
 }
-
+.train-ticket-details{
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem 0.1rem;
+    overflow-x: scroll;
+}
+.train-ticket-details::-webkit-scrollbar{
+    display: none;
+}
+.train-ticket-details-coaches{
+    min-width: 160px;
+    padding: 0.4rem;
+    box-shadow: 0px 2px 5px 1px rgba(0,0,0,0.2);
+    border-radius: 0.25rem;
+    display: flex;
+    gap: 0.1rem;
+    flex-direction: column;
+    cursor: pointer;
+    >div:first-child{
+        display: flex;
+        justify-content: space-between;
+        font-weight: 500;
+    }
+    >div:nth-child(2){
+        color: #65B5A9;
+        font-size: 13px;
+    }
+    >div:last-child{
+        font-size: 12px;
+        margin-top: 0.8rem;
+        color: rgb(67, 67, 67);
+    }
+}
 
 
 
