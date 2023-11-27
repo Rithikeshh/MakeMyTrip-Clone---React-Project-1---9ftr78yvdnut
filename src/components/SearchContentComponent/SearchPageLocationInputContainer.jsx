@@ -6,10 +6,8 @@ function SearchPageLocationInputContainer({children, inputId, spanHeading, value
   const [showModal, setShowModal] = useState(false);
   useEffect(()=>{
     document.body.addEventListener('click', (e)=>{
-      console.log(e.target);
       setShowModal(false)
     })
-    console.log("run only once");
   },[])
   return (
     <div onClick={(e)=>{e.stopPropagation()}} className='searchPage-booking-input'>

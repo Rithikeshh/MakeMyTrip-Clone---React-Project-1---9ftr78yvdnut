@@ -1,9 +1,24 @@
 import React from 'react'
 import { useTrainBookingDetailsContext } from '../provider/TrainBookingDetailsProvider'
+import { useNavigate, createSearchParams } from 'react-router-dom'
 
 function TrainCard({train}) {
+
     const{trainBookingState} = useTrainBookingDetailsContext()
     const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
+    const navigate = useNavigate();
+   
+
+    function handleNavigate(e, coach){
+
+        navigate({
+            pathname: `/railway/${train._id}`,
+            search: createSearchParams({
+                coachId: coach._id
+            }).toString()
+        })
+        console.log(coach)
+    }
   return (
     <div className='train-card'>
         <div className='train-details'>
@@ -47,8 +62,10 @@ function TrainCard({train}) {
         </div>
         <div className='train-ticket-details'>
         {
-            train.coaches.map((coach)=>(
-            <div className='train-ticket-details-coaches'>
+            train.coaches.map((coach,index)=>(
+            <div key={index} onClick={(e)=>{
+                handleNavigate(e,coach)
+            }} className='train-ticket-details-coaches'>
                 <div>
                 <span>{coach.coachType}</span>
                 <span>₹ {train.fare}</span>

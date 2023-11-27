@@ -41,9 +41,10 @@ function RailwaySearch() {
   const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
   const {trainList} = useTrainListContext()
   const [loading, setLoading] = useState(true)
+  const [suggestedTrainList, setSuggestedTrainList] = useState([]);
   return (
     <div>
-      <SearchPageHeaderForTrain setLoading={setLoading}/>
+      <SearchPageHeaderForTrain setLoading={setLoading} setSuggestedTrainList={setSuggestedTrainList}/>
       {loading && <FlightLoader/>}
       <div className='trainSearchPage-main-container'>
         <div className='trainSearchPage-filter-container'>
@@ -71,6 +72,16 @@ function RailwaySearch() {
         </div>
         <div className='trainSearchPage-card-container'>
               {trainList.map((train)=>(
+                <TrainCard key={train._id} train={train}/>
+              )) }
+              {
+                trainList.length == 0 && 
+                <div className='trainSearchPage-no-train-container'>
+                  <h3>No trains found for the given day.</h3>
+                </div>
+              }
+              <h3 style={{color:'#0084ff'}}>Suggested Journey</h3>
+              {suggestedTrainList.map((train)=>(
                 <TrainCard key={train._id} train={train}/>
               )) }
         </div>

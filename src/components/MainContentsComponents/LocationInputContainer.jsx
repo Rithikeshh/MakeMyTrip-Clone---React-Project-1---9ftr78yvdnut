@@ -4,12 +4,16 @@ import { airportAndCity, fromStations, toStations } from '../../utils/airportNam
 
 function LocationInputContainer({children, inputId, spanHeading, value, dispatch, type}) {
   const [showModal, setShowModal] = useState(false);
+  function setModalFalse(e){
+    console.log(e.target);
+    setShowModal(false)
+  }
   useEffect(()=>{
-    document.body.addEventListener('click', (e)=>{
-      console.log(e.target);
-      setShowModal(false)
-    })
+    document.body.addEventListener('click', setModalFalse)
     console.log("run only once");
+    return ()=>{
+      document.body.removeEventListener('click',setModalFalse);
+    }
   },[])
   console.log(showModal)
   return (

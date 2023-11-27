@@ -5,11 +5,11 @@ import SearchPageCalendarInputContainer from '../SearchContentComponent/SearchPa
 import { useTrainListContext } from '../../provider/TrainListProvider';
 import getTrainList from '../../utils/getTrainList';
 
-function SearchPageHeaderForTrain({setLoading}) {
+function SearchPageHeaderForTrain({setLoading, setSuggestedTrainList}) {
   const {trainBookingState, dispatchTrainBookingState} = useTrainBookingDetailsContext()
   const {setTrainList} = useTrainListContext()
     useEffect(()=>{
-        getTrainList(trainBookingState.fromCity, trainBookingState.toCity, trainBookingState.travelDate.day.substring(0,3), setTrainList, setLoading)
+        getTrainList(trainBookingState.fromCity, trainBookingState.toCity, trainBookingState.travelDate.day.substring(0,3), setTrainList, setLoading, setSuggestedTrainList)
     },[])
   return (
     <div className='searchPage-header-container'>
@@ -61,7 +61,7 @@ function SearchPageHeaderForTrain({setLoading}) {
                             const source = trainBookingState.fromCity
                             const destination = trainBookingState.toCity;
                             setLoading(true)
-                            getTrainList(source, destination, trainBookingState.travelDate.day.substring(0,3), setTrainList, setLoading)
+                            getTrainList(source, destination, trainBookingState.travelDate.day.substring(0,3), setTrainList, setLoading, setSuggestedTrainList)
                             // flightSourceRef.current = flightBookingState.fromCity
                             // flightDestinationRef.current = flightBookingState.toCity
 

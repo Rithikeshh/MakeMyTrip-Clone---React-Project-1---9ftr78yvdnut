@@ -939,6 +939,118 @@
         color: rgb(67, 67, 67);
     }
 }
+.trainSearchPage-no-train-container{
+    text-align: center;
+    border: 1px solid grey;
+    border-radius: 0.3rem;
+    padding: 1rem;
+    color: #0084ff;
+}
+.trainBookingPage-bookingDetails-container{
+    background-color: #fff;
+    width: 100%;
+    padding: 3rem 10%;
+    display: flex;
+    gap: 3rem;
+    position: relative;
+    >div:first-child{
+        flex-grow: 1;
+        
+    }
+    >div:last-child{
+        min-width: 270px;
+        width: 300px;
+    }
+}
+.trainBookingPage-train-details-container{
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+.trainBookingpage-seat-details{
+    display: flex;
+    justify-content: space-between;
+    >div{
+        display: flex;
+        flex-direction: column;
+        gap: 0.4rem;
+        >div:first-child >span{
+            color: rgb(77, 77, 77);
+            font-weight: 500;
+        }
+    }
+    >div:first-child{
+
+        >div:last-child{
+            border: 1px solid grey;
+            border-radius: 0.25rem;
+            padding: 0.3rem 1.5rem;
+            >div:first-child {
+                display: flex;
+                gap: 1.5rem;
+                >span{
+                    font-weight: 700;
+                }
+                >span:last-child{
+                    color: #65B5A9;
+                }
+            }
+            >div:last-child >span{
+                font-size: 12px;
+            }
+        }
+    }
+    >div:last-child{
+        >div:last-child{
+            border: 1px solid grey;
+            padding: 0.3rem .8rem;
+            border-radius: 0.25rem;
+            text-transform: uppercase;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+    }
+}
+.boarding-station-details{
+    white-space: nowrap;
+    
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
