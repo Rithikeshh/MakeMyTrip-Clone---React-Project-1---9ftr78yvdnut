@@ -3,6 +3,7 @@ import SearchNavbar from '../components/Navbar/SearchNavbar'
 import { useParams, useSearchParams } from 'react-router-dom';
 import getTrain from '../utils/getTrain';
 import { useTrainBookingDetailsContext } from '../provider/TrainBookingDetailsProvider';
+import { createPortal } from 'react-dom';
 
 function RailwayBookingPage() {
 
@@ -13,10 +14,13 @@ function RailwayBookingPage() {
     const{trainBookingState} = useTrainBookingDetailsContext()
     const [coach, setCoach] = useState(null)
     const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
+    const [showModal, setShowModal] = useState(false);
+    const [travellers, setTravellers] = useState([])
     const coachId = useRef(searchParams.get('coachId'));
     useEffect(()=>{
         getTrain(trainId, setTrain, setLoading, coachId, setCoach)
     },[])
+    console.log(travellers);
   return (
     <div>
       <SearchNavbar/>
@@ -95,13 +99,153 @@ function RailwayBookingPage() {
                             </div>
                         </div>
                     </div>
-                    
+                    <div>
+                        <h2>Add Travellers </h2>
+                        <div className='trainBookingPage-traveller'>
+                            {travellers.map((traveller, index)=>(
+                                
+                                <div key={index}>
+                                    {console.log(traveller)}
+                                    <span>{traveller.name} ({traveller.gender}), {traveller.age}</span>
+                                    <button onClick={(e)=>{
+                                        setTravellers(prev=>{
+                                            console.log(prev)
+                                            prev.splice(index,1)
+                                            console.log(prev)
+                                            return prev
+                                        })
+                                    }}>
+                                        DELETE
+                                    </button>
+
+                                </div>
+                            ))}
+                            <div>
+                                <span onClick={()=>{
+                                setShowModal(true)
+                            }}>
+                                + ADD TRAVELLER
+                                </span>
+                            </div>
+                            
+                        </div>
+                        
+                    </div>
+                    <div>
+                        <h3>Contact Information</h3>
+                        <div className='trainBookingPage-contact-info'>
+                            <div>
+                                <span>Email Id</span>
+                                <input type="email" placeholder='Enter Email Id'/>
+                            </div>
+                            <div>
+                                <span>Mobile Number</span>
+                                <input type="number" placeholder='Enter Mobile Number'/>
+                            </div>
+                        </div>
+                    </div>
+                    {/* <div>
+                        <h3>Yout State</h3>
+                    </div> */}
                 </div>
-                <div>Alok</div>
+                <div>
+                    <div className='non-scrollable'>
+                        <div>Alok</div>
+                    </div>
+                </div>
             </div>  
         }
+        {showModal && <UserDetailModalForTrain setTravellers={setTravellers} setShowModal={setShowModal}/>}
     </div>
   )
 }
 
 export default RailwayBookingPage
+
+function UserDetailModalForTrain({setTravellers, setShowModal}){
+    const [gender, setGender] = useState('Select')
+    const [showGenderModal, setShowGenderModal] = useState(false)
+    const [passenger, setPassenger] = useState({
+        name:'',
+        age:'',
+        gender: 'Select'
+    })
+    return(
+        <>
+        {createPortal(
+            <div onClick={()=>{
+                setShowModal(false)
+            }} className='user-detail-modal'>
+                <div onClick={(e)=>{
+                    e.stopPropagation()
+                    setShowGenderModal(false)
+                }}>
+                    <div>
+                        <h3>Add Traveller Information</h3>
+                        <div>
+                            <div>
+                                <span>Name</span>
+                                <input type="text" onChange={(e)=>{
+                                    setPassenger(prev=>{
+                                        return{...prev,name:e.target.value}
+                                    })
+                                }} value={passenger.name} placeholder='Enter Traveller Name' name="" id=""/>
+                            </div>
+                            <div>
+                                <span>Age (in years)</span>
+                                <input type="number" onChange={(e)=>{
+                                    setPassenger(prev=>{
+                                        return{...prev,age:e.target.value}
+                                    })
+                                }} value={passenger.age} placeholder='Enter Age' name="" id=""/>
+                            </div>
+                            <div onClick={(e)=>{
+                                e.stopPropagation()
+                                setShowGenderModal(!showGenderModal);
+                            }}>
+                                <span>Gender</span>
+                                <input type="text" value={passenger.gender} name="" id=""/>
+                                <span className='train-modal-dropdown'></span>
+                                {showGenderModal && <GenderModal setPassenger={setPassenger} />}
+                            </div>
+                            <div>
+                                <span>Nationality</span>
+                                <input type="text" value={'India'} disabled name="" id=""/>
+                                
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <button onClick={()=>{
+                            setShowModal(false)
+                        }}>Cancel</button>
+                        <button onClick={()=>{
+                            setShowModal(false)
+                            setTravellers(prev=>{
+                                return [...prev, passenger]
+                            })
+                        }}>Add</button>
+                    </div>
+                </div>
+            </div>,
+        document.body)
+        }
+        </>
+    )
+}
+function GenderModal({setPassenger}){
+    return(
+        <div className='gender-modal'>
+            <div onClick={()=>{
+                setPassenger(prev=>{
+                    return {...prev, gender:'Male'}
+                })
+            }}>Male</div>
+            <div onClick={()=>{
+                setPassenger(prev=>{
+                    return {...prev, gender:'Female'}
+                })
+            }}>Female</div>
+        </div>
+    )
+}
