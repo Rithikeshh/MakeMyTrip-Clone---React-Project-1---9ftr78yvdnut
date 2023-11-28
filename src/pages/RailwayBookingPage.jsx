@@ -109,10 +109,9 @@ function RailwayBookingPage() {
                                     <span>{traveller.name} ({traveller.gender}), {traveller.age}</span>
                                     <button onClick={(e)=>{
                                         setTravellers(prev=>{
-                                            console.log(prev)
                                             prev.splice(index,1)
-                                            console.log(prev)
-                                            return prev
+                                            const newArr = [...prev]
+                                            return newArr
                                         })
                                     }}>
                                         DELETE
@@ -140,17 +139,52 @@ function RailwayBookingPage() {
                             </div>
                             <div>
                                 <span>Mobile Number</span>
-                                <input type="number" placeholder='Enter Mobile Number'/>
+                                <input step="0.01" type="number" placeholder='Enter Mobile Number'/>
                             </div>
                         </div>
                     </div>
                     {/* <div>
                         <h3>Yout State</h3>
                     </div> */}
+                    <div className='payment-details'>
+                        <div className='payment-heading-container'>
+                            <img className='rupee-icon' src="https://t3.ftcdn.net/jpg/06/38/31/08/360_F_638310888_VQ6blDob0VuZohykQsEqbP622BpjTNWl.jpg" alt="" />
+                            <span>Payment Mode</span>
+                        </div>
+                        <div className='card-number-container'>
+                            <label htmlFor="card-number">Enter Your Card No.</label>
+                            <div>
+                                <input step="0.01" type="number" pattern="\d*" maxLength={16} placeholder='0000-0000-0000-0000' name="" id="card-number" />
+                                <div></div>
+                            </div>
+                        </div>
+                        <div className='card-holder-container'>
+                            <label htmlFor="card-holder">Enter Card Holder Name</label>
+                            <input  type="text" placeholder='Card Holder Name' name="" id="card-holder" />
+                        </div>
+                    </div>
                 </div>
                 <div>
-                    <div className='non-scrollable'>
-                        <div>Alok</div>
+                    <div style={{top:'100px'}} className='non-scrollable'>
+                        <div className='trainBookingPage-fare-details-container'>
+                            <div>
+                                <button>PAY & BOOK NOW</button>
+                            </div>
+                            <div>
+                                <div>
+                                    <span>Base fare per adult</span>
+                                    <span>₹{train.fare}</span>
+                                </div>
+                                <div>
+                                    <span>Reservation charge</span>
+                                    <span>₹20</span>
+                                </div>
+                            </div>
+                            <div>
+                                <span>Total Price per adult</span>
+                                <span>₹{train.fare+20}</span>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>  
