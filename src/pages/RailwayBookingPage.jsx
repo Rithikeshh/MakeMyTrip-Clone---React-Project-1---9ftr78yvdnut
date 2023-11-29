@@ -4,9 +4,13 @@ import { useParams, useSearchParams } from 'react-router-dom';
 import getTrain from '../utils/getTrain';
 import { useTrainBookingDetailsContext } from '../provider/TrainBookingDetailsProvider';
 import { createPortal } from 'react-dom';
+import PaymentModal from '../components/PaymentModal';
+import { useAuth } from '../provider/AuthProvider';
+import { useLoginModalContext } from '../provider/LoginModalProvider';
 
 function RailwayBookingPage() {
-
+    const {isLoggedIn} = useAuth()
+    const {setIsLoginModalVisible} = useLoginModalContext()
     const[loading, setLoading] = useState(true);
     const[train, setTrain] = useState()
     const {trainId} = useParams()
@@ -15,12 +19,48 @@ function RailwayBookingPage() {
     const [coach, setCoach] = useState(null)
     const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
     const [showModal, setShowModal] = useState(false);
+    const [contactInfo, setContactInfo] = useState({
+        email: '',
+        phoneNumber: '',
+        checked: false
+    })
     const [travellers, setTravellers] = useState([])
+    const [showPaymentModal, setShowPaymentModal] = useState(false);
+    const [travellerWarning, setTravellerWarning] = useState('')
+    const [contactWarning, setContactWarning] = useState('')
     const coachId = useRef(searchParams.get('coachId'));
     useEffect(()=>{
         getTrain(trainId, setTrain, setLoading, coachId, setCoach)
     },[])
-    console.log(travellers);
+    
+    function resetWarning(callback){
+        setTimeout(()=>{
+            callback('')
+        },5000)
+    }
+
+    function handleBookNow(e){
+
+        if(!travellers.length > 0){
+            setTravellerWarning('Please add a traveller.')
+            resetWarning(setTravellerWarning)
+            return;
+        }
+        for(const property in contactInfo){
+            if(!contactInfo[property]){
+                setContactWarning('Please fill all contact information.')
+                resetWarning(setContactWarning)
+               return; 
+            }
+        }
+        if(isLoggedIn){
+            setShowPaymentModal(true)
+        }
+        else{
+            setIsLoginModalVisible(true)
+        }
+        
+    }
   return (
     <div>
       <SearchNavbar/>
@@ -101,6 +141,7 @@ function RailwayBookingPage() {
                     </div>
                     <div>
                         <h2>Add Travellers </h2>
+                        <span style={{fontSize:'10px', color:"red", fontWeight:"600"}}>{travellerWarning}</span>
                         <div className='trainBookingPage-traveller'>
                             {travellers.map((traveller, index)=>(
                                 
@@ -132,42 +173,43 @@ function RailwayBookingPage() {
                     </div>
                     <div>
                         <h3>Contact Information</h3>
+                        <span style={{fontSize:'10px', color:"red", fontWeight:"600"}}>{contactWarning}</span>
                         <div className='trainBookingPage-contact-info'>
                             <div>
                                 <span>Email Id</span>
-                                <input type="email" placeholder='Enter Email Id'/>
+                                <input type="email" onChange={(e)=>{
+                                    setContactInfo(prev=>{
+                                        return {...prev, email: e.target.value}
+                                    })
+                                }} value={contactInfo.email} placeholder='Enter Email Id'/>
                             </div>
                             <div>
                                 <span>Mobile Number</span>
-                                <input step="0.01" type="number" placeholder='Enter Mobile Number'/>
+                                <input step="0.01" type="number" onChange={(e)=>{
+                                    setContactInfo(prev=>{
+                                        return {...prev, phoneNumber: e.target.value}
+                                    })
+                                }} value={contactInfo.phoneNumber} placeholder='Enter Mobile Number'/>
                             </div>
+                        </div>
+                        <div className='contact-info-checkbox'>
+                            <input type="checkbox" onChange={(e)=>{
+                            setContactInfo(prev=>{
+                                return {...prev, checked: e.target.checked}
+                            })
+                        }} id='confirm' />
+                            <label style={{paddingLeft:"4px", fontSize:"14px", cursor:"pointer"}} htmlFor="confirm">Confirm</label>
                         </div>
                     </div>
                     {/* <div>
                         <h3>Yout State</h3>
                     </div> */}
-                    <div className='payment-details'>
-                        <div className='payment-heading-container'>
-                            <img className='rupee-icon' src="https://t3.ftcdn.net/jpg/06/38/31/08/360_F_638310888_VQ6blDob0VuZohykQsEqbP622BpjTNWl.jpg" alt="" />
-                            <span>Payment Mode</span>
-                        </div>
-                        <div className='card-number-container'>
-                            <label htmlFor="card-number">Enter Your Card No.</label>
-                            <div>
-                                <input step="0.01" type="number" pattern="\d*" maxLength={16} placeholder='0000-0000-0000-0000' name="" id="card-number" />
-                                <div></div>
-                            </div>
-                        </div>
-                        <div className='card-holder-container'>
-                            <label htmlFor="card-holder">Enter Card Holder Name</label>
-                            <input  type="text" placeholder='Card Holder Name' name="" id="card-holder" />
-                        </div>
-                    </div>
+                    {showPaymentModal && <PaymentModal totalPrice={travellers.length*(train.fare+20)}/>}
                 </div>
                 <div>
                     <div style={{top:'100px'}} className='non-scrollable'>
                         <div className='trainBookingPage-fare-details-container'>
-                            <div>
+                            <div onClick={handleBookNow}>
                                 <button>PAY & BOOK NOW</button>
                             </div>
                             <div>
@@ -185,6 +227,9 @@ function RailwayBookingPage() {
                                 <span>₹{train.fare+20}</span>
                             </div>
                         </div>
+                        {/* <div>
+                            <span style={{fontSize:'10px', color:"red", fontWeight:"600"}}>{warning}</span>
+                        </div> */}
                     </div>
                 </div>
             </div>  

@@ -292,6 +292,7 @@ function FlightBookingPage() {
                         CONTINUE
                     </button>
                 </div>
+                
             </div>
             <div>
                 <div className='non-scrollable'>
