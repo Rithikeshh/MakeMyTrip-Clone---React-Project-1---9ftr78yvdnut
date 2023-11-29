@@ -1109,24 +1109,28 @@
         >div:last-child{
             padding: 1.2rem;
             display: flex;
-            justify-content: flex-end;
-            gap: 1rem;
-            >button{
-                padding: 8px 1.5rem;
-                border-radius: 20px;
-                font-weight: 600;
-                font-size: 14px;
-                text-transform: uppercase;
-                cursor: pointer;
-            }
-            >button:first-child{
-                border: 1px solid #0084ff;
-                color: #0084ff;
-            }
-            >button:last-child{
-                border: none;
-                color: #fff;
-                background-image: linear-gradient(96deg,#53b2fe,#065af3);
+            justify-content: space-between;
+            align-items: center;
+            >div{
+                gap: 1rem;
+                display: flex;
+                >button{
+                    padding: 8px 1.5rem;
+                    border-radius: 20px;
+                    font-weight: 600;
+                    font-size: 14px;
+                    text-transform: uppercase;
+                    cursor: pointer;
+                }
+                >button:first-child{
+                    border: 1px solid #0084ff;
+                    color: #0084ff;
+                }
+                >button:last-child{
+                    border: none;
+                    color: #fff;
+                    background-image: linear-gradient(96deg,#53b2fe,#065af3);
+                }
             }
             
         }

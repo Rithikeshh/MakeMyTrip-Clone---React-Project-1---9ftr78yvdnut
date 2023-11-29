@@ -14,7 +14,7 @@ function Profile() {
     const {isLoggedIn} = useAuth()
     const {isLoginModalVisible, setIsLoginModalVisible} = useLoginModalContext()
     const [isProfileModalVisible, setIsProfileModalVisible] = useState(false);
-    const userDetails = JSON.parse(sessionStorage.getItem("userDetails"));
+    const userDetails = JSON.parse(localStorage.getItem("userDetails"));
 
     function handleModal(){
 
@@ -81,8 +81,8 @@ function ProfileModal({setIsProfileModalVisible}){
     const navigate = useNavigate()
     const {setIsLoggedIn} = useAuth()
     const logout = () => {
-        sessionStorage.removeItem("userToken");
-        sessionStorage.removeItem("userDetails");
+        localStorage.removeItem("userToken");
+        localStorage.removeItem("userDetails");
         setIsLoggedIn(false);
         setIsProfileModalVisible(false)
         navigate('/')

@@ -36,12 +36,13 @@ function LoginForm() {
             const token = result.token;
             if(token){
                 
-                sessionStorage.setItem("userToken", token);
-                sessionStorage.setItem(
+                localStorage.setItem("userToken", token);
+                localStorage.setItem(
                     "userDetails",
                     JSON.stringify({
                         name : result.data.name, 
-                        email : result.data.email
+                        email : result.data.email,
+                        id : result.data._id
                     })
                 );
                 setIsLoginModalVisible(false)

@@ -4,6 +4,11 @@ import { useParams } from 'react-router-dom'
 import getFlight from '../utils/getFlight'
 import { airportAndCity} from '../utils/airportNames'
 import { useFlightBookingDetailsContext } from '../provider/FlightBookingDetailsProvider'
+import PaymentModal from '../components/PaymentModal'
+import { useAuth } from '../provider/AuthProvider'
+import { useLoginModalContext } from '../provider/LoginModalProvider'
+import { bookTrainTicket } from '../utils/bookTrain'
+import { bookFlightTicket } from '../utils/bookFlight'
 
 const flightIcons = {
     '6E' :{img: "https://imgak.mmtcdn.com/flights/assets/media/dt/common/icons/6E.png?v=17", name: 'IndiGo'},
@@ -14,6 +19,9 @@ const flightIcons = {
 }
 
 function FlightBookingPage() {
+
+    const {isLoggedIn} = useAuth()
+    const {setIsLoginModalVisible} = useLoginModalContext()
 
     const {flightId} = useParams()
     const [flight, setFlight] = useState(null)
@@ -39,6 +47,7 @@ function FlightBookingPage() {
         checked: false
     })
     const [checkAllField, setCheckAllField] = useState(false);
+    const [showPaymentModal, setShowPaymentModal] = useState(false)
 
     console.log(addedTravellers);
     useEffect(()=>{
@@ -86,8 +95,6 @@ function FlightBookingPage() {
             showMsg();
             return null;
         }
-
-        
         for(const property in bookingDetailsSentTo){
             if(!bookingDetailsSentTo[property]){
                 showMsg();
@@ -109,8 +116,16 @@ function FlightBookingPage() {
                 }
             }
         }
+        if(isLoggedIn){
+            setShowPaymentModal(true)
+        }
+        else{
+            setIsLoginModalVisible(true)
+        }
         
-
+    }
+    function bookTicket(){
+        bookFlightTicket(flightId)
     }
     console.log(address.state);
   return (
@@ -287,12 +302,12 @@ function FlightBookingPage() {
                     </div>
                 </div>
                 <div>
-                    {checkAllField && <span style={{fontSize:'10px', color:"red", fontWeight:"600"}}>Please provide all details mentioned above.</span>}<br/>
+                    {checkAllField && !showPaymentModal && <span style={{fontSize:'10px', color:"red", fontWeight:"600"}}>Please provide all details mentioned above.</span>}<br/>
                     <button onClick={checkDetails} className='flightBookingPage-submitBtn'>
                         CONTINUE
                     </button>
                 </div>
-                
+                {showPaymentModal && <PaymentModal totalPrice={flightBookingState.travellers*flight.ticketPrice + parseInt((flightBookingState.travellers*flight.ticketPrice*5)/100)} callback={bookTicket}/>}
             </div>
             <div>
                 <div className='non-scrollable'>
@@ -329,16 +344,16 @@ function FlightBookingPage() {
                                     }
                                     <span>Taxes and Surcharges</span>
                                 </div>
-                                {!showTaxes &&<div>₹ 0</div>} 
+                                {!showTaxes &&<div>₹ {parseInt((flightBookingState.travellers*flight.ticketPrice*5)/100)}</div>} 
                             </div>
                             {showTaxes && <div>
                                <span>Airline Taxes and Surcharges</span>
-                               <div>₹ 0</div>
+                               <div>₹ {parseInt((flightBookingState.travellers*flight.ticketPrice*5)/100)}</div>
                             </div>}
                         </div>
                         <div>
                             <span>Total Amount</span>
-                            <span>₹ {flightBookingState.travellers*flight.ticketPrice}</span>
+                            <span>₹ {flightBookingState.travellers*flight.ticketPrice + parseInt((flightBookingState.travellers*flight.ticketPrice*5)/100)}</span>
                         </div>
                     </div>
                     {/**Add coupons here */}

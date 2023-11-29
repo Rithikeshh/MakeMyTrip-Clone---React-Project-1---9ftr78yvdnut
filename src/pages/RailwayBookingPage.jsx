@@ -7,6 +7,7 @@ import { createPortal } from 'react-dom';
 import PaymentModal from '../components/PaymentModal';
 import { useAuth } from '../provider/AuthProvider';
 import { useLoginModalContext } from '../provider/LoginModalProvider';
+import {  bookTrainTicket } from '../utils/bookTrain';
 
 function RailwayBookingPage() {
     const {isLoggedIn} = useAuth()
@@ -61,6 +62,9 @@ function RailwayBookingPage() {
         }
         
     }
+    function bookTicket(){
+        bookTrainTicket(trainId)
+    }
   return (
     <div>
       <SearchNavbar/>
@@ -81,8 +85,8 @@ function RailwayBookingPage() {
                             <div className='train-depart-days'>
                                 <span>#{train.trainNumber}</span>{" "}
                                 <span>|</span>{" "}
-                                <span>Departs on: {days.map((day)=>(
-                                <span
+                                <span>Departs on: {days.map((day, index)=>(
+                                <span key={index}
                                     className={`${train.daysOfOperation.find(element=> element == day) ? 'trainOnDay' : ''} train-days`}
                                 >{day.substring(0,1)}</span>
                                 ))}</span>
@@ -147,7 +151,7 @@ function RailwayBookingPage() {
                                 
                                 <div key={index}>
                                     {console.log(traveller)}
-                                    <span>{traveller.name} ({traveller.gender}), {traveller.age}</span>
+                                    <span style={{textTransform:'capitalize'}}>{traveller.name} ({traveller.gender}), {traveller.age}</span>
                                     <button onClick={(e)=>{
                                         setTravellers(prev=>{
                                             prev.splice(index,1)
@@ -204,7 +208,7 @@ function RailwayBookingPage() {
                     {/* <div>
                         <h3>Yout State</h3>
                     </div> */}
-                    {showPaymentModal && <PaymentModal totalPrice={travellers.length*(train.fare+20)}/>}
+                    {showPaymentModal && <PaymentModal totalPrice={travellers.length*(train.fare+20)} callback={bookTicket}/>}
                 </div>
                 <div>
                     <div style={{top:'100px'}} className='non-scrollable'>
@@ -249,6 +253,7 @@ function UserDetailModalForTrain({setTravellers, setShowModal}){
         age:'',
         gender: 'Select'
     })
+    const [warning, setWarning] = useState('')
     return(
         <>
         {createPortal(
@@ -295,15 +300,26 @@ function UserDetailModalForTrain({setTravellers, setShowModal}){
                         </div>
                     </div>
                     <div>
-                        <button onClick={()=>{
-                            setShowModal(false)
-                        }}>Cancel</button>
-                        <button onClick={()=>{
-                            setShowModal(false)
-                            setTravellers(prev=>{
-                                return [...prev, passenger]
-                            })
-                        }}>Add</button>
+                        <span style={{fontSize:'10px', color:"red", fontWeight:"600"}}>{warning}</span>
+                        <div>
+                            <button onClick={()=>{
+                                setShowModal(false)
+                            }}>Cancel</button>
+                            <button onClick={()=>{
+                                if(passenger.name && passenger.age && passenger.gender != 'Select'){
+                                    setShowModal(false)
+                                    setTravellers(prev=>{
+                                        return [...prev, passenger]
+                                    })
+                                }
+                                else{
+                                    setWarning('Please fill all field.')
+                                    setTimeout(()=>{
+                                        setWarning('')
+                                    },5000)
+                                }
+                            }}>Add</button>
+                        </div>
                     </div>
                 </div>
             </div>,

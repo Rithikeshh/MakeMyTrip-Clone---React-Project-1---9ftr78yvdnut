@@ -43,12 +43,13 @@ function SignUpForm() {
             console.log(token)
             if(token){
                 
-                sessionStorage.setItem("userToken", token);
-                sessionStorage.setItem(
+                localStorage.setItem("userToken", token);
+                localStorage.setItem(
                     "userDetails",
                     JSON.stringify({
                         name : result.data.user.name, 
-                        email : result.data.user.email
+                        email : result.data.user.email,
+                        id: result.data.user._id
                     })
                 );
                 setIsLoginModalVisible(false)
