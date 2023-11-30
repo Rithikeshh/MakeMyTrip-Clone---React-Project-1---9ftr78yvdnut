@@ -1,5 +1,8 @@
 import { getDay, getMonth } from "../utils/dateFunctions";
 
+const day = new Date();
+const nextDay = new Date(day)
+nextDay.setDate(day.getDate()+1)
 export const hotalBookingDetails={
     city: 'Mumbai',
     checkIn: {
@@ -9,10 +12,10 @@ export const hotalBookingDetails={
         day: getDay(new Date().getDay())
     },
     checkOut: {
-        date: 10,
-        month: "Nov",
-        year: 23,
-        day: 'Friday'
+        date: nextDay.getDate(),
+        month: getMonth(nextDay.getMonth()),
+        year: nextDay.getFullYear(),
+        day: getDay(nextDay.getDay())
     },
     room : 1,
     adults: 2,
