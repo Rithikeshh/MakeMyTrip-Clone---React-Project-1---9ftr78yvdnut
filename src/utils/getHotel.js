@@ -13,7 +13,7 @@ export default async function getHotel(id, setHotel, setName, setLoading, dispat
         config
       )
       let result = await response.json();
-      console.log(result);
+      console.log(result.data);
       setName(result.data.name)
       // dispatch({type:'hotelLocation', payload:result.data.name})
       setHotel(result.data)

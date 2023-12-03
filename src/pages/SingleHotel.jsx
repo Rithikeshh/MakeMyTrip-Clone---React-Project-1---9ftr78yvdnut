@@ -23,7 +23,7 @@ import './SingleHotel.css'
     console.log(hotelId);
     useEffect(()=>{
       getHotel(hotelId, sethotel, setHotelName, setLoading)
-      moveCarousel();
+      // moveCarousel();
       
       return ()=>{
         clearInterval(stopMoveCarouselRef.current)
@@ -148,10 +148,42 @@ import './SingleHotel.css'
               startCarousel();
             }} className='carousel-scroll-right'></button>
           </div>
+          <div className='fix-book-hotel'>
+            <div className='fix-book-hotel-non-scrollable'>
+              <img src={hotel.images[0]} alt="" />
+              <h3>Recommended room</h3>
+              <div className='fix-book-hotel-room-details'>
+                <div>
+                  <span><span>Room 1: </span>{hotel.rooms[0].roomType}</span>
+                  <span><span>Bed : </span>{hotel.rooms[0].bedDetail}</span>
+                </div>
+                <div>
+                  <span>Price per night </span>
+                  <span>₹ {hotel.rooms[0].costPerNight}</span>
+                </div>
+              </div>
+              <div className='fix-book-hotel-bookNow'>
+                <button>Book Now</button>
+              </div>
+            </div>
+          </div>
+          <div className='hotel-name'>
+            <h1>{hotelName}</h1>
+          </div>
         </div>
-        <div>
-
+        <div className='rating'>
+            <div>
+              <span>Rating </span>
+              <span>{hotel.rating}</span>
+            </div>
+            <div>
+              <div>
+                <img src="//imgak.mmtcdn.com/pwa_v3/pwa_hotel_assets/map-bg-new.png" alt="" />
+              </div>
+              <span>View On Map</span>
+            </div>
         </div>
+        
         </>
       }
       

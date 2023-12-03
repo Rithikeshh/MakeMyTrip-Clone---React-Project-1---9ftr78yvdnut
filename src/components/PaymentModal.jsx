@@ -18,9 +18,9 @@ function PaymentModal({totalPrice, callback}) {
             paymentDetails.month &&
             paymentDetails.cvv.length == 3
         ){
+            callback()
         }
         else{
-            callback()
             setWarning('Please fill all information correctly.')
             setTimeout(()=>{
                 setWarning("")
