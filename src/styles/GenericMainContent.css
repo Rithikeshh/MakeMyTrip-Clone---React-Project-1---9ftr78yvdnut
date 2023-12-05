@@ -249,7 +249,7 @@
 .hotel-cover-container{
     display: flex;
     position: relative;
-    width: 100vw;
+    width: 100%;
     /* scroll-snap-type: x mandatory; */
     overflow-x: hidden;
     scroll-behavior: smooth;

@@ -15,7 +15,7 @@ import './SingleHotel.css'
     const [hotel, sethotel] = useState(null)
     const [loading, setLoading] = useState(true);
     const [hotelName, setHotelName] = useState('');
-
+    const mapRef = useRef();
     const carouselRef = useRef();
     const carouselIndexRef = useRef(0);
     const stopMoveCarouselRef = useRef();
@@ -180,10 +180,89 @@ import './SingleHotel.css'
               <div>
                 <img src="//imgak.mmtcdn.com/pwa_v3/pwa_hotel_assets/map-bg-new.png" alt="" />
               </div>
-              <span>View On Map</span>
+              <span onClick={()=>{
+                let rect = mapRef.current.getBoundingClientRect()
+                window.scrollBy({top:rect.top, left:0, behavior: "smooth"})
+              }}>View On Map</span>
             </div>
         </div>
-        
+        <div className='singleHotel-about'>
+          <h1>About {hotelName}</h1>
+          <p>{hotelName} is the epitome of world-class architecture and comfort with premium dining spaces, world-class leisure amenities, and unbeatable hospitality. </p>
+          <div className='singleHotel-about-list'>
+              <ul>
+                <li>Take a refreshing dip in the outdoor swimming pool while kids splash around in the kids' pool.</li>
+                <li>Relish gourmet Indian specialities at the property's award-winning restaurant, Baluchi.</li>
+                <li>Enjoy a holistic spa session or a beauty treatment at in-house spa and salon.</li>
+              </ul>
+          </div>
+        </div>
+        <div className='singleHotel-select-rooms'>
+            <div className='singleHotel-card-container'>
+              <h2>Select Rooms</h2>
+              {hotel.rooms.map((room, index)=>(
+              <div key={index} className='singleHotel-card'>
+                <div >
+                  <p className='singleHotel-card-heading'>{hotelName} Executive {room.roomType}, {room.bedDetail.split(' ')[1]} Bed with Sit out Living Room/ Seperate Dining Area and Bathtub</p>
+                  <div className='singleHotel-card-room-imageAndBed'>
+                    <img src={hotel.images[Math.ceil(Math.random()*3)]} alt="" />
+                    <div className='singleHotel-card-bedDetails'>
+                      <ul>
+                        <li>
+                          <img src="https://promos.makemytrip.com/Hotels_product/Hotel_SR/Android/drawable-hdpi/view.png" alt="" />
+                          <span>{room.roomSize} sq. ft</span>
+                        </li>
+                        <li>
+                          <img src="https://promos.makemytrip.com/Hotels_product/Hotel_SR/Android/drawable-hdpi/view.png" alt="" />
+                          <span>City View</span>
+                        </li>
+                        <li>
+                          <img src="https://promos.makemytrip.com/Hotels_product/Hotel_SR/Android/drawable-hdpi/bed.png" alt="" />
+                          <span>{room.bedDetail}</span>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+                <div>
+                  <div className='singleHotel-card-breakfastOption'>
+                    <span>Room with Breakfast</span>
+                    <div>
+                      <span className='cross-icon'></span>
+                      <span>Non-Refundable</span>
+                    </div>
+                    <div>
+                      <span className='tick-icon'></span>
+                      <span>Free Breakfast</span>
+                    </div>
+                  </div>
+                </div>
+                <div>
+                  <div>
+                    <span style={{color:"grey"}}>Per night for a Room</span>
+                  </div>
+                  <div className='singleHotel-card-price-section'>
+                    <div>
+                      <span>₹ {room.costDetails.baseCost}</span>
+                      <span>+₹ {room.costDetails.taxesAndFees} taxes & fees</span>
+                    </div>
+                    <div>
+                      <button>Book Now</button>
+                    </div>
+                  </div>
+                </div>
+              </div>)).filter((room,index)=> index < 4)}
+            </div>
+        </div>
+        <div className='singleHotel-location'>
+          <h2>Location</h2>
+          <div ref={mapRef} className='map-container'>
+            <iframe className='map' src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d223994.09818129404!2d77.09004195!3d28.692405!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2sin!4v1699640662870!5m2!1sen!2sin" frameBorder="0"></iframe>
+          </div>
+        </div>
+        <div className='singleHotel-amenities'>
+          <h2>Amenities at The Lalit Mumbai</h2>
+        </div>
         </>
       }
       
