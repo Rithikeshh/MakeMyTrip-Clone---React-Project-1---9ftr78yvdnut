@@ -336,12 +336,95 @@
     position: relative;
     left: 50%;
     margin-top: 2.2rem;
+    margin-bottom: 1rem;
     transform: translate(-50%);
     >h2{
         color: #3c3f3f;
+        margin-bottom: 1rem;
     }
 }
-
+.singleHotel-amenitiesList{
+    font-weight: 500;
+    color: rgb(72, 69, 69);
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    >li::before{
+        content: "-";
+        padding-right: 0.1rem;
+    }
+}
+.sinigleHotel-propertyRules{
+    width: 80%;
+    position: relative;
+    left: 50%;
+    margin-bottom: 1rem;
+    transform: translate(-50%);
+    >h2{
+        color: #3c3f3f;
+        margin-bottom: 1rem;
+    }
+    >div{
+        margin-left: 2.4rem;
+        display: flex;
+        flex-direction: column;
+        gap: 0.6rem;
+        >p svg{
+            margin-right: 1rem;
+        }
+        >p{
+            display: flex;
+            align-items: center;
+        }
+    }
+}
+.singleHotel-review-container{
+    width: 80%;
+    position: relative;
+    left: 50%;
+    padding-top: 1rem;
+    margin-bottom: 1rem;
+    border-top: 1px solid rgb(195, 195, 195);
+    transform: translate(-50%);
+    >h3{
+        color: #3c3f3f;
+        margin-bottom: 1rem;
+    }
+    >div{
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        margin-bottom: 6rem;
+        >div{
+            background-color: #f0f9ff;
+            padding: 1rem;
+            border: 1px solid rgb(213, 213, 213);
+            border-radius: 0.3rem;
+            box-shadow: 0px 0px 10px 1px rgba(0,0,0,0.1);
+        }
+    }
+}
+.review-heading{
+    font-weight: 500;
+    font-size: 18px;
+    color: #3c3f3f;
+    margin-bottom: 0.1rem;
+}
+.review-rating{
+    background-color: #065af3;
+    font-size: 14px;
+    font-weight: 500;
+    color: #fff;
+    padding: 0 0.3rem;
+    border-radius: 0.25rem;
+}
+.review-by{
+    font-size: 14px;
+}
+.review{
+    font-size: 14px;
+    margin-top: 0.3rem;
+}
 
 
 

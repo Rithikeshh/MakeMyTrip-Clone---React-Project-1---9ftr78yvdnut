@@ -29,8 +29,8 @@ function TrainCard({train}) {
             <div className='train-depart-days'>
                 <span>#{train.trainNumber}</span>{" "}
                 <span>|</span>{" "}
-                <span>Departs on: {days.map((day)=>(
-                <span
+                <span>Departs on: {days.map((day, index)=>(
+                <span key={index}
                     className={`${train.daysOfOperation.find(element=> element == day) ? 'trainOnDay' : ''} train-days`}
                 >{day.substring(0,1)}</span>
                 ))}</span>

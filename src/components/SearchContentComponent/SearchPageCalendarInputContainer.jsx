@@ -18,6 +18,9 @@ function SearchPageCalendarInputContainer({labelFor, spanHeading, value, dispatc
         document.removeEventListener('click',closeModal)
       }
     },[])
+    useEffect(()=>{
+      closeModal()
+    },[value.date])
     function handleDateChange(e){
       setValue1(e)
       dispatch(

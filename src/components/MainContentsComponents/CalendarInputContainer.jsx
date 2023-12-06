@@ -18,6 +18,9 @@ function CalendarInputContainer({labelFor, spanHeading, value, dispatch, type}) 
         document.removeEventListener('click',closeModal)
       }
     },[])
+    useEffect(()=>{
+      closeModal()
+    },[value.date])
     function handleDateChange(e){
       setValue1(e)
       dispatch(
