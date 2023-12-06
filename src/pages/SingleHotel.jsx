@@ -1,5 +1,5 @@
  import React, { useEffect, useRef, useState } from 'react'
-import { Link, useNavigate, useParams } from 'react-router-dom'
+import { Link, useNavigate, createSearchParams, useParams } from 'react-router-dom'
 import SearchNavbar from '../components/Navbar/SearchNavbar';
 import SearchPageLocationInputContainer from '../components/SearchContentComponent/SearchPageLocationInputContainer';
 import SearchPageCalendarInputContainer from '../components/SearchContentComponent/SearchPageCalendarInputContainer';
@@ -20,6 +20,7 @@ import './SingleHotel.css'
     const carouselIndexRef = useRef(0);
     const stopMoveCarouselRef = useRef();
     const startMoveCarouselRef = useRef()
+
     console.log(hotelId);
     useEffect(()=>{
       getHotel(hotelId, sethotel, setHotelName, setLoading)
@@ -62,6 +63,16 @@ import './SingleHotel.css'
         moveCarousel()
       },10000);
     }
+    function handleNavigate(e, room){
+
+      navigate({
+          pathname: `/hotel/booking/${hotel._id}`,
+          search: createSearchParams({
+              roomId: room._id
+          }).toString()
+      })
+    }
+
    return (
      <div>
        <SearchNavbar/>
@@ -159,11 +170,14 @@ import './SingleHotel.css'
                 </div>
                 <div>
                   <span>Price per night </span>
-                  <span>₹ {hotel.rooms[0].costPerNight}</span>
+                  <span>₹ {hotel.rooms[0].costDetails.baseCost}</span>
+                  <span>+₹ {hotel.rooms[0].costDetails.taxesAndFees} taxes & fees</span>
                 </div>
               </div>
               <div className='fix-book-hotel-bookNow'>
-                <button>Book Now</button>
+                <button onClick={(e)=>{
+                  handleNavigate(e, hotel.rooms[0])
+                }}>Book Now</button>
               </div>
             </div>
           </div>
@@ -248,7 +262,9 @@ import './SingleHotel.css'
                       <span>+₹ {room.costDetails.taxesAndFees} taxes & fees</span>
                     </div>
                     <div>
-                      <button>Book Now</button>
+                      <button onClick={(e)=>{
+                        handleNavigate(e, room)
+                      }}>Book Now</button>
                     </div>
                   </div>
                 </div>

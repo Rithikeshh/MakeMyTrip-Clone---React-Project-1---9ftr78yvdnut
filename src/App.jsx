@@ -21,6 +21,7 @@ import FlightListProvider from "./provider/FlightListProvider";
 import FlightBookingPage from "./pages/FlightBookingPage";
 import TrainListProvider from "./provider/TrainListProvider";
 import RailwayBookingPage from "./pages/RailwayBookingPage";
+import HotelBookingPage from "./pages/HotelBookingPage";
 
 
 
@@ -43,6 +44,7 @@ function App() {
             <Route path="/hotel/:hotelId" element={<SingleHotel/>}/>
             <Route path="/flight/:flightId" element={<FlightBookingPage/>}/>
             <Route path="/railway/:trainId" element={<RailwayBookingPage/>}/>
+            <Route path="hotel/booking/:hotelId" element={<HotelBookingPage/>}/>
           </Routes>
           </TrainListProvider>
           </FlightListProvider>
