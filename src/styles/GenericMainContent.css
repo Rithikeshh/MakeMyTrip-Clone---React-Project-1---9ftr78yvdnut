@@ -1377,17 +1377,279 @@
         }
     }
 }
-
-
-
-
-
-
-
-
-
-
-
+.hotelBookingPage-bookingDetails-container{
+    width: 100%;
+    padding: 0 10%;
+    display: flex;
+    gap: 3rem;
+    position: relative;
+    margin-bottom: 10rem;
+    >div:first-child{
+        flex-grow: 1;
+        display: flex;
+        flex-direction: column;  
+    }
+    >div:last-child{
+        min-width: 270px;
+        width: 300px;
+    }
+}
+.hotelBookingPage-bookingDetails{
+    box-shadow: 0px 0px 1px 1px rgba(0,0,0, 0.1);
+    padding-top: 1rem;
+    border-radius: 0.2rem;
+    background-color: #fff;
+}
+.hotelBookingPage-hotelDetails{
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid rgb(193, 193, 193);
+    padding: 0 1rem;
+    padding-bottom: 1rem;
+    >div:first-child{
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+        >span:first-child{
+            font-size: 20px;
+            font-weight: 700;
+        }
+        >span:last-child{
+            >img{
+                width: 12px;
+            }
+            >span{
+                font-size: 12px;
+                border: 1px solid rgb(172, 172, 172);
+                color: #7c7c7c;
+                padding: 2px 4px;
+                border-radius: 0.3rem;
+                font-weight: 500;
+                margin-left: 4px;
+            }
+        }
+    }
+    >div:last-child{
+        >img{
+            width: 100px;
+            aspect-ratio: 3/2.5;
+            border-radius: 0.15rem;
+        }
+    }
+}
+.hotelBookingPage-checkoutDetails{
+    padding: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid rgb(193, 193, 193);
+}
+.checkinAndCheckout-date{
+    display: flex;
+    flex-direction: column;
+    >span:first-child{
+        font-size: 13px;
+        color: grey;
+    }
+    >span:nth-child(2){
+        font-size: 15px;
+        >span{
+            font-size: 18px;
+            font-weight: 700;
+        }
+    }
+    >span:last-child{
+        font-size: 15px;
+    }
+}
+.diffDate{
+    border: 1px solid rgb(175, 175, 175);
+    border-radius: 10px;
+    padding: 0 0.5rem;
+    font-size: 12px;
+    color: grey;
+}
+.hotelBooking-roomDetails{
+    padding: 1.5rem 1rem;
+    >p{
+        font-weight: 700;
+        font-size: 16px;
+    }
+    >ul{
+        margin-top: 1rem;
+        font-size: 14px;
+        margin-left: 1rem;
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+        >li{
+            list-style: disc;
+        }
+    }
+}
+.hotelBooking-importantInfo{
+    padding: 1rem;
+    background-color: #FFF8ED;
+    border-top: 1px dashed #CF8100;
+    border-bottom: 1px dashed #CF8100;
+    >h3{
+        color: #CF8100;
+    }
+    >ul{
+        margin-top: 0.5rem;
+        font-size: 13px;
+        margin-left: 1rem;
+        display: flex;
+        flex-direction: column;
+        gap: 2px;
+        >li{
+            list-style: disc;
+        }
+    }
+}
+.hotelBookingPage-guestDetails-container{
+    margin-top: 1rem;
+    box-shadow: 0px 0px 5px 1px rgba(0,0,0, 0.2);
+    border-radius: 0.2rem;
+    background-color: #fff;
+    padding: 1rem;
+}
+.hotelBookingPage-guestDetails-heading{
+    font-weight: 700;
+    font-size: 18px;
+    margin-bottom: 1rem;
+}
+.hotelBookingPage-contact-details{
+    display: flex;
+    gap: 1rem;
+    margin-top: 1rem;
+    >div{
+        min-width: 300px;
+        >p{
+            margin-bottom: 0.5rem;
+            font-size: 13px;
+        }
+        >div{
+            border: 1px solid grey;
+            display: flex;
+            align-items: center;
+            border-radius: 0.3rem;
+            overflow: hidden;
+            >input{
+                border: none;
+                outline: none;
+                padding: 0.5rem;
+                line-height: 16px;
+                width: 100%;
+                font-size: 16px;
+            }
+            >span{
+                margin: 0 8px;
+                position: relative;
+                top: -2px;
+            }
+        }
+    }
+    >div:last-child input{
+        border-left: 1px solid grey;
+        
+    }
+}
+.hotelBooking-confirm{
+    margin-top: 0.6rem;
+    >label{
+        cursor: pointer;
+        font-size: 14px;
+        padding-left: 0.5rem;
+    }
+}
+.hotelBooking-payNow-button{
+    margin-top: 1.5rem;
+    border: none;
+    background-image: linear-gradient(96deg,#53b2fe,#065af3);
+    color: white;
+    border-radius: 0.25rem;
+    padding: 0.6rem 3rem;
+    font-weight: 500;
+    font-size: 16px;
+    cursor: pointer;
+}
+.hotelBooking-price-details{
+    background-color: #fff;
+    border-radius: 0.2rem;
+    overflow: hidden;
+    padding-top: 1.2rem;
+    box-shadow: 0px 0px 10px 1px rgba(0,0,0, 0.2);
+    >h4{
+        margin: 0 1.2rem;
+    }
+}
+.hotelBooking-room-price{
+    display: flex;
+    justify-content: space-between;
+    margin: 0 1.2rem;
+    margin-top: 1.2rem;
+    border-bottom: 1px solid rgb(184, 184, 184);
+    padding-bottom: 8px;
+    >div:first-child{
+        display: flex;
+        flex-direction: column;
+        >span:first-child{
+            font-size: 14px;
+            font-weight: 700;
+        }
+        >span:last-child{
+            font-size: 13px;
+            color: grey;
+        }
+    }
+    >div:last-child span{
+        font-weight: 500;
+        color: #323030;
+        white-space: nowrap;
+    }
+}
+.hotelBooking-room-tax{
+    margin: 0 1.2rem;
+    margin-top: 0.5rem;
+    /* border-bottom: 1px solid rgb(184, 184, 184);
+    padding-bottom: 8px; */
+    >div{
+        display: flex;
+        justify-content: space-between;
+        >span:first-child{
+            font-weight: 500;
+        }
+        >span:last-child{
+            font-weight: 500;
+            color: #323030;
+            white-space: nowrap;
+        }
+    }
+}
+.hotelBooking-room-totalPrice{
+    margin-top: 1rem;
+    padding: 1rem 1.2rem;
+    background-color: rgb(217, 217, 217);
+    >div{
+        display: flex;
+        justify-content: space-between;
+        >span:first-child{
+            font-size: 18px;
+        }
+        >span:last-child{
+            white-space: nowrap;
+            font-weight: 500;
+            color: #323030;
+        }
+    }
+}
+.hotelBooking-errorMsg{
+    position: relative;
+    font-size: 12px;
+    color: red;
+    top: 10px;
+}
 
 
 
