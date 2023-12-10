@@ -6,6 +6,7 @@ import TicketCheckboxContainer from '../components/MainContentsComponents/Ticket
 import LocationInputContainer from '../components/MainContentsComponents/LocationInputContainer';
 import CalendarInputContainer from '../components/MainContentsComponents/CalendarInputContainer';
 import { useFlightBookingDetailsContext } from '../provider/FlightBookingDetailsProvider';
+import FlightTravellerModal from '../Modals/FlightTravellerModal';
 
 const checkboxForTickets = [
   { id: 1, name: "One Way" },
@@ -39,6 +40,7 @@ function FlightsContent() {
               value={flightBookingState.fromCity}
               dispatch={dispatchFlightBookingState}
               type={'flightFromCity'}
+              modal={'flight'}
             >
               <span onClick={()=>{
                 dispatchFlightBookingState({type:'swap'})
@@ -54,6 +56,7 @@ function FlightsContent() {
                 value={flightBookingState.toCity}
                 dispatch={dispatchFlightBookingState}
                 type={'flightToCity'}
+                modal={'flight'}
             />
             <CalendarInputContainer
                 labelFor={'travelDate'}
@@ -62,7 +65,7 @@ function FlightsContent() {
                 dispatch={dispatchFlightBookingState}
                 type={'flightTravelDate'}
             />
-            <div>
+            {/* <div>
                 <label htmlFor='class' className='booking-inputBox'>
                     <span className='dropdown'>Travellers & Class</span>
                     <div className='font20 lineHeight-36'>
@@ -70,7 +73,12 @@ function FlightsContent() {
                     </div>
                     <span>{'All Class'}</span>
                 </label>
-            </div>
+                <FlightTravellerModal/>
+            </div> */}
+            <TravellersInputContainer
+              value={flightBookingState}
+              dispatch={dispatchFlightBookingState}
+            />
         </section>
         <section className='flight-booking-fare makeFlex make make-align-center make-justify-space margin-b-20'>
            <div className="makeFlex make-align-center">
@@ -131,6 +139,24 @@ function FareItems(){
         </p>
       </div>
     </li>
+  )
+}
+function TravellersInputContainer({value, dispatch}){
+  const [showModal, setShowModal] = useState(false)
+  return(
+    <div onClick={(e)=>{
+      e.stopPropagation()
+      setShowModal(n=>!n)
+    }}>
+        <label htmlFor='class' className='booking-inputBox'>
+            <span className='dropdown'>Travellers & Class</span>
+            <div className='font20 lineHeight-36'>
+                <span className='p-r-6 lineHeight-36 font30 strongBold-text'>{value.travellers.adults + value.travellers.children + value.travellers.infant}</span>
+            </div>
+            <span>{value.ticketClass}</span>
+        </label>
+        {showModal && <FlightTravellerModal setShowModal={setShowModal} value={value} dispatch={dispatch}/>}
+    </div>
   )
 }
 // function InputBoxForCity({

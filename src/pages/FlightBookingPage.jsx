@@ -67,7 +67,7 @@ function FlightBookingPage() {
         setShowTaxes(!showTaxes)
     }
     function handleAddTraveller(){
-        if(addedTravellers.length < flightBookingState.travellers){
+        if(addedTravellers.length < (flightBookingState.travellers.adults + flightBookingState.travellers.children + flightBookingState.travellers.infant)){
             setAddedTravellers(oldValue=>{
                 return [...oldValue, {
                     firstName: "",
@@ -91,7 +91,7 @@ function FlightBookingPage() {
     }
     function checkDetails(){
 
-        if(addedTravellers.length != flightBookingState.travellers){
+        if(addedTravellers.length != (flightBookingState.travellers.adults + flightBookingState.travellers.children + flightBookingState.travellers.infant)){
             showMsg();
             return null;
         }
@@ -156,7 +156,7 @@ function FlightBookingPage() {
                                 <span style={{border:'1px solid grey', borderRadius:'12px', fontSize:'12px', fontWeight:'500', padding:'0 8px', color:'grey'}}>Airbus A320</span>
                             </div>
                             <div>
-                                <span>{"Economy"}</span> {/*make dynamic*/}
+                                <span>{flightBookingState.ticketClass}</span> {/*make dynamic*/}
                             </div>
                         </div>
                         <div>
@@ -208,7 +208,7 @@ function FlightBookingPage() {
                             {travellerLimitExceed && <span style={{fontSize:'10px'}}>You have already selected 2 ADULT. Remove before adding a new one.</span>}
                         </div>
                         <div>
-                            <span>{addedTravellers.length}/{flightBookingState.travellers}</span>
+                            <span>{addedTravellers.length}/{flightBookingState.travellers.adults + flightBookingState.travellers.children + flightBookingState.travellers.infant}</span>
                             <span> added</span>
                         </div>
                     </div>
@@ -307,7 +307,7 @@ function FlightBookingPage() {
                         CONTINUE
                     </button>
                 </div>
-                {showPaymentModal && <PaymentModal totalPrice={flightBookingState.travellers*flight.ticketPrice + parseInt((flightBookingState.travellers*flight.ticketPrice*5)/100)} callback={bookTicket}/>}
+                {showPaymentModal && <PaymentModal totalPrice={(flightBookingState.travellers.adults + flightBookingState.travellers.children + flightBookingState.travellers.infant)*flight.ticketPrice + parseInt(((flightBookingState.travellers.adults + flightBookingState.travellers.children + flightBookingState.travellers.infant)*flight.ticketPrice*5)/100)} callback={bookTicket}/>}
             </div>
             <div>
                 <div className='non-scrollable'>
@@ -324,13 +324,13 @@ function FlightBookingPage() {
                                     <span>Base Fare</span>
                                 </div>
                                 {!showBaseFare && 
-                                    <div>₹ {flightBookingState.travellers*flight.ticketPrice}</div> 
+                                    <div>₹ {(flightBookingState.travellers.adults + flightBookingState.travellers.children + flightBookingState.travellers.infant)*flight.ticketPrice}</div> 
                                 }{/**price depend on number of travellers */}
                             </div>
                             {showBaseFare && 
                                 <div>
-                                    <span> Traveller(s) ({`${flightBookingState.travellers} X ₹ ${flight.ticketPrice}`})</span>
-                                    <div>₹ {flightBookingState.travellers*flight.ticketPrice}</div>
+                                    <span> Traveller(s) ({`${flightBookingState.travellers.adults + flightBookingState.travellers.children + flightBookingState.travellers.infant} X ₹ ${flight.ticketPrice}`})</span>
+                                    <div>₹ {(flightBookingState.travellers.adults + flightBookingState.travellers.children + flightBookingState.travellers.infant)*flight.ticketPrice}</div>
                                 </div>
                             }
                         </div>
@@ -344,16 +344,16 @@ function FlightBookingPage() {
                                     }
                                     <span>Taxes and Surcharges</span>
                                 </div>
-                                {!showTaxes &&<div>₹ {parseInt((flightBookingState.travellers*flight.ticketPrice*5)/100)}</div>} 
+                                {!showTaxes &&<div>₹ {parseInt(((flightBookingState.travellers.adults + flightBookingState.travellers.children + flightBookingState.travellers.infant)*flight.ticketPrice*5)/100)}</div>} 
                             </div>
                             {showTaxes && <div>
                                <span>Airline Taxes and Surcharges</span>
-                               <div>₹ {parseInt((flightBookingState.travellers*flight.ticketPrice*5)/100)}</div>
+                               <div>₹ {parseInt(((flightBookingState.travellers.adults + flightBookingState.travellers.children + flightBookingState.travellers.infant)*flight.ticketPrice*5)/100)}</div>
                             </div>}
                         </div>
                         <div>
                             <span>Total Amount</span>
-                            <span>₹ {flightBookingState.travellers*flight.ticketPrice + parseInt((flightBookingState.travellers*flight.ticketPrice*5)/100)}</span>
+                            <span>₹ {(flightBookingState.travellers.adults + flightBookingState.travellers.children + flightBookingState.travellers.infant)*flight.ticketPrice + parseInt(((flightBookingState.travellers.adults + flightBookingState.travellers.children + flightBookingState.travellers.infant)*flight.ticketPrice*5)/100)}</span>
                         </div>
                     </div>
                     {/**Add coupons here */}

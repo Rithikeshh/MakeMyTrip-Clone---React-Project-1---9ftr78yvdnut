@@ -35,6 +35,7 @@ function RailwaysContent() {
                 value={trainBookingState.fromCity}
                 dispatch={dispatchTrainBookingState}
                 type={'trainFromCity'}
+                modal={'train'}
             >
                 <span onClick={()=>{
                     dispatchTrainBookingState({type:'swap'})
@@ -49,6 +50,7 @@ function RailwaysContent() {
                 value={trainBookingState.toCity}
                 dispatch={dispatchTrainBookingState}
                 type={'trainToCity'}
+                modal={'train'}
             />
             <CalendarInputContainer
                 labelFor={'travelDate'}

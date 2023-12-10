@@ -1,10 +1,11 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import SearchPageLocationInputContainer from '../SearchContentComponent/SearchPageLocationInputContainer'
 import { useFlightBookingDetailsContext } from '../../provider/FlightBookingDetailsProvider'
 import SearchPageCalendarInputContainer from '../SearchContentComponent/SearchPageCalendarInputContainer'
 import getFlightList from '../../utils/getFlightList'
 import { useFlightListContext } from '../../provider/FlightListProvider'
 import getAirportShortName from '../../utils/airportNames'
+import FlightTravellerModal from '../../Modals/FlightTravellerModal'
 
 function SearchPageHeaderForFlight({flightSourceRef, flightDestinationRef, setLoading}) {
 
@@ -25,6 +26,7 @@ function SearchPageHeaderForFlight({flightSourceRef, flightDestinationRef, setLo
                         value={flightBookingState.fromCity}
                         dispatch={dispatchFlightBookingState}
                         type={'flightFromCity'}
+                        modal={'flight'}
                         >
                         
                     </SearchPageLocationInputContainer>
@@ -40,6 +42,7 @@ function SearchPageHeaderForFlight({flightSourceRef, flightDestinationRef, setLo
                         value={flightBookingState.toCity}
                         dispatch={dispatchFlightBookingState}
                         type={'flightToCity'}
+                        modal={'flight'}
                     />
                     <SearchPageCalendarInputContainer
                         labelFor={'travelDate'}
@@ -48,15 +51,10 @@ function SearchPageHeaderForFlight({flightSourceRef, flightDestinationRef, setLo
                         dispatch={dispatchFlightBookingState}
                         type={'flightTravelDate'}
                     />
-                    <div className='searchPage-booking-input'>
-                        <label htmlFor='class' className='searchPage-booking-inputBox'>
-                            <span className='dropdown'>PASSENGERS & CLASS</span>
-                            <div>
-                                <span >{flightBookingState.travellers}{' Traveller, '}</span>
-                                <span>{'All Class'}</span>
-                            </div>
-                        </label>
-                    </div>
+                    <SearchPageTravellerInput
+                        value={flightBookingState}
+                        dispatch={dispatchFlightBookingState}
+                    />
                 </section>
                 <section>
                     <p className='makeFlex make-justify-center'>
@@ -78,3 +76,22 @@ function SearchPageHeaderForFlight({flightSourceRef, flightDestinationRef, setLo
 }
 
 export default SearchPageHeaderForFlight
+
+function SearchPageTravellerInput({value, dispatch}){
+    const [showModal, setShowModal] = useState(false)
+        return(
+            <div onClick={(e)=>{
+                e.stopPropagation()
+                setShowModal(n=>!n)
+              }} className='searchPage-booking-input'>
+                <label htmlFor='class' className='searchPage-booking-inputBox'>
+                    <span className='dropdown'>PASSENGERS & CLASS</span>
+                    <div>
+                        <span>{value.travellers.adults + value.travellers.children + value.travellers.infant}{' Traveller, '}</span>
+                        <span>{value.ticketClass}</span>
+                    </div>
+                </label>
+                {showModal && <FlightTravellerModal setShowModal={setShowModal} value={value} dispatch={dispatch} search={true}/>}
+            </div>
+        )
+    }

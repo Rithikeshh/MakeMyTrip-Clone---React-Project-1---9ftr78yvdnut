@@ -22,6 +22,7 @@ function SearchPageHeaderForTrain({setLoading, setSuggestedTrainList}) {
                         value={trainBookingState.fromCity}
                         dispatch={dispatchTrainBookingState}
                         type={'trainFromCity'}
+                        modal={'train'}
                         >
                         
                     </SearchPageLocationInputContainer>
@@ -37,6 +38,7 @@ function SearchPageHeaderForTrain({setLoading, setSuggestedTrainList}) {
                         value={trainBookingState.toCity}
                         dispatch={dispatchTrainBookingState}
                         type={'trainToCity'}
+                        modal={'train'}
                     />
                     <SearchPageCalendarInputContainer
                         labelFor={'travelDate'}

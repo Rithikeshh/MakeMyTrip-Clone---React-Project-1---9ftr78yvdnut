@@ -9,13 +9,15 @@ export const flightBookingDetails = {
         year: new Date().getFullYear(),
         day: getDay(new Date().getDay())
     },
-    ticketClass:{
-        head: 'All',
-        text: 'All Class'
-    },
-    travellers: 2
+    ticketClass:'Economy',
+    travellers: {
+        adults: 1,
+        children: 0,
+        infant: 0,
+    }
 }
 export default function flightReducer(state, action){
+    console.log(action.payload);
     switch(action.type){
 
         case 'flightFromCity':
@@ -44,6 +46,12 @@ export default function flightReducer(state, action){
                 ...state,
                 fromCity: state.toCity,
                 toCity: state.fromCity
+            }
+        case 'updateTravellers' :
+            return {
+                ...state,
+                ticketClass: action.payload.ticketClass,
+                travellers: action.payload.travellers
             }
         default :
         return {

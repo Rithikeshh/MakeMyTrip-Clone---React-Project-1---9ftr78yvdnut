@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import './Modals.css'
 import { airportAndCity, fromStations, toStations } from '../../utils/airportNames';
 
-function LocationInputContainer({children, inputId, spanHeading, value, dispatch, type}) {
+function LocationInputContainer({children, inputId, spanHeading, value, dispatch, type, modal}) {
   const [showModal, setShowModal] = useState(false);
   function setModalFalse(e){
     console.log(e.target);
@@ -10,12 +10,10 @@ function LocationInputContainer({children, inputId, spanHeading, value, dispatch
   }
   useEffect(()=>{
     document.body.addEventListener('click', setModalFalse)
-    console.log("run only once");
     return ()=>{
       document.body.removeEventListener('click',setModalFalse);
     }
   },[])
-  console.log(showModal)
   return (
     <div onClick={(e)=>{e.stopPropagation()}}>
         <label htmlFor={inputId} className='booking-inputBox'>
@@ -26,8 +24,8 @@ function LocationInputContainer({children, inputId, spanHeading, value, dispatch
             <span>{'India'}</span>
         </label>
         {children}
-        {/* {showModal && <FlightsLocationModal spanHeading={spanHeading} dispatch={dispatch} type={type} setShowModal={setShowModal}/>} */}
-        {showModal && <TrainsLocationModal spanHeading={spanHeading} dispatch={dispatch} type={type} setShowModal={setShowModal}/>}
+        {modal == 'flight' && showModal && <FlightsLocationModal spanHeading={spanHeading} dispatch={dispatch} type={type} setShowModal={setShowModal}/>}
+        {modal == 'train' && showModal && <TrainsLocationModal spanHeading={spanHeading} dispatch={dispatch} type={type} setShowModal={setShowModal}/>}
     </div>
   )
 }
@@ -44,7 +42,7 @@ export function FlightsLocationModal({dispatch, type, setShowModal, spanHeading}
     <div className='flight-location-modal'>
       <div>
         <img  src="https://upload.wikimedia.org/wikipedia/commons/c/ca/VisualEditor_-_Icon_-_Search.svg" alt="" />
-        <input readOnly placeholder={spanHeading} type="text" />
+        <input placeholder={spanHeading} type="text" />
       </div>
       <ul>
         {
@@ -76,7 +74,7 @@ export function TrainsLocationModal({dispatch, type, setShowModal, spanHeading})
     <div className='flight-location-modal'>
       <div>
         <img  src="https://upload.wikimedia.org/wikipedia/commons/c/ca/VisualEditor_-_Icon_-_Search.svg" alt="" />
-        <input readOnly placeholder={spanHeading} type="text" />
+        <input placeholder={spanHeading} type="text" />
       </div>
       <ul>
         {

@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react'
-import { airportAndCity } from '../../utils/airportNames';
+import { airportAndCity, fromStations, toStations } from '../../utils/airportNames';
 
 
-function SearchPageLocationInputContainer({children, inputId, spanHeading, value, dispatch, type}) {
+function SearchPageLocationInputContainer({children, inputId, spanHeading, value, dispatch, type, modal}) {
   const [showModal, setShowModal] = useState(false);
   useEffect(()=>{
     document.body.addEventListener('click', (e)=>{
@@ -18,12 +18,14 @@ function SearchPageLocationInputContainer({children, inputId, spanHeading, value
             }} type="text" id={inputId} readOnly style={{caretColor:"transparent"}} value={value}/> 
         </label>
         {children}
-        {showModal && <FlightsLocationModal spanHeading={spanHeading} dispatch={dispatch} type={type} setShowModal={setShowModal}/>}
+        {modal == 'flight' && showModal && <FlightsLocationModal spanHeading={spanHeading} dispatch={dispatch} type={type} setShowModal={setShowModal}/>}
+        {modal == 'train' && showModal && <TrainsLocationModal spanHeading={spanHeading} dispatch={dispatch} type={type} setShowModal={setShowModal}/>}
     </div>
   )
 }
 
 export default SearchPageLocationInputContainer
+
 function FlightsLocationModal({dispatch, type, setShowModal, spanHeading}){
   const airport = []
   for(const element in airportAndCity){
@@ -34,7 +36,7 @@ function FlightsLocationModal({dispatch, type, setShowModal, spanHeading}){
     <div className='flight-location-modal flight-search-location-modal'>
       <div>
         <img  src="https://upload.wikimedia.org/wikipedia/commons/c/ca/VisualEditor_-_Icon_-_Search.svg" alt="" />
-        <input readOnly placeholder={spanHeading} type="text" />
+        <input placeholder={spanHeading} type="text" />
       </div>
       <ul>
         {
@@ -58,4 +60,34 @@ function FlightsLocationModal({dispatch, type, setShowModal, spanHeading}){
     </div>
   )
 }
-
+function TrainsLocationModal({dispatch, type, setShowModal, spanHeading}){
+  
+  const stations = spanHeading == 'From' ? fromStations : toStations;
+  return(
+    <div className='flight-location-modal flight-search-location-modal'>
+      <div>
+        <img  src="https://upload.wikimedia.org/wikipedia/commons/c/ca/VisualEditor_-_Icon_-_Search.svg" alt="" />
+        <input placeholder={spanHeading} type="text" />
+      </div>
+      <ul>
+        {
+          stations.map((station, index)=>{
+            return(
+              <li key={index} onClick={()=>{
+                dispatch({type:type, payload: station})
+                setShowModal(false)
+              }}>
+                <div>
+                {/* <span>{city}</span> */}
+                </div>
+                <div style={{marginLeft:'0rem'}}>
+                <span>{station}</span>
+                </div>
+              </li>
+            )
+          })
+        }
+      </ul>
+    </div>
+  )
+}
