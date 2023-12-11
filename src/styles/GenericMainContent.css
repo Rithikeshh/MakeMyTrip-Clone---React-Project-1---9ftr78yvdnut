@@ -286,12 +286,59 @@
     cursor: pointer;
 }
 .flightList-container{
+    width: 100%;
+    padding: 0 10%;
     display: flex;
+    margin-top: 1rem;
+    gap: 2rem;
+    position: relative;
+    >div:last-child{
+        flex-grow: 1;
+    }
+    >div:first-child{
+        min-width: 270px;
+        width: 300px;
+        margin-top: 1rem;
+    }
+    /* display: flex;
     justify-content: center;
     >div{
         width: 80%;
+    } */
+}
+.flight-filters{
+    background-color: #fff;
+    border-radius: 0.15rem;
+    position: sticky;
+    top: 75px;
+    padding: 1.2rem;
+
+}
+.flight-popularFilter{
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+    margin-bottom: 1.4rem;
+    >h4{
+        margin-bottom: 0.2rem;
+    }
+    >label{
+        display: flex;
+        align-items: center;
+        gap: 0.3rem;
+        cursor: pointer;
+        >img{
+            width: 14px;
+            aspect-ratio: 1/1;
+        }
+        >input{
+            cursor: pointer;
+        }
     }
 }
+/* .flight-stopsFilter{
+
+} */
 .flight-add-bar{
     margin-top: 2rem;
     display: flex;

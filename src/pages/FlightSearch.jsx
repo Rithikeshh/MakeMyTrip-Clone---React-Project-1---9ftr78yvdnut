@@ -10,7 +10,13 @@ import { useFlightBookingDetailsContext } from '../provider/FlightBookingDetails
 import FlightCard from '../components/FlightCard'
 import FlightLoader from '../components/FlightLoader'
 
-
+const flightIcons = {
+  '6E' :{img: "https://imgak.mmtcdn.com/flights/assets/media/dt/common/icons/6E.png?v=17", name: 'IndiGo'},
+  'UK' :{img: "https://imgak.mmtcdn.com/flights/assets/media/dt/common/icons/UK.png?v=17", name: 'Vistara'},
+  'AI' :{img: "https://imgak.mmtcdn.com/flights/assets/media/dt/common/icons/AI.png?v=17", name: 'Air India'},
+  'SG' :{img: "https://imgak.mmtcdn.com/flights/assets/media/dt/common/icons/SG.png?v=17", name: 'Spice Jet'},
+  'G8' :{img: 'https://airhex.com/images/airline-logos/go-first.png', name: 'Go First'}
+}
 function FlightSearch() {
   
   const {flightList} = useFlightListContext()
@@ -18,6 +24,22 @@ function FlightSearch() {
   const{flightBookingState} = useFlightBookingDetailsContext()
   const flightSourceRef = useRef(flightBookingState.fromCity)
   const flightDestinationRef = useRef(flightBookingState.toCity)
+  const [filteredFlights, setFilteredFlights] = useState([])
+  console.log(filteredFlights)
+  const [filters, setFilters] = useState({
+    flights: {
+      '6E' : false, 'UK': false, 'AI': false, 'SG': false, 'G8': false
+    },
+    stops: {
+      '0': false, '1': false, '2': false
+    },
+    sort: {
+      asec: false, dsec: false
+    },
+    departure: {
+      'before6Am' : false, '6AmTo12Pm': false, '12PmTo6Pm': false, 'after6Pm': false
+    }
+  })
 
   const [loading, setLoading] = useState(true)
   useEffect(()=>{
@@ -26,12 +48,152 @@ function FlightSearch() {
       document.body.style.backgroundColor = ''
     }
   },[])
+  function handleFilter(){
+      let isFilterApply = false;
+      let filteredFilghts = [...flightList];
+      for(const element in filters){
+        for(const property in filters[element]){
+          if(filters[element][property]){
+            isFilterApply = true;
+          }
+        }
+      }
+      const flightIdFilter = Object.keys(filters.flights).filter((item)=>filters.flights[item])
+      if(flightIdFilter.length > 0){
+        filteredFilghts =  filteredFilghts.filter((flight)=>{
+          if(flightIdFilter.indexOf(flight.flightID.substring(0,2)) >= 0){
+            return true;
+          }
+        })
+      }
+      const stopFilter = Object.keys(filters.stops).filter((item)=>filters.stops[item])
+      if(stopFilter.length > 0){
+        filteredFilghts = filteredFilghts.filter((flight)=>{
+          if(stopFilter.indexOf(flight.stops.toString()) >= 0){
+            return true
+          }
+        })
+      }
+      if(filters.sort.asec){
+        filteredFilghts.sort((a,b)=> a.ticketPrice - b.ticketPrice)
+      }
+      else if(filters.sort.dsec){
+        filteredFilghts.sort((a,b)=> b.ticketPrice - a.ticketPrice)
+      }
+      console.log(filteredFilghts)
+      setFilteredFlights(filteredFilghts)
+  }
+  useEffect(()=>{
+    if(flightList.length > 0)
+    handleFilter()
+  },[flightList, filters])
+
+  function handleFlightID(e){
+    const key = e.target.name;
+    setFilters({...filters,flights:{...filters.flights, [key]: !filters.flights[key]}})
+  }
+  function handleStops(e){
+    const key = e.target.name;
+    setFilters({...filters,stops:{...filters.stops, [key]: !filters.stops[key]}})
+  }
+  function handleSorting(e){
+    const key = e.target.name;
+    const property = key == 'asec' ? 'dsec' : 'asec';
+    setFilters({...filters, sort:{[key]: !filters.sort[key], [property]: false}})
+  }
   return (
     <div>
       {/* <SearchNavbar/> */}
       <SearchPageHeaderForFlight flightSourceRef={flightSourceRef} flightDestinationRef={flightDestinationRef} setLoading={setLoading}/>
       <div className='flightList-container'>
         
+        <div>
+          <div className='flight-filters'>
+            <div className='flight-popularFilter'>
+              <h4>Popular Filters</h4>
+              <label htmlFor="non-stop">
+                <input onChange={handleStops} name='0' checked={filters.stops['0']} id='non-stop' type="checkbox" />
+                Non Stop
+              </label>
+              <label htmlFor="indigo">
+                <input onChange={handleFlightID} id='indigo' checked={filters.flights['6E']} name='6E' type="checkbox" />
+                <img src={flightIcons['6E'].img} alt="" />
+                IndiGo
+              </label>
+              <label htmlFor="vistara">
+                <input onChange={handleFlightID} id='vistara' checked={filters.flights['UK']} name='UK' type="checkbox" />
+                <img src={flightIcons['UK'].img} alt="" />
+                Vistara
+              </label>
+              <label htmlFor="airindia">
+                <input onChange={handleFlightID} id='airindia' checked={filters.flights['AI']} name='AI' type="checkbox" />
+                <img src={flightIcons['AI'].img} alt="" />
+                Air India
+              </label>
+            </div>
+            <div className='flight-popularFilter'>
+              <h4>Sort By Price</h4>
+              <label htmlFor="asec">
+                <input onChange={handleSorting} name='asec' checked={filters.sort.asec} id='asec' type="checkbox" />
+                Low to High
+              </label><label htmlFor="dsec">
+                <input onChange={handleSorting} name='dsec' checked={filters.sort.dsec} id='dsec' type="checkbox" />
+                High to Low
+              </label>
+            </div>
+            <div className='flight-popularFilter'>
+              <h4>Stops From {flightSourceRef.current}</h4>
+              <label htmlFor="non-stop">
+                <input onChange={handleStops} name='0' checked={filters.stops['0']} id='non-stop' type="checkbox" />
+                Non Stop
+              </label>
+              <label htmlFor="1-stop">
+                <input onChange={handleStops} name='1' checked={filters.stops['1']} id='1-stop' type="checkbox" />
+                1 Stop
+              </label>
+              <label htmlFor="2-stop">
+                <input onChange={handleStops} name='2' checked={filters.stops['2']} id='2-stop' type="checkbox" />
+                2 Stop
+              </label>
+            </div>
+            <div className='flight-popularFilter'>
+              <h4>Airlines</h4>
+              <label htmlFor="indigo">
+                <input onChange={handleFlightID} id='indigo' checked={filters.flights['6E']} name='6E' type="checkbox" />
+                <img src={flightIcons['6E'].img} alt="" />
+                IndiGo
+              </label>
+              <label htmlFor="vistara">
+                <input onChange={handleFlightID} id='vistara' checked={filters.flights['UK']} name='UK' type="checkbox" />
+                <img src={flightIcons['UK'].img} alt="" />
+                Vistara
+              </label>
+              <label htmlFor="airindia">
+                <input onChange={handleFlightID} id='airindia' checked={filters.flights['AI']} name='AI' type="checkbox" />
+                <img src={flightIcons['AI'].img} alt="" />
+                Air India
+              </label>
+              <label htmlFor="spicejet">
+                <input onChange={handleFlightID} id='spicejet' checked={filters.flights['SG']} name='SG' type="checkbox" />
+                <img src={flightIcons['SG'].img} alt="" />
+                Spice Jet
+              </label>
+              <label htmlFor="gofirst">
+                <input onChange={handleFlightID} id='gofirst' checked={filters.flights['G8']} name='G8' type="checkbox" />
+                <img src={flightIcons['G8'].img} alt="" />
+                Go First
+              </label>
+            </div>
+           {/*remaining */} <div className='flight-departureFilter'>
+              <h4>Departure From {flightSourceRef.current}</h4>
+              <div>
+                <img src="https://imgak.mmtcdn.com/flights/assets/media/dt/listing/left-filters/morning_active.png?v=1" alt="" />
+                <img src="https://imgak.mmtcdn.com/flights/assets/media/dt/listing/left-filters/morning_inactive.png?v=1" alt="" />
+              </div>
+            </div>
+          </div>
+
+        </div>
         <div>
           <div className='bold-text font24' style={{color:'#fff'}}>Flights from {flightSourceRef.current} to {flightDestinationRef.current}</div>
           <div className='flight-add-bar'>
@@ -70,7 +232,7 @@ function FlightSearch() {
             <ul className='flight-card-container'>
               
               {
-                flightList.map((item) => (
+                filteredFlights.map((item) => (
                   <FlightCard key={item._id} flight={item}/>
                 ))          
               }

@@ -12,6 +12,7 @@ function SearchPageHeaderForFlight({flightSourceRef, flightDestinationRef, setLo
     const {flightBookingState, dispatchFlightBookingState} = useFlightBookingDetailsContext()
     const {setFlightList} = useFlightListContext()
     useEffect(()=>{
+        console.log('hi')
         getFlightList(getAirportShortName(flightBookingState.fromCity), getAirportShortName(flightBookingState.toCity), flightBookingState.travelDate.day.substring(0,3), setFlightList, setLoading)
     },[])
   return (

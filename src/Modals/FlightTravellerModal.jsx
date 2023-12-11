@@ -7,10 +7,16 @@ function FlightTravellerModal({setShowModal, value, dispatch , search}) {
    const [adults, setAdults] = useState(value.travellers.adults);
    const [children, setChildren] = useState(value.travellers.children);
    const [infant, setInfant] = useState(value.travellers.infant);
+   function updateTravellers(){
+      dispatch({type: 'updateTravellers', payload: { ticketClass: ticketClassArr[active], travellers:{adults, children, infant}}})
+   }
+   // useEffect(()=>{
+   //    return ()=>{
+   //       updateTravellers()
+   //    }
+   // },[])
    useEffect(()=>{
-      return ()=>{
-         dispatch({type: 'updateTravellers', payload: { ticketClass: ticketClassArr[active], travellers:{adults, children, infant}}})
-      }
+      updateTravellers()
    },[adults, children, infant, active])
    function setModalFalse(e){
       console.log(e.target);
