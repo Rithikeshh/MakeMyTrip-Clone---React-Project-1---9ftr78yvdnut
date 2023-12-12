@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { airportAndCity, fromStations, toStations } from '../../utils/airportNames';
+import { airportAndCity, cities, fromStations, toStations } from '../../utils/airportNames';
 
 
 function SearchPageLocationInputContainer({children, inputId, spanHeading, value, dispatch, type, modal}) {
@@ -20,6 +20,7 @@ function SearchPageLocationInputContainer({children, inputId, spanHeading, value
         {children}
         {modal == 'flight' && showModal && <FlightsLocationModal spanHeading={spanHeading} dispatch={dispatch} type={type} setShowModal={setShowModal}/>}
         {modal == 'train' && showModal && <TrainsLocationModal spanHeading={spanHeading} dispatch={dispatch} type={type} setShowModal={setShowModal}/>}
+        {modal == 'hotel' && showModal && <HotelsLocationModal spanHeading={spanHeading} dispatch={dispatch} type={type} setShowModal={setShowModal}/>}
     </div>
   )
 }
@@ -82,6 +83,36 @@ function TrainsLocationModal({dispatch, type, setShowModal, spanHeading}){
                 </div>
                 <div style={{marginLeft:'0rem'}}>
                 <span>{station}</span>
+                </div>
+              </li>
+            )
+          })
+        }
+      </ul>
+    </div>
+  )
+}
+export function HotelsLocationModal({dispatch, type, setShowModal, spanHeading}){
+  const citiesArr = [...cities];
+  return(
+    <div className='flight-location-modal flight-search-location-modal'>
+      <div>
+        <img  src="https://upload.wikimedia.org/wikipedia/commons/c/ca/VisualEditor_-_Icon_-_Search.svg" alt="" />
+        <input placeholder={spanHeading} type="text" />
+      </div>
+      <ul>
+        {
+          citiesArr.map((city, index)=>{
+            return(
+              <li key={index} onClick={()=>{
+                dispatch({type:type, payload: city})
+                setShowModal(false)
+              }}>
+                <div>
+                {/* <span>{city}</span> */}
+                </div>
+                <div style={{marginLeft:'0rem'}}>
+                <span>{city}</span>
                 </div>
               </li>
             )

@@ -31,10 +31,11 @@ function HotelsContent() {
 
         <LocationInputContainer 
           inputId={'location'} 
-          spanHeading={'City, Property Name Or Location'}
+          spanHeading={'City Or Location'}
           value={hotelBookingState.city}
           dispatch={dispatchHotelBookingState}
           type={'hotelLocation'}
+          modal={'hotel'}
         />
         <CalendarInputContainer
           labelFor={'checkIn'}

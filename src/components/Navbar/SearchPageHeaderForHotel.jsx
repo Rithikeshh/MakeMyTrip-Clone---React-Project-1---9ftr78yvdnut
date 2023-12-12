@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom'
 import getHotelList from '../../utils/getHotelList'
 import { useHotelsListContext } from '../../provider/HotelsListProvider'
 
-function SearchPageHeaderForHotel({hotelCityRef}) {
+function SearchPageHeaderForHotel({ setFilteredHotelList, hotelCityRef}) {
     const {hotelBookingState, dispatchHotelBookingState} = useHotelBookingDetailsContext()
     const{setHotelList} = useHotelsListContext()
     const [active, setActive] = useState(1);
@@ -19,7 +19,7 @@ function SearchPageHeaderForHotel({hotelCityRef}) {
         getHotelList(setHotelList ,hotelBookingState.city)
     }
     function handleRatingFilter(){
-        setHotelList((oldList)=>{
+        setFilteredHotelList((oldList)=>{
             const newList = oldList.sort((item1,item2)=>item2.rating-item1.rating)
             return [...newList]
         })
@@ -27,14 +27,14 @@ function SearchPageHeaderForHotel({hotelCityRef}) {
     }
     function handlePriceHighestFirst(){
         setActive(3)
-        setHotelList((oldList)=>{
+        setFilteredHotelList((oldList)=>{
             const newList = oldList.sort((item1, item2)=>item2.rooms[0].costDetails.baseCost - item1.rooms[0].costDetails.baseCost)
             return [...newList]
         })
     }
     function handlePriceLowestFirst(){
         setActive(4)
-        setHotelList((oldList)=>{
+        setFilteredHotelList((oldList)=>{
             const newList = oldList.sort((item1, item2)=>item1.rooms[0].costDetails.baseCost - item2.rooms[0].costDetails.baseCost)
             return [...newList]
         })
@@ -50,6 +50,7 @@ function SearchPageHeaderForHotel({hotelCityRef}) {
             value={hotelBookingState.city}
             dispatch={dispatchHotelBookingState}
             type={'hotelLocation'}
+            modal={'hotel'}
             />
             <SearchPageCalendarInputContainer
             labelFor={'checkIn'}

@@ -94,6 +94,30 @@ export const toStations = [
     'Gorakhpur',
 ]
 
+export const cities = [
+    'Mumbai',
+    'Kolkata',
+    'Delhi',
+    'Bangalore',
+    'Chennai',
+    'Hyderabad',
+    'Pune',
+    'Patna',
+    'Agra',
+    'Nagpur',
+    'Jodhpur',
+    'Amritsar',
+    'Bhopal',
+    'Kalyan-Dombivali',
+    'Pimpri-Chinchwad',
+    'Kanpur',
+    'Visakhapatnam',
+    'Nasik',
+    'Srinagar',
+    'Meerut',
+    'Coimbatore',
+    'Vijayawada',
+]
 export default function getAirportShortName(city){
     const cityInLowerCase = city.toLowerCase()
     switch(cityInLowerCase){

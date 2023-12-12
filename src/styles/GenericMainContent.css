@@ -163,7 +163,7 @@
     margin-bottom: 2rem;
     >li{
         flex-grow: 1;
-        width: 80%;
+        width: 100%;
     }
     >.hotel-card{
         display: flex;
@@ -172,8 +172,9 @@
         border-radius: 0.25rem;
         gap: 1rem;
         &:hover{
-            border: 1px solid #0084ff;
+            border-radius: 0;
             cursor: pointer;
+            box-shadow: 0px 0px 6px 1px #0084ff;  
         }
         >img{
             object-fit: cover;
@@ -294,6 +295,7 @@
     position: relative;
     >div:last-child{
         flex-grow: 1;
+        overflow: auto;
     }
     >div:first-child{
         min-width: 270px;
@@ -390,6 +392,10 @@
         display: flex;
         flex-direction: column;
         gap: 2rem;
+        margin: 0.1rem;
+        &:hover{
+            box-shadow: 0px 0px 6px 1px #0084ff;  
+        }
         >div:nth-child(1){
             flex-grow: 1;
             width: 100%;
@@ -902,6 +908,7 @@
     flex-direction: column;
     gap: 1rem;
     overflow: hidden;
+    padding-top: 0.2rem;
 }.trainSearchPage-filter-items{
     margin-top: 1rem;
     display: flex;
@@ -915,6 +922,11 @@
     display: flex;
     flex-direction: column;
     gap: 1.5rem;
+    &:hover{
+        border-radius: 0;
+        cursor: pointer;
+        box-shadow: 0px 0px 6px 1px #0084ff;  
+    }
 }
 .train-details{
     display: flex;
@@ -1697,7 +1709,21 @@
     color: red;
     top: 10px;
 }
-
+.hotel-searchPage-list-container{
+    background-color: #fff;
+    width: 100%;
+    position: relative;
+    display: flex;
+    padding: 1rem 10%;
+    /* gap: 1rem; */
+    >div:first-child{
+        min-width: 220px;
+    }
+    >div:last-child{
+        overflow: hidden;
+        flex-grow: 1;
+    }
+}
 
 
 
@@ -1779,6 +1805,10 @@
             border-top: 1px solid #e7e7e7;
         }
     }
+    
+    
+}
+@media only screen and (max-width:1100px) {
     .hotel-card-container{
 
         >.hotel-card{
@@ -1794,5 +1824,4 @@
             }
         }
     }
-    
 }
