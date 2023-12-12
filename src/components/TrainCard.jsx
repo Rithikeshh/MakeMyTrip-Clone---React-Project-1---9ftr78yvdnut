@@ -2,7 +2,7 @@ import React from 'react'
 import { useTrainBookingDetailsContext } from '../provider/TrainBookingDetailsProvider'
 import { useNavigate, createSearchParams } from 'react-router-dom'
 
-function TrainCard({train}) {
+function TrainCard({train, filters}) {
 
     const{trainBookingState} = useTrainBookingDetailsContext()
     const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
@@ -61,27 +61,56 @@ function TrainCard({train}) {
             </div>
         </div>
         <div className='train-ticket-details'>
-        {
-            train.coaches.map((coach,index)=>(
-            <div key={index} onClick={(e)=>{
-                handleNavigate(e,coach)
-            }} className='train-ticket-details-coaches'>
-                <div>
-                <span>{coach.coachType}</span>
-                <span>₹ {train.fare}</span>
-                </div>
-                <div>
-                <span>AVAILABLE {coach.numberOfSeats}</span>
-                </div>
-                <div>
-                <span>Free Cancellation</span>
-                </div>
-            </div>
-            ))
-        } 
+        <FIlteredCoaches train={train} filters={filters} handleNavigate={handleNavigate}/>
         </div>
     </div>
   )
 }
 
 export default TrainCard
+
+function FIlteredCoaches({train, filters, handleNavigate}){
+
+    const filterArr = Object.keys(filters).filter((filter)=>filters[filter])
+    let filteredCoach = [...train.coaches]
+    if(filterArr.indexOf('AC') >= 0){
+        filteredCoach = filteredCoach.filter((coach)=>{
+            if(filterArr.indexOf(coach.coachType) >= 0 || coach.coachType.indexOf('A') >= 0){
+                return true;
+            }
+        })
+    }
+    else if(filterArr.length > 0){
+        filteredCoach = filteredCoach.filter((coach)=>{
+            if(filterArr.indexOf(coach.coachType) >= 0){
+                return true;
+            }
+        })
+    }
+    return(
+        <>
+            {filteredCoach.length > 0 ?
+            filteredCoach.map((coach,index)=>(
+                <div key={index} onClick={(e)=>{
+                    handleNavigate(e,coach)
+                }} className='train-ticket-details-coaches'>
+                    <div>
+                    <span>{coach.coachType}</span>
+                    <span>₹ {train.fare}</span>
+                    </div>
+                    <div>
+                    <span>AVAILABLE {coach.numberOfSeats}</span>
+                    </div>
+                    <div>
+                    <span>Free Cancellation</span>
+                    </div>
+                </div>
+            ))
+            :
+            <div style={{textAlign:'center', width:'100%', color:'red'}}>
+                No Seat Available For The Specific Class
+            </div>
+        }
+        </>
+    )
+}

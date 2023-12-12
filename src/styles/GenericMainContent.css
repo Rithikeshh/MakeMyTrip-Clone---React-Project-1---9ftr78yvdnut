@@ -310,7 +310,7 @@
     background-color: #fff;
     border-radius: 0.15rem;
     position: sticky;
-    top: 75px;
+    top: -50%;
     padding: 1.2rem;
 
 }

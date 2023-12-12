@@ -42,37 +42,59 @@ function RailwaySearch() {
   const {trainList} = useTrainListContext()
   const [loading, setLoading] = useState(true)
   const [suggestedTrainList, setSuggestedTrainList] = useState([]);
+  const [filters, setFilters] = useState({
+    'AC': false,
+    'SL': false,
+    '1A': false,
+    '2A': false,
+    '3A': false
+  })
+  function handleFIlters(e){
+    const key = e.target.name;
+    setFilters({...filters,[key]:!filters[key]})
+  }
   return (
     <div>
       <SearchPageHeaderForTrain setLoading={setLoading} setSuggestedTrainList={setSuggestedTrainList}/>
       {loading && <FlightLoader/>}
       <div className='trainSearchPage-main-container'>
         <div className='trainSearchPage-filter-container'>
-          <h3 style={{fontWeight:'600'}}>Filters</h3>
-          <div className='trainSearchPage-filter-items'>
-            <FormControlLabel 
-              control={
-                <Checkbox
-                  checked={false}
-                  sx={{ '& .MuiSvgIcon-root': { fontSize: 20 } }}
-                />
-              }
-              label={'AC'}
-            />
-            <FormControlLabel 
-              control={
-                <Checkbox
-                  checked={false}
-                  sx={{ '& .MuiSvgIcon-root': { fontSize: 20 } }}
-                />
-              }
-              label={'AC'}
-            />
+          <div className='flight-filters' style={{top:'80px'}}>
+            <div className='flight-popularFilter'>
+              <h4>Quick Filters</h4>
+              <label htmlFor="ac">
+                <input onChange={handleFIlters} name='AC' type="checkbox" id='ac'/>
+                AC
+              </label>
+              <label htmlFor="available">
+                <input type="checkbox" id='available'/>
+                Available
+              </label>
+            </div>
+            <div className='flight-popularFilter'>
+              <h4>Journey Class Filters</h4>
+              <label htmlFor="1-ac">
+                <input onChange={handleFIlters} name='1A' type="checkbox" id='1-ac'/>
+                1st Class AC
+              </label>
+              <label htmlFor="2-ac">
+                <input onChange={handleFIlters} name='2A' type="checkbox" id='2-ac'/>
+                2 Tier AC
+              </label>
+              <label htmlFor="3-ac">
+                <input onChange={handleFIlters} name='3A' type="checkbox" id='3-ac'/>
+                3 Tier AC
+              </label>
+              <label htmlFor="sleeper">
+                <input onChange={handleFIlters} name='SL' type="checkbox" id='sleeper' />
+                Sleeper SL
+              </label>
+            </div>
           </div>
         </div>
         <div className='trainSearchPage-card-container'>
               {trainList.map((train)=>(
-                <TrainCard key={train._id} train={train}/>
+                <TrainCard key={train._id} train={train} filters={filters}/>
               )) }
               {
                 trainList.length == 0 && 
@@ -82,7 +104,7 @@ function RailwaySearch() {
               }
               <h3 style={{color:'#0084ff'}}>Suggested Journey</h3>
               {suggestedTrainList.map((train)=>(
-                <TrainCard key={train._id} train={train}/>
+                <TrainCard key={train._id} train={train} filters={filters}/>
               )) }
         </div>
       </div>
