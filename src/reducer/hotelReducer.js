@@ -100,6 +100,12 @@ export default function hotelReducer(state, action){
                     day: getDay(action.payload.day)
                 },    
             }
+            case 'updateRoomAndTravellers':
+                return{
+                    ...state,
+                    room: action.payload.room,
+                    adults: action.payload.adults
+                }
         default:
             return {...state};
     }

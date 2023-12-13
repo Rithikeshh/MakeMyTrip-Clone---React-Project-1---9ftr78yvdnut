@@ -10,6 +10,7 @@ import { bookHotelTicket } from '../utils/bookHotel';
 import SuccessFullBookingModal from '../Modals/SuccessFullBookingModal';
 
 function HotelBookingPage() {
+
   const {isLoggedIn} = useAuth()
   const {setIsLoginModalVisible} = useLoginModalContext()
   const {hotelId} = useParams();
@@ -19,16 +20,18 @@ function HotelBookingPage() {
   const [hotelName, setHotelName] = useState('');
   const [room, setRoom] = useState(null)
   const {hotelBookingState} = useHotelBookingDetailsContext()
-  console.log(hotelBookingState);
+
   const checkInDate = new Date(`${hotelBookingState.checkIn.date}/${hotelBookingState.checkIn.month}/${hotelBookingState.checkIn.year}`)
   const checkOutDate = new Date(`${hotelBookingState.checkOut.date}/${hotelBookingState.checkOut.month}/${hotelBookingState.checkOut.year}`)
   const diffDate = Math.ceil(Math.abs(checkInDate-checkOutDate) / (1000*3600*24))
   const roomId = useRef(searchParams.get('roomId'));
+
   const [addAdults, setAddAdults] = useState([]);
   const [travellerLimitExceed, setTravellerLimitExceed] = useState(false);
   const [errorMsg, setErrorMsg] = useState('');
   const [showPaymentModal, setShowPaymentModal] = useState(false)
   const [showSuccessFullModal, setShowSuccessFullModal] = useState(false)
+
   const emailRef = useRef()
   const phoneRef = useRef()
   const confirmRef = useRef()
@@ -90,7 +93,7 @@ function checkDetails(){
     setShowPaymentModal(true)
   }
   else{
-      setIsLoginModalVisible(true)
+    setIsLoginModalVisible(true)
   }
 }
 function bookTicket(){
@@ -176,7 +179,7 @@ function bookTicket(){
             <div className='hotelBookingPage-guestDetails-container'>
               <div className='hotelBookingPage-guestDetails-heading'>
                 <span>Guest Details </span>
-                {travellerLimitExceed && <span style={{fontSize:'10px', color:'red', fontWeight:'400'}}>You have already selected 2 ADULT. Remove before adding a new one.</span>}
+                {travellerLimitExceed && <span style={{fontSize:'10px', color:'red', fontWeight:'400'}}>You have already selected {hotelBookingState.adults} ADULT. Remove before adding a new one.</span>}
               </div>
               <div className='flightBookingPage-userNameAndGender'>
                   {!addAdults.length && <div>

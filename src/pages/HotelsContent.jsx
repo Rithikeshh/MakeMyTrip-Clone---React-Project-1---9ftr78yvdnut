@@ -6,6 +6,7 @@ import { useHotelBookingDetailsContext } from '../provider/HotelBookingDetailsPr
 import LocationInputContainer from '../components/MainContentsComponents/LocationInputContainer';
 import CalendarInputContainer from '../components/MainContentsComponents/CalendarInputContainer';
 import { Link } from 'react-router-dom';
+import HotelRoomAndTravellerModal from '../Modals/HotelRoomAndTravellerModal';
 
 
 
@@ -51,17 +52,10 @@ function HotelsContent() {
           dispatch={dispatchHotelBookingState}
           type={'hotleCheckOut'}
         />
-        <div key={3}>
-          <label htmlFor='rooms' className='booking-inputBox'>
-            <span className='dropdown'>Rooms & Guests</span>
-            <div className='font20 lineHeight-36'>
-              <span className='p-r-6 lineHeight-36 font30 strongBold-text'>{1}</span>
-              <span>{'Room'}</span>
-              <span className='p-r-6 p-l-6 lineHeight-36 font30 strongBold-text'>{2}</span>
-              <span>{'Adults'}</span>
-            </div>
-          </label>
-        </div>
+        <TravellerAndRoomInput 
+          value={hotelBookingState}
+          dispatch={dispatchHotelBookingState}
+        />
         <div key={4}>
           <label htmlFor='price' className='booking-inputBox'>
             <span className='dropdown'>Price Per Night</span>
@@ -82,3 +76,26 @@ function HotelsContent() {
 }
 
 export default HotelsContent
+
+function TravellerAndRoomInput({value, dispatch}){
+
+  const [showModal, setShowModal] = useState(false)
+  const myElementRef = useRef(null)
+  return(
+    <div ref={myElementRef} onClick={(e)=>{
+      // e.stopPropagation()
+      setShowModal(n=>!n)
+    }}>
+      <label htmlFor='rooms' className='booking-inputBox'>
+        <span className='dropdown'>Rooms & Guests</span>
+        <div className='font20 lineHeight-36'>
+          <span className='p-r-6 lineHeight-36 font30 strongBold-text'>{value.room}</span>
+          <span>{'Room'}</span>
+          <span className='p-r-6 p-l-6 lineHeight-36 font30 strongBold-text'>{value.adults}</span>
+          <span>{'Adults'}</span>
+        </div>
+      </label>
+      {showModal && <HotelRoomAndTravellerModal myElementRef={myElementRef} setShowModal={setShowModal} value={value} dispatch={dispatch}/>}
+    </div>
+  )
+}

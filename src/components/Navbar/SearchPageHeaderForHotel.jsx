@@ -1,10 +1,11 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import SearchPageLocationInputContainer from '../SearchContentComponent/SearchPageLocationInputContainer'
 import SearchPageCalendarInputContainer from '../SearchContentComponent/SearchPageCalendarInputContainer'
 import { useHotelBookingDetailsContext } from '../../provider/HotelBookingDetailsProvider'
 import { Link } from 'react-router-dom'
 import getHotelList from '../../utils/getHotelList'
 import { useHotelsListContext } from '../../provider/HotelsListProvider'
+import HotelRoomAndTravellerModal from '../../Modals/HotelRoomAndTravellerModal'
 
 function SearchPageHeaderForHotel({ setFilteredHotelList, hotelCityRef}) {
     const {hotelBookingState, dispatchHotelBookingState} = useHotelBookingDetailsContext()
@@ -66,17 +67,10 @@ function SearchPageHeaderForHotel({ setFilteredHotelList, hotelCityRef}) {
             dispatch={dispatchHotelBookingState}
             type={'hotleCheckOut'}
             />
-            <div className='searchPage-booking-input'>
-                <label htmlFor='rooms' className='searchPage-booking-inputBox'>
-                    <span className='dropdown'>Rooms & Guests</span>
-                    <div >
-                    <span >{1}</span>{' '}
-                    <span>{'Room'}</span>{', '}
-                    <span>{2}</span>{' '}
-                    <span>{'Adults'}</span>
-                    </div>
-                </label>
-            </div>
+            <SearchPageTravellerAndRoomInput
+                value={hotelBookingState}
+                dispatch={dispatchHotelBookingState}
+            />
         </section>
         <section>
             <p className='makeFlex make-justify-center'>
@@ -111,3 +105,25 @@ function SearchPageHeaderForHotel({ setFilteredHotelList, hotelCityRef}) {
 }
 
 export default SearchPageHeaderForHotel
+
+export function SearchPageTravellerAndRoomInput({value, dispatch}){
+
+    const [showModal, setShowModal] = useState(false)
+    const myElementRef = useRef(null)
+    return(
+        <div ref={myElementRef} onClick={(e)=>{
+            setShowModal(n=>!n)
+          }}className='searchPage-booking-input'>
+            <label htmlFor='rooms' className='searchPage-booking-inputBox'>
+                <span className='dropdown'>Rooms & Guests</span>
+                <div >
+                <span >{value.room}</span>{' '}
+                <span>{'Room'}</span>{', '}
+                <span>{value.adults}</span>{' '}
+                <span>{'Adults'}</span>
+                </div>
+            </label>
+            {showModal && <HotelRoomAndTravellerModal myElementRef={myElementRef} setShowModal={setShowModal} value={value} dispatch={dispatch} search={true}/>}
+        </div>
+    )
+}

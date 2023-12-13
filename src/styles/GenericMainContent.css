@@ -256,6 +256,7 @@
     scroll-behavior: smooth;
     >.carousel-picture{
         scroll-snap-align: start;
+        width: 100%;
         >img{
             object-fit: cover;
             overflow: hidden;
@@ -844,6 +845,7 @@
             color: rgb(96, 96, 96);
             border-radius: 0.25rem;
             border: 1px solid rgb(179, 178, 178);
+            text-transform: capitalize;
         }
         >input:focus{
             outline: none;
@@ -924,7 +926,6 @@
     gap: 1.5rem;
     &:hover{
         border-radius: 0;
-        cursor: pointer;
         box-shadow: 0px 0px 6px 1px #0084ff;  
     }
 }

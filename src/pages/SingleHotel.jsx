@@ -7,6 +7,7 @@ import { useHotelBookingDetailsContext } from '../provider/HotelBookingDetailsPr
 import { useHotelsListContext } from '../provider/HotelsListProvider';
 import getHotel from '../utils/getHotel';
 import './SingleHotel.css'
+import { SearchPageTravellerAndRoomInput } from '../components/Navbar/SearchPageHeaderForHotel';
  
  function SingleHotel() {
     const {hotelId} = useParams()
@@ -24,7 +25,7 @@ import './SingleHotel.css'
     console.log(hotelId);
     useEffect(()=>{
       getHotel(hotelId, sethotel, setHotelName, setLoading)
-      // moveCarousel();
+      moveCarousel();
       
       return ()=>{
         clearInterval(stopMoveCarouselRef.current)
@@ -107,17 +108,21 @@ import './SingleHotel.css'
             dispatch={dispatchHotelBookingState}
             type={'hotleCheckOut'}
             />
-            <div className='searchPage-booking-input'>
-                <label htmlFor='rooms' className='searchPage-booking-inputBox'>
-                    <span className='dropdown'>Rooms & Guests</span>
-                    <div >
-                    <span >{1}</span>{' '}
-                    <span>{'Room'}</span>{', '}
-                    <span>{2}</span>{' '}
-                    <span>{'Adults'}</span>
-                    </div>
-                </label>
-            </div>
+            {/* <div className='searchPage-booking-input'>
+              <label htmlFor='rooms' className='searchPage-booking-inputBox'>
+                  <span className='dropdown'>Rooms & Guests</span>
+                  <div >
+                  <span >{1}</span>{' '}
+                  <span>{'Room'}</span>{', '}
+                  <span>{2}</span>{' '}
+                  <span>{'Adults'}</span>
+                  </div>
+              </label>
+            </div> */}
+            <SearchPageTravellerAndRoomInput
+              value={hotelBookingState}
+              dispatch={dispatchHotelBookingState}
+            />
         </section>
         <section>
             <p className='makeFlex make-justify-center'>
