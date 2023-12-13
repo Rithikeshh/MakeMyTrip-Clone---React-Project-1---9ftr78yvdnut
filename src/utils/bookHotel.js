@@ -1,7 +1,20 @@
-export function bookHotelTicket(hotelId, setSuccessModal, setShowPaymentModal, setAddAdults, emailRef, phoneRef, confirmRef){
+export function bookHotelTicket(hotelId, hotelBookingState, setSuccessModal, setShowPaymentModal, setAddAdults, emailRef, phoneRef, confirmRef){
     const token = localStorage.getItem("userToken");
     const user = JSON.parse(localStorage.getItem("userDetails"))
     const userId = user.id;
+    let monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
+    const checkInDate = hotelBookingState.checkIn.date
+    const checkInMonth = monthNames.indexOf(hotelBookingState.checkIn.month);
+    const checkInYear = hotelBookingState.checkIn.year;
+    const startDate = new Date(checkInYear, checkInMonth, checkInDate)
+
+    const checkOutDate = hotelBookingState.checkOut.date;
+    const checkOutMonth = monthNames.indexOf(hotelBookingState.checkOut.month);
+    const checkOutYear = hotelBookingState.checkOut.year;
+    const endDate = new Date(checkOutYear, checkOutMonth, checkOutDate)
+
+    const formattedStartDate = startDate.toISOString();
+    const formattedEndDate = endDate.toISOString()
     const config = {
       method: "POST",
       body : JSON.stringify({
@@ -9,8 +22,8 @@ export function bookHotelTicket(hotelId, setSuccessModal, setShowPaymentModal, s
         "userId" : userId,
         "bookingDetails" : {
           "hotelId":hotelId,
-          "startDate":"2023-10-09T10:03:53",
-          "endDate" : "2023-10-09T10:05:53"
+          "startDate":formattedStartDate,
+          "endDate" : formattedEndDate
         }
       }),
       headers: {

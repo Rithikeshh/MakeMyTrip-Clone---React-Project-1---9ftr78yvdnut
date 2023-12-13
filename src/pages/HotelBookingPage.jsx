@@ -94,7 +94,7 @@ function checkDetails(){
   }
 }
 function bookTicket(){
-  bookHotelTicket(hotelId, setShowSuccessFullModal, setShowPaymentModal, setAddAdults, emailRef, phoneRef, confirmRef)
+  bookHotelTicket(hotelId, hotelBookingState, setShowSuccessFullModal, setShowPaymentModal, setAddAdults, emailRef, phoneRef, confirmRef)
 }
   return (
     <div>
