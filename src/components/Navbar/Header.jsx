@@ -2,11 +2,22 @@ import React from 'react'
 // import allLogo from './assets/images/allLogos.png'
 import mmtLogo from '../../assets/images/mmtLogoWhite.png'
 import Profile from '../Profile'
-import LoginModalProvider from '../../provider/LoginModalProvider'
+import LoginModalProvider, { useLoginModalContext } from '../../provider/LoginModalProvider'
 import { useNavigate } from 'react-router-dom'
+import { useAuth } from '../../provider/AuthProvider'
 
 function Header() {
     const navigate = useNavigate();
+    const {isLoggedIn} = useAuth()
+    const {setIsLoginModalVisible} = useLoginModalContext()
+    function handleNavigate(){
+        if(isLoggedIn){
+            navigate('/mytrips')
+        }
+        else{
+            setIsLoginModalVisible(true)
+        }
+    }
   return (
     <div className='makeFlex make-justify-center'>
         <div className='makeFlex make-align-center make-justify-space gap-140 padding-t-5 padding-b-50'>
@@ -33,7 +44,7 @@ function Header() {
                     </div>
                 </li>
                 {/* Protected Route */}
-                <li key={2} className="header-userList-item makeFlex makeCenter">
+                <li onClick={handleNavigate} key={2} className="header-userList-item makeFlex makeCenter">
                     <span className="myTripIcon landingSprite"></span>
                     <div className="margin-r-5">
                     <p className="font12 whiteText bold-text">My Trips</p>

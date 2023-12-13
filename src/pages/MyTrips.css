@@ -21,6 +21,9 @@
         }
     }
 }
+.mytrips-background-style-completed{
+    background-image: linear-gradient(262deg,#afb3ba,#cfcfcf);
+}
 .mytrips-container{
     display: flex;
     justify-content: center;
@@ -67,22 +70,28 @@
 .upcomingIcon{
     width: 27px;
     height: 27px;
-    background-position: -1px -3px;
+    background-position: -2px -3px;
     background-image: url(https://imgak.mmtcdn.com/mima/images/Desktop/mytripSprite.png);
     background-size: 700px 850px;
     background-repeat: no-repeat;
     display: inline-block;
     flex-shrink: 0;
 }
+.upcomingIcon-active{
+    background-position: -2px -30px;
+}
 .completedIcon{
     width: 27px;
     height: 27px;
-    background-position: -68px -5px;
+    background-position: -68px -4px;
     background-image: url(https://imgak.mmtcdn.com/mima/images/Desktop/mytripSprite.png);
     background-size: 700px 850px;
     background-repeat: no-repeat;
     display: inline-block;
     flex-shrink: 0;
+}
+.completedIcon-active{
+    background-position: -68px -33px;
 }
 .myTrips{
     padding: 1.5rem;
