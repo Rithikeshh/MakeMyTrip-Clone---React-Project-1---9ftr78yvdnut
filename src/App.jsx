@@ -22,6 +22,7 @@ import FlightBookingPage from "./pages/FlightBookingPage";
 import TrainListProvider from "./provider/TrainListProvider";
 import RailwayBookingPage from "./pages/RailwayBookingPage";
 import HotelBookingPage from "./pages/HotelBookingPage";
+import MyTrips from "./pages/MyTrips";
 
 
 
@@ -40,6 +41,7 @@ function App() {
             <TrainListProvider>
           <Routes>
             <Route path="/*" element={<MainContent/>}/>
+            <Route path="/mytrips" element={<MyTrips/>}/>
             <Route path="/:section/search" element={<SearchContent/>}/>
             <Route path="/hotel/:hotelId" element={<SingleHotel/>}/>
             <Route path="/flight/:flightId" element={<FlightBookingPage/>}/>

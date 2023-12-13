@@ -22,6 +22,7 @@ function MainContent() {
           <Route path='flights' element={<FlightsContent/>}/>
           <Route path='hotels' element={<HotelsContent/>}/>
           <Route path='railways' element={<RailwaysContent/>}/>
+          <Route path="mytrips" element={<div>hi</div>}/>
           <Route path='*' element={<div>Page Not Found!!</div>}/>
         </Routes>
       </div>

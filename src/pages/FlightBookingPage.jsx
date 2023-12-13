@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import SearchNavbar from '../components/Navbar/SearchNavbar'
-import { useParams } from 'react-router-dom'
+import { useParams, useSearchParams } from 'react-router-dom'
 import getFlight from '../utils/getFlight'
 import { airportAndCity} from '../utils/airportNames'
 import { useFlightBookingDetailsContext } from '../provider/FlightBookingDetailsProvider'
@@ -9,6 +9,7 @@ import { useAuth } from '../provider/AuthProvider'
 import { useLoginModalContext } from '../provider/LoginModalProvider'
 import { bookTrainTicket } from '../utils/bookTrain'
 import { bookFlightTicket } from '../utils/bookFlight'
+import SuccessFullBookingModal from '../Modals/SuccessFullBookingModal'
 
 const flightIcons = {
     '6E' :{img: "https://imgak.mmtcdn.com/flights/assets/media/dt/common/icons/6E.png?v=17", name: 'IndiGo'},
@@ -20,6 +21,7 @@ const flightIcons = {
 
 function FlightBookingPage() {
 
+    const [searchParams, setSearchParams] = useSearchParams()
     const {isLoggedIn} = useAuth()
     const {setIsLoginModalVisible} = useLoginModalContext()
 
@@ -48,6 +50,7 @@ function FlightBookingPage() {
     })
     const [checkAllField, setCheckAllField] = useState(false);
     const [showPaymentModal, setShowPaymentModal] = useState(false)
+    const [showSuccessFullModal, setShowSuccessFullModal] = useState(false)
 
     console.log(addedTravellers);
     useEffect(()=>{
@@ -125,7 +128,7 @@ function FlightBookingPage() {
         
     }
     function bookTicket(){
-        bookFlightTicket(flightId)
+        bookFlightTicket(flightId, flightBookingState , {date:searchParams.get('nextdate'), month: searchParams.get('nextmonth'), year: searchParams.get('nextyear')}, setShowSuccessFullModal, setShowPaymentModal, setAddedTravellers, setBookingDetailsSentTo, setAddress)
     }
     console.log(address.state);
   return (
@@ -297,7 +300,7 @@ function FlightBookingPage() {
                                 console.log((e.target.checked));
                                 return {...prev, checked: e.target.checked}
                             })
-                        }} type="checkbox" name="" id="confirm" />
+                        }} type="checkbox" checked={address.checked} name="" id="confirm" />
                         <label style={{paddingLeft:"4px", fontSize:"14px", cursor:"pointer"}} htmlFor="confirm">Confirm</label>
                     </div>
                 </div>
@@ -361,6 +364,7 @@ function FlightBookingPage() {
             </div>
         </div>
       }
+      {showSuccessFullModal && <SuccessFullBookingModal setShowSuccessFullModal={setShowSuccessFullModal}/>}
     </div>
   )
 }

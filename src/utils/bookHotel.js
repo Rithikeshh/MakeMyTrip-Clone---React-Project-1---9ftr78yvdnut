@@ -1,4 +1,4 @@
-export function bookHotelTicket(hotelId){
+export function bookHotelTicket(hotelId, setSuccessModal, setShowPaymentModal, setAddAdults, emailRef, phoneRef, confirmRef){
     const token = localStorage.getItem("userToken");
     const user = JSON.parse(localStorage.getItem("userDetails"))
     const userId = user.id;
@@ -23,6 +23,14 @@ export function bookHotelTicket(hotelId){
       return res.json();
     }).then((result)=>{
       console.log(result)
+      if(result.message == "Booking successful"){
+        setSuccessModal(true)
+        setShowPaymentModal(false)
+        setAddAdults([])
+        emailRef.current.value=''
+        phoneRef.current.value=''
+        confirmRef.current.checked = false
+      }
     }).catch((e)=>{
       console.log(e);
     })

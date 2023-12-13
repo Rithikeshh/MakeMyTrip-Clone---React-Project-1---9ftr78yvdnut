@@ -124,13 +124,13 @@
     background-color: #1065F5;
 }
 .profile-modal{
-    background:rgba(216, 216, 216, 1);
-    /* filter:blur(4px); */
+    width: 100%;
+    backdrop-filter: blur(20px);
     position: absolute;
-    top: 2.66rem;
+    top: 2.9rem;
     left: 0;
     padding: 0px 16px;
-    z-index: 1;
+    z-index: 10;
     border-radius: 0.25rem;
     display: flex;
     flex-direction: column;
@@ -138,14 +138,14 @@
             font-size: 1.1rem;
             line-height: 1.1rem;
             padding: 12px 0px;
-            color: #3f3f3f;
+            color: black;
             border: none;
             border-bottom: 2px solid rgb(192, 192, 192);
             cursor: pointer;
             background-color: inherit;
             text-align: left;
         }
-        >button:nth-child(3){
+        >button:last-child{
             border-bottom: none;
         }
     

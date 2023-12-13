@@ -1,7 +1,15 @@
-export function bookFlightTicket(flightId){
+export function bookFlightTicket(flightId, flightBookingState, nextDate, setSuccessModal, setShowPaymentModal, setAddedTravellers, setBookingDetailsSentTo, setAddress){
     const token = localStorage.getItem("userToken");
     const user = JSON.parse(localStorage.getItem("userDetails"))
     const userId = user.id;
+    let monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
+    const date = flightBookingState.travelDate.date;
+    const month = monthNames.indexOf(flightBookingState.travelDate.month);
+    const year = flightBookingState.travelDate.year;
+    const startDate = new Date(year, month, date)
+    const endDate = new Date(nextDate.year, nextDate.month, nextDate.date)
+    const formattedStartDate = startDate.toISOString();
+    const formattedEndDate = endDate.toISOString()
     const config = {
       method: "POST",
       body : JSON.stringify({
@@ -9,8 +17,8 @@ export function bookFlightTicket(flightId){
         "userId" : userId,
         "bookingDetails" : {
           "flightId":flightId,
-          "startDate":"2023-10-09T10:03:53",
-          "endDate" : "2023-10-09T10:05:53"
+          "startDate": formattedStartDate,
+          "endDate" : formattedEndDate
         }
       }),
       headers: {
@@ -23,6 +31,21 @@ export function bookFlightTicket(flightId){
       return res.json();
     }).then((result)=>{
       console.log(result)
+      if(result.message == "Booking successful"){
+        setSuccessModal(true)
+        setShowPaymentModal(false)
+        setAddedTravellers([])
+        setBookingDetailsSentTo({
+          number:"",
+          email:""
+        })
+        setAddress({
+          pincode:"",
+          state:"",
+          address:"",
+          checked: false
+        })
+      }
     }).catch((e)=>{
       console.log(e);
     })

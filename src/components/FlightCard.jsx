@@ -1,6 +1,7 @@
 import React from 'react'
-import { useNavigate } from 'react-router-dom'
+import { createSearchParams, useNavigate } from 'react-router-dom'
 import { airportAndCity } from '../utils/airportNames'
+import { useFlightBookingDetailsContext } from '../provider/FlightBookingDetailsProvider'
 
 const flightIcons = {
     '6E' :{img: "https://imgak.mmtcdn.com/flights/assets/media/dt/common/icons/6E.png?v=17", name: 'IndiGo'},
@@ -13,11 +14,32 @@ const flightIcons = {
 function FlightCard({flight}) {
 
     const navigate = useNavigate()
-   
+    const {flightBookingState} = useFlightBookingDetailsContext()
 
     function handleNavigation(){
-        navigate(`/flight/${flight._id}`,{target:'_blank'})
-        
+        navigate({
+            pathname: `/flight/${flight._id}`,
+            search: createSearchParams({
+                nextday: getNextDate()[0],
+                nextdate: getNextDate()[1],
+                nextmonth: getNextDate()[2],
+                nextyear: getNextDate()[3],
+                duration: getNextDate()[4],
+            }).toString()
+        })
+    }
+    let monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
+    function getNextDate(){
+        const timeParts = flight.departureTime.split(':');
+        const hours = parseInt(timeParts[0], 10);
+        const minutes = parseInt(timeParts[1], 10);
+        const addHour = parseInt(flight.duration)
+        const date = flightBookingState.travelDate.date
+        const month = monthNames.indexOf(flightBookingState.travelDate.month)
+        const year = flightBookingState.travelDate.year
+        const startDate = new Date(year, month, date, hours, minutes)
+        startDate.setHours(startDate.getHours() + addHour)
+        return [startDate.getDay(), startDate.getDate(), startDate.getMonth(), startDate.getFullYear(), addHour ];
     }
   return (
     <li className='flight-card'>

@@ -8,6 +8,8 @@ import PaymentModal from '../components/PaymentModal';
 import { useAuth } from '../provider/AuthProvider';
 import { useLoginModalContext } from '../provider/LoginModalProvider';
 import {  bookTrainTicket } from '../utils/bookTrain';
+import SuccessFullBookingModal from '../Modals/SuccessFullBookingModal';
+import { getMonth } from '../utils/dateFunctions';
 
 function RailwayBookingPage() {
     const {isLoggedIn} = useAuth()
@@ -20,6 +22,7 @@ function RailwayBookingPage() {
     const [coach, setCoach] = useState(null)
     const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
     const [showModal, setShowModal] = useState(false);
+    const [showSuccessFullModal, setShowSuccessFullModal] = useState(false);
     const [contactInfo, setContactInfo] = useState({
         email: '',
         phoneNumber: '',
@@ -63,7 +66,7 @@ function RailwayBookingPage() {
         
     }
     function bookTicket(){
-        bookTrainTicket(trainId)
+        bookTrainTicket(trainId, trainBookingState, {date:searchParams.get('nextdate'), month: searchParams.get('nextmonth'), year: searchParams.get('nextyear')} ,setShowSuccessFullModal, setShowPaymentModal, setContactInfo, setTravellers)
     }
   return (
     <div>
@@ -109,7 +112,7 @@ function RailwayBookingPage() {
                             </div>
                             <div>
                             <div>
-                                <h4>{train.arrivalTime}, <span style={{fontWeight:'400', color:'grey'}}>{trainBookingState.travelDate.date} {trainBookingState.travelDate.month}</span></h4>
+                                <h4>{train.arrivalTime}, <span style={{fontWeight:'400', color:'grey'}}>{searchParams.get('nextdate')} {getMonth(searchParams.get('nextmonth'))}</span></h4>
                             </div>
                             <div className='source-station'>
                                 <span>{train.destination}</span>
@@ -197,7 +200,7 @@ function RailwayBookingPage() {
                             </div>
                         </div>
                         <div className='contact-info-checkbox'>
-                            <input type="checkbox" onChange={(e)=>{
+                            <input type="checkbox" checked={contactInfo.checked} onChange={(e)=>{
                             setContactInfo(prev=>{
                                 return {...prev, checked: e.target.checked}
                             })
@@ -239,6 +242,7 @@ function RailwayBookingPage() {
             </div>  
         }
         {showModal && <UserDetailModalForTrain setTravellers={setTravellers} setShowModal={setShowModal}/>}
+        {showSuccessFullModal && <SuccessFullBookingModal setShowSuccessFullModal={setShowSuccessFullModal}/>}
     </div>
   )
 }

@@ -1,4 +1,4 @@
-import React, { useState, createContext, useContext } from 'react'
+import React, { useState, createContext, useContext, useEffect } from 'react'
 import {createPortal} from 'react-dom'
 import '../styles/LoginModal.css'
 import LoginModal from './Login&SignUpComponent/LoginModal'
@@ -16,8 +16,8 @@ function Profile() {
     const [isProfileModalVisible, setIsProfileModalVisible] = useState(false);
     const userDetails = JSON.parse(localStorage.getItem("userDetails"));
 
-    function handleModal(){
-
+    function handleModal(e){
+        e.stopPropagation()
         if(isLoggedIn){
             setIsProfileModalVisible(!isProfileModalVisible)
         }
@@ -25,7 +25,12 @@ function Profile() {
             setIsLoginModalVisible(!isLoginModalVisible)
         }
     }
-    
+    function hideModal(){
+        setIsProfileModalVisible(false)
+    }
+    useEffect(()=>{
+        document.body.addEventListener('click', hideModal)
+    },[])
   return (
     
         <li 
@@ -88,10 +93,12 @@ function ProfileModal({setIsProfileModalVisible}){
         navigate('/')
     };
     return(
-        <div className='profile-modal' onClick={(e)=>e.stopPropagation()}>
+        <div className='profile-modal'>
             
-            <button>Profile Setting</button> {/*Add profile setting later */}
-            <button>My Trips</button> {/*Add My trip section later */}
+            {/* <button>Profile Setting</button> Add profile setting later */}
+            <button onClick={()=>{
+                navigate('/mytrips')
+            }}>My Trips</button> {/*Add My trip section later */}
             <button onClick={logout}>Logout</button>
 
         </div>

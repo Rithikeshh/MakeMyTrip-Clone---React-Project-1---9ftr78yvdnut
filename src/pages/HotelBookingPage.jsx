@@ -7,6 +7,7 @@ import { useLoginModalContext } from '../provider/LoginModalProvider';
 import { useAuth } from '../provider/AuthProvider';
 import PaymentModal from '../components/PaymentModal';
 import { bookHotelTicket } from '../utils/bookHotel';
+import SuccessFullBookingModal from '../Modals/SuccessFullBookingModal';
 
 function HotelBookingPage() {
   const {isLoggedIn} = useAuth()
@@ -27,12 +28,11 @@ function HotelBookingPage() {
   const [travellerLimitExceed, setTravellerLimitExceed] = useState(false);
   const [errorMsg, setErrorMsg] = useState('');
   const [showPaymentModal, setShowPaymentModal] = useState(false)
+  const [showSuccessFullModal, setShowSuccessFullModal] = useState(false)
   const emailRef = useRef()
   const phoneRef = useRef()
   const confirmRef = useRef()
-  console.log("Room Id: ", roomId.current)
-  console.log(hotelId)
-  console.log("room", room);
+  
   useEffect(()=>{
     getHotel(hotelId, setHotel, setHotelName, setLoading, roomId, setRoom)
   },[])
@@ -94,7 +94,7 @@ function checkDetails(){
   }
 }
 function bookTicket(){
-  bookHotelTicket(hotelId)
+  bookHotelTicket(hotelId, setShowSuccessFullModal, setShowPaymentModal, setAddAdults, emailRef, phoneRef, confirmRef)
 }
   return (
     <div>
@@ -247,6 +247,7 @@ function bookTicket(){
         </div>
         
       }
+      {showSuccessFullModal && <SuccessFullBookingModal setShowSuccessFullModal={setShowSuccessFullModal}/>}
     </div>
   )
 }

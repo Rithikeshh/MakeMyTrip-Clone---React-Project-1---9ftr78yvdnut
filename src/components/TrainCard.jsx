@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useTrainBookingDetailsContext } from '../provider/TrainBookingDetailsProvider'
 import { useNavigate, createSearchParams } from 'react-router-dom'
 
@@ -6,15 +6,35 @@ function TrainCard({train, filters}) {
 
     const{trainBookingState} = useTrainBookingDetailsContext()
     const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
+    let monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
     const navigate = useNavigate();
    
 
+    function getNextDate(){
+        const timeParts = train.departureTime.split(':');
+        const hours = parseInt(timeParts[0], 10);
+        const minutes = parseInt(timeParts[1], 10);
+        const durationHourString = train.travelDuration.split(' ')[0];
+        const addHour = parseInt(durationHourString.substring(0, durationHourString.length))
+        const date = trainBookingState.travelDate.date
+        const month = monthNames.indexOf(trainBookingState.travelDate.month)
+        const year = trainBookingState.travelDate.year
+        const startDate = new Date(year, month, date, hours, minutes)
+        startDate.setHours(startDate.getHours() + addHour)
+        // const newDate = startDate.getDay()
+        return [startDate.getDay(), startDate.getDate(), startDate.getMonth(), startDate.getFullYear(), addHour, ];
+    }
     function handleNavigate(e, coach){
 
         navigate({
             pathname: `/railway/${train._id}`,
             search: createSearchParams({
-                coachId: coach._id
+                coachId: coach._id,
+                nextday: getNextDate()[0],
+                nextdate: getNextDate()[1],
+                nextmonth: getNextDate()[2],
+                nextyear: getNextDate()[3],
+                duration: getNextDate()[4],
             }).toString()
         })
         console.log(coach)
@@ -53,7 +73,7 @@ function TrainCard({train, filters}) {
             </div>
             <div>
             <div>
-                <h4>{train.arrivalTime}, {trainBookingState.travelDate.day.substring(0,3)}</h4>
+                <h4>{train.arrivalTime}, {days[getNextDate()[0]]}</h4>
             </div>
             <div className='source-station'>
                 <span>{train.destination}</span>

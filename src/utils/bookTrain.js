@@ -1,7 +1,20 @@
-export function bookTrainTicket(trainId){
+export function bookTrainTicket(trainId, trainBookingState, nextDate, setSuccessModal, setShowPaymentModal, setContactInfo, setTravellers){
     const token = localStorage.getItem("userToken");
     const user = JSON.parse(localStorage.getItem("userDetails"))
     const userId = user.id;
+    let monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
+    const date = trainBookingState.travelDate.date
+    const month = monthNames.indexOf(trainBookingState.travelDate.month)
+    const year = trainBookingState.travelDate.year
+    const startDate = new Date(year, month, date)
+    const endDate = new Date(nextDate.year, nextDate.month, nextDate.date)
+    const formattedStartDate = startDate.toISOString();
+    const formattedEndDate = endDate.toISOString()
+    // console.log('formattedStartDate', formattedStartDate)
+    // console.log('formattedEndDate', formattedEndDate)
+    // console.log('nextDate', nextDate)
+    // console.log('startDate', startDate)
+    // console.log('endDate', endDate)
     const config = {
       method: "POST",
       body : JSON.stringify({
@@ -9,8 +22,8 @@ export function bookTrainTicket(trainId){
         "userId" : userId,
         "bookingDetails" : {
           "trainId":trainId,
-          "startDate":"2023-10-09T10:03:53",
-          "endDate" : "2023-10-09T10:05:53"
+          "startDate": formattedStartDate,
+          "endDate" : formattedEndDate
         }
       }),
       headers: {
@@ -23,6 +36,16 @@ export function bookTrainTicket(trainId){
       return res.json();
     }).then((result)=>{
       console.log(result)
+      if(result.message == "Booking successful"){
+        setSuccessModal(true)
+        setShowPaymentModal(false)
+        setContactInfo({
+          email: '',
+          phoneNumber: '',
+          checked: false
+        })
+        setTravellers([])
+      }
     }).catch((e)=>{
       console.log(e);
     })
