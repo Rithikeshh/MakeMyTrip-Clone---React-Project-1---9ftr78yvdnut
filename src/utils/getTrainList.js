@@ -8,9 +8,7 @@ export default async function getTrainList(source, destination, day, setTrainLis
             projectID: "f104bi07c490"
         }
     }
-    console.log('source', source);
-    console.log('destination', destination);
-    console.log('day', day);
+    
     try{
         const resultForSuggestion = await axios.get(`https://academics.newtonschool.co/api/v1/bookingportals/train?search={"source":"${""}","destination":"${""}"}&day=${day}`,
             config
@@ -19,10 +17,9 @@ export default async function getTrainList(source, destination, day, setTrainLis
         const result = await axios.get(`https://academics.newtonschool.co/api/v1/bookingportals/train?search={"source":"${source}","destination":"${destination}"}&day=${day}`,
             config
         )
-        console.log(result.data.data.trains);
         setTrainList(result.data.data.trains);
     } catch(e){
-        console.log(e);
+        
         setTrainList([])
     }
     setTimeout(()=>{

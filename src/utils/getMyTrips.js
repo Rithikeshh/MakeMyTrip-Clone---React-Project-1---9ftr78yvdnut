@@ -12,7 +12,7 @@ export async function getMyTrips(setAllTrips){
     try {
         const response = await fetch('https://academics.newtonschool.co/api/v1/bookingportals/booking/', config);
         const result = await response.json()
-        console.log(result.data);
+        
         setAllTrips(result.data)
     } catch (error) {
         

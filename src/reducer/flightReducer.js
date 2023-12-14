@@ -17,7 +17,7 @@ export const flightBookingDetails = {
     }
 }
 export default function flightReducer(state, action){
-    console.log(action.payload);
+    
     switch(action.type){
 
         case 'flightFromCity':

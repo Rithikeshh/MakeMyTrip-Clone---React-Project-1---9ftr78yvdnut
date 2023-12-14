@@ -5,7 +5,6 @@ import { airportAndCity, cities, fromStations, toStations } from '../../utils/ai
 function LocationInputContainer({children, inputId, spanHeading, value, dispatch, type, modal}) {
   const [showModal, setShowModal] = useState(false);
   function setModalFalse(e){
-    console.log(e.target);
     setShowModal(false)
   }
   useEffect(()=>{

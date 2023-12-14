@@ -10,11 +10,7 @@ export function bookTrainTicket(trainId, trainBookingState, nextDate, setSuccess
     const endDate = new Date(nextDate.year, nextDate.month, nextDate.date)
     const formattedStartDate = startDate.toISOString();
     const formattedEndDate = endDate.toISOString()
-    // console.log('formattedStartDate', formattedStartDate)
-    // console.log('formattedEndDate', formattedEndDate)
-    // console.log('nextDate', nextDate)
-    // console.log('startDate', startDate)
-    // console.log('endDate', endDate)
+    
     const config = {
       method: "POST",
       body : JSON.stringify({
@@ -35,7 +31,7 @@ export function bookTrainTicket(trainId, trainBookingState, nextDate, setSuccess
     fetch('https://academics.newtonschool.co/api/v1/bookingportals/booking',config).then((res)=>{
       return res.json();
     }).then((result)=>{
-      console.log(result)
+     
       if(result.message == "Booking successful"){
         setSuccessModal(true)
         setShowPaymentModal(false)
@@ -47,6 +43,6 @@ export function bookTrainTicket(trainId, trainBookingState, nextDate, setSuccess
         setTravellers([])
       }
     }).catch((e)=>{
-      console.log(e);
+      
     })
   }

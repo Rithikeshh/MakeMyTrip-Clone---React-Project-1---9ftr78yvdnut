@@ -30,7 +30,7 @@ export function bookFlightTicket(flightId, flightBookingState, nextDate, setSucc
     fetch('https://academics.newtonschool.co/api/v1/bookingportals/booking',config).then((res)=>{
       return res.json();
     }).then((result)=>{
-      console.log(result)
+      
       if(result.message == "Booking successful"){
         setSuccessModal(true)
         setShowPaymentModal(false)
@@ -47,6 +47,6 @@ export function bookFlightTicket(flightId, flightBookingState, nextDate, setSucc
         })
       }
     }).catch((e)=>{
-      console.log(e);
+      
     })
   }

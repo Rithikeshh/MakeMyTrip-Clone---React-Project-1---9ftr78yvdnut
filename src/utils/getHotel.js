@@ -13,9 +13,8 @@ export default async function getHotel(id, setHotel, setName, setLoading, roomId
         config
       )
       let result = await response.json();
-      console.log(result.data);
+      
       setName(result.data.name)
-      // dispatch({type:'hotelLocation', payload:result.data.name})
       setHotel(result.data)
       if(roomId){
         setRoom((prev)=>{
@@ -27,7 +26,7 @@ export default async function getHotel(id, setHotel, setName, setLoading, roomId
       }
     }
     catch(error){
-      console.log('error', error)
+      
     }
     setLoading(false)
   }

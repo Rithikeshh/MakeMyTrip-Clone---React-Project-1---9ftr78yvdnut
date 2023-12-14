@@ -35,7 +35,7 @@ export function bookHotelTicket(hotelId, hotelBookingState, setSuccessModal, set
     fetch('https://academics.newtonschool.co/api/v1/bookingportals/booking',config).then((res)=>{
       return res.json();
     }).then((result)=>{
-      console.log(result)
+      
       if(result.message == "Booking successful"){
         setSuccessModal(true)
         setShowPaymentModal(false)
@@ -45,6 +45,6 @@ export function bookHotelTicket(hotelId, hotelBookingState, setSuccessModal, set
         confirmRef.current.checked = false
       }
     }).catch((e)=>{
-      console.log(e);
+      
     })
   }

@@ -13,10 +13,10 @@ export default async function getHotelList(setHotelList, city){
         config
       )
       let result = await response.json();
-      console.log(result);
+      
       setHotelList(result.data.hotels)
     }
     catch(error){
-      console.log('error', error)
+      
     }
   }

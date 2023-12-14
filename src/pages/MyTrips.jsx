@@ -48,7 +48,7 @@ function MyTrips() {
                                     return true
                                 }
                             }).map((item, index)=>(
-                                <Trips item={item}/>
+                                <Trips key={item._id} item={item}/>
                             ))}
                         </>
                         :
@@ -58,7 +58,7 @@ function MyTrips() {
                                     return true
                                 }
                             }).map((item, index)=>(
-                                <Trips item={item}/>
+                                <Trips key={item._id} item={item}/>
                             ))}
                         </>}
                     </ul>

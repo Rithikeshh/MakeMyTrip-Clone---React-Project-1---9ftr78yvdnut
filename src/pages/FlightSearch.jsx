@@ -20,12 +20,11 @@ const flightIcons = {
 function FlightSearch() {
   
   const {flightList} = useFlightListContext()
-  console.log(flightList);
   const{flightBookingState} = useFlightBookingDetailsContext()
   const flightSourceRef = useRef(flightBookingState.fromCity)
   const flightDestinationRef = useRef(flightBookingState.toCity)
   const [filteredFlights, setFilteredFlights] = useState([])
-  console.log(filteredFlights)
+
   const [filters, setFilters] = useState({
     flights: {
       '6E' : false, 'UK': false, 'AI': false, 'SG': false, 'G8': false
@@ -80,7 +79,6 @@ function FlightSearch() {
       else if(filters.sort.dsec){
         filteredFilghts.sort((a,b)=> b.ticketPrice - a.ticketPrice)
       }
-      console.log(filteredFilghts)
       setFilteredFlights(filteredFilghts)
   }
   useEffect(()=>{

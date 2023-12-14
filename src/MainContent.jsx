@@ -13,7 +13,6 @@ import HotelPageAds1 from './components/HotelPageAds';
 function MainContent() {
 
   const location = useLocation()
-  console.log(location);
 
   return (
     <>

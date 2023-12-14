@@ -153,7 +153,6 @@ function RailwayBookingPage() {
                             {travellers.map((traveller, index)=>(
                                 
                                 <div key={index}>
-                                    {console.log(traveller)}
                                     <span style={{textTransform:'capitalize'}}>{traveller.name} ({traveller.gender}), {traveller.age}</span>
                                     <button onClick={(e)=>{
                                         setTravellers(prev=>{
@@ -292,13 +291,13 @@ function UserDetailModalForTrain({setTravellers, setShowModal}){
                                 setShowGenderModal(!showGenderModal);
                             }}>
                                 <span>Gender</span>
-                                <input type="text" value={passenger.gender} name="" id=""/>
+                                <input readOnly type="text" value={passenger.gender} name="" id=""/>
                                 <span className='train-modal-dropdown'></span>
                                 {showGenderModal && <GenderModal setPassenger={setPassenger} />}
                             </div>
                             <div>
                                 <span>Nationality</span>
-                                <input type="text" value={'India'} disabled name="" id=""/>
+                                <input type="text" readOnly value={'India'} disabled name="" id=""/>
                                 
                             </div>
                         </div>

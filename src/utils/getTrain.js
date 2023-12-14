@@ -13,7 +13,7 @@ export default async function getTrain(id, setTrain, setLoading, coachId, setCoa
         config
       )
       let result = await response.json();
-      console.log(result.data);
+      
       setTrain(result.data)
       setCoach((prev)=>{
         const coach = result.data.coaches.find((element)=>{
@@ -23,7 +23,7 @@ export default async function getTrain(id, setTrain, setLoading, coachId, setCoa
       })
     }
     catch(error){
-      console.log('error', error)
+      
     }
     setLoading(false)
   }

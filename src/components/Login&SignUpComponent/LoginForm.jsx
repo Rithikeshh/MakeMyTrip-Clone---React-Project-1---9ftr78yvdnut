@@ -32,7 +32,6 @@ function LoginForm() {
                 {headers:{projectID: "f104bi07c490"}}
             )
             const result = response.data;
-            console.log("result", result);
             const token = result.token;
             if(token){
                 
@@ -50,7 +49,7 @@ function LoginForm() {
             }
 
         } catch(error){
-            console.log("Error: ", error)
+            
         }
     }
     function handleSubmit(e){

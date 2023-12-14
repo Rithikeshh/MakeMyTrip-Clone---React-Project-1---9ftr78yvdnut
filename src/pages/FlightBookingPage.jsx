@@ -52,7 +52,6 @@ function FlightBookingPage() {
     const [showPaymentModal, setShowPaymentModal] = useState(false)
     const [showSuccessFullModal, setShowSuccessFullModal] = useState(false)
 
-    console.log(addedTravellers);
     useEffect(()=>{
         document.addEventListener('click',()=>{
             setShowStateModal(false)
@@ -111,7 +110,6 @@ function FlightBookingPage() {
             }
         }
         for(const element of addedTravellers){
-            console.log(element);
             for(const property in element){
                 if(!element[property]){
                     showMsg();
@@ -130,7 +128,7 @@ function FlightBookingPage() {
     function bookTicket(){
         bookFlightTicket(flightId, flightBookingState , {date:searchParams.get('nextdate'), month: searchParams.get('nextmonth'), year: searchParams.get('nextyear')}, setShowSuccessFullModal, setShowPaymentModal, setAddedTravellers, setBookingDetailsSentTo, setAddress)
     }
-    console.log(address.state);
+    
   return (
     <div>
       <SearchNavbar/>
@@ -208,7 +206,7 @@ function FlightBookingPage() {
                         <div className='flightBookingPage-traveller-icon-container'>
                             <img style={{width:'28px'}} src="	https://imgak.mmtcdn.com/flights/assets/media/dt/rta_assets/traveller-placeholder2.png" alt="" />
                             <span>Traveller</span>
-                            {travellerLimitExceed && <span style={{fontSize:'10px'}}>You have already selected 2 ADULT. Remove before adding a new one.</span>}
+                            {travellerLimitExceed && <span style={{fontSize:'10px'}}>You have already selected {flightBookingState.travellers.adults + flightBookingState.travellers.children + flightBookingState.travellers.infant} ADULT. Remove before adding a new one.</span>}
                         </div>
                         <div>
                             <span>{addedTravellers.length}/{flightBookingState.travellers.adults + flightBookingState.travellers.children + flightBookingState.travellers.infant}</span>
@@ -241,7 +239,7 @@ function FlightBookingPage() {
                         <div>
                             <div>
                                 <span>Country Code</span>
-                                <input type="text" disabled value={'India(91)'}/>
+                                <input type="text" readOnly disabled value={'India(91)'}/>
                             </div>
                             <div>
                                 <span>Mobile No</span>
@@ -278,10 +276,10 @@ function FlightBookingPage() {
                         </div>
                         <div>
                             <span>State</span>
-                            <input type="text" placeholder='Your State' value={stateValue} onClick={(e)=>{
+                            <input type="text" readOnly placeholder='Your State'  onClick={(e)=>{
                                 e.stopPropagation();
                                 setShowStateModal(true)
-                            }}/>
+                            }} value={stateValue}/>
                             <span className={showStateModal ? 'dropdown-active': 'dropdown'}></span>
                             {showStateModal && <StateModal setStateValue={setStateValue} stateValue={stateValue} setAddress={setAddress}/>}
                         </div>
@@ -297,7 +295,7 @@ function FlightBookingPage() {
                     <div>
                         <input onChange={(e)=>{
                             setAddress(prev=>{
-                                console.log((e.target.checked));
+                               
                                 return {...prev, checked: e.target.checked}
                             })
                         }} type="checkbox" checked={address.checked} name="" id="confirm" />
@@ -456,7 +454,7 @@ function StateModal({setStateValue, stateValue, setAddress}){
                         })
                     }} 
                         key={index}
-                        className = {stateValue == state && 'state-modal-active-state'}
+                        className = {stateValue == state ? 'state-modal-active-state' : ''}
                     >{state}
                     </li>
                 ))}

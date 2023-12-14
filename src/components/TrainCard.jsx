@@ -37,7 +37,7 @@ function TrainCard({train, filters}) {
                 duration: getNextDate()[4],
             }).toString()
         })
-        console.log(coach)
+        
     }
   return (
     <div className='train-card'>

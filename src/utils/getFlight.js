@@ -13,11 +13,9 @@ export default async function getFlight(id, setFlight, setLoading){
         config
       )
       let result = await response.json();
-      console.log(result.data);
       setFlight(result.data)
     }
     catch(error){
-      console.log('error', error)
     }
     setLoading(false)
   }

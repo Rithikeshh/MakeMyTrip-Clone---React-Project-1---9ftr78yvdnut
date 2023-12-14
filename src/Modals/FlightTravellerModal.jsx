@@ -19,7 +19,6 @@ function FlightTravellerModal({setShowModal, value, dispatch , search}) {
       updateTravellers()
    },[adults, children, infant, active])
    function setModalFalse(e){
-      console.log(e.target);
       setShowModal(false)
     }
     useEffect(()=>{
