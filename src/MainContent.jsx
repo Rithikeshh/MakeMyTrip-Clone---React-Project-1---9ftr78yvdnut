@@ -1,16 +1,22 @@
 import React from 'react'
 import "./styles/MainContent.css";
-import { Routes, Route, Navigate, useParams } from "react-router-dom";
+import { Routes, Route, Navigate, useParams, useLocation } from "react-router-dom";
 import FlightsContent from './pages/FlightsContent';
 import HotelsContent from './pages/HotelsContent';
 import RailwaysContent from './pages/RailwaysContent';
 import Header from './components/Navbar/Header';
 import Navbar from './components/Navbar/Navbar';
+import FligthPageAds1, { FligthPageAds2 } from './components/FligthPageAds';
+import Footer from './components/Footer';
+import HotelPageAds1 from './components/HotelPageAds';
 
 function MainContent() {
 
+  const location = useLocation()
+  console.log(location);
 
   return (
+    <>
     <div className="container" >
       <Header/>
       <Navbar/>
@@ -22,14 +28,22 @@ function MainContent() {
           <Route path='flights' element={<FlightsContent/>}/>
           <Route path='hotels' element={<HotelsContent/>}/>
           <Route path='railways' element={<RailwaysContent/>}/>
-          <Route path="mytrips" element={<div>hi</div>}/>
           <Route path='*' element={<div>Page Not Found!!</div>}/>
         </Routes>
       </div>
     </div>
-    <div>alok</div>
+      <FligthPageAds1/>
+      {/* {location.pathname == '/flights' && <FligthPageAds1/>} */}
+      {/* {location.pathname == '/hotels' && <HotelPageAds1/>} */}
     </div>
+      <div>
+        <FligthPageAds2/>
+      </div>
+      <Footer/>
+    </>
   )
 }
 
 export default MainContent
+
+
