@@ -1,9 +1,10 @@
-import React from 'react'
+import React, { useRef, useState } from 'react'
 import TicketCheckboxContainer from '../components/MainContentsComponents/TicketCheckboxContainer';
 import LocationInputContainer from '../components/MainContentsComponents/LocationInputContainer';
 import { useTrainBookingDetailsContext } from '../provider/TrainBookingDetailsProvider';
 import CalendarInputContainer from '../components/MainContentsComponents/CalendarInputContainer';
 import { Link } from 'react-router-dom';
+import TrainClassModal from '../Modals/TrainClassModal';
 
 const checkboxForTickets = [
     { id: 1, name: "Book Train Tickets" },
@@ -59,15 +60,10 @@ function RailwaysContent() {
                 dispatch={dispatchTrainBookingState}
                 type={'trainTravelDate'}
             />
-            <div key={3}>
-                <label htmlFor='class' className='booking-inputBox'>
-                    <span className='dropdown'>Class</span>
-                    <div className='font20 lineHeight-36'>
-                        <span className='p-r-6 lineHeight-36 font30 strongBold-text'>{'All'}</span>
-                    </div>
-                    <span>{'All Class'}</span>
-                </label>
-            </div>
+            <TrainClassInput
+                value={trainBookingState}
+                dispatch={dispatchTrainBookingState}
+            />
         </section>
         <section>
             <p className='makeFlex make-justify-center'>
@@ -79,3 +75,23 @@ function RailwaysContent() {
 }
 
 export default RailwaysContent
+
+function TrainClassInput({value, dispatch}){
+
+    const [showModal, setShowModal] = useState(false)
+    const myElementRef = useRef(null)
+    return(
+        <div ref={myElementRef} onClick={(e)=>{
+            setShowModal(n=>!n)
+          }}>
+            <label htmlFor='class' className='booking-inputBox'>
+                <span className='dropdown'>Class</span>
+                <div className='font20 lineHeight-36'>
+                    <span className='p-r-6 lineHeight-36 font30 strongBold-text'>{value.ticketClass.head}</span>
+                </div>
+                <span>{value.ticketClass.text}</span>
+            </label>
+            {showModal && <TrainClassModal myElementRef={myElementRef} setShowModal={setShowModal} value={value} dispatch={dispatch}/>}
+        </div>
+    )
+}

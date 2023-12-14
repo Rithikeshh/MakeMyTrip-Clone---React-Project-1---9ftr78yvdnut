@@ -125,7 +125,7 @@
 }
 .profile-modal{
     width: 100%;
-    backdrop-filter: blur(20px);
+    backdrop-filter: blur(50px);
     position: absolute;
     top: 2.9rem;
     left: 0;

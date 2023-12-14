@@ -45,6 +45,11 @@ export default function trainReducer(state, action){
                 fromCity: state.toCity,
                 toCity: state.fromCity
             }
+        case 'updateClass' :
+            return{
+                ...state,
+                ticketClass: action.payload
+            }
         default:
             return {...state};
     }

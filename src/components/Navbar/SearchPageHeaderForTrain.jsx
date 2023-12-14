@@ -1,9 +1,10 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import SearchPageLocationInputContainer from '../SearchContentComponent/SearchPageLocationInputContainer';
 import { useTrainBookingDetailsContext } from '../../provider/TrainBookingDetailsProvider';
 import SearchPageCalendarInputContainer from '../SearchContentComponent/SearchPageCalendarInputContainer';
 import { useTrainListContext } from '../../provider/TrainListProvider';
 import getTrainList from '../../utils/getTrainList';
+import TrainClassModal from '../../Modals/TrainClassModal';
 
 function SearchPageHeaderForTrain({setLoading, setSuggestedTrainList}) {
   const {trainBookingState, dispatchTrainBookingState} = useTrainBookingDetailsContext()
@@ -47,15 +48,10 @@ function SearchPageHeaderForTrain({setLoading, setSuggestedTrainList}) {
                         dispatch={dispatchTrainBookingState}
                         type={'trainTravelDate'}
                     />
-                    <div className='searchPage-booking-input'>
-                        <label htmlFor='class' className='searchPage-booking-inputBox'>
-                            <span className='dropdown'>PASSENGERS & CLASS</span>
-                            <div>
-                                <span >{trainBookingState.travellers}{' Traveller, '}</span>
-                                <span>{'All Class'}</span>
-                            </div>
-                        </label>
-                    </div>
+                    <SearchPageTrainClassInput
+                        value={trainBookingState}
+                        dispatch={dispatchTrainBookingState}
+                    />
                 </section>
                 <section>
                     <p className='makeFlex make-justify-center'>
@@ -76,3 +72,23 @@ function SearchPageHeaderForTrain({setLoading, setSuggestedTrainList}) {
 }
 
 export default SearchPageHeaderForTrain
+
+function SearchPageTrainClassInput({value, dispatch}){
+    
+    const [showModal, setShowModal] = useState(false)
+    const myElementRef = useRef(null)
+    return(
+        <div ref={myElementRef} onClick={(e)=>{
+            setShowModal(n=>!n)
+          }} className='searchPage-booking-input'>
+            <label htmlFor='class' className='searchPage-booking-inputBox'>
+                <span className='dropdown'>PASSENGERS & CLASS</span>
+                <div>
+                    <span >{value.ticketClass.text}, </span>
+                    <span>{value.ticketClass.head}</span>
+                </div>
+            </label>
+            {showModal && <TrainClassModal myElementRef={myElementRef} setShowModal={setShowModal} value={value} dispatch={dispatch} search={true}/>}
+        </div>
+    )
+}

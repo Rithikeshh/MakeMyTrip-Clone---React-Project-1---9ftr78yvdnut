@@ -13,7 +13,7 @@ const checkboxForTickets = [
   { id: 2, name: "Round Trip" },
   { id: 3, name: "Multi City" },
 ]
-const paraText = 'Book International Flights'
+const paraText = 'Book Domestic Flights'
 function FlightsContent() {
 
   const [search, setSearch] = useSearchParams();
