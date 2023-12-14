@@ -39,6 +39,7 @@ function Navbar() {
                                 {item.name}
                             </span>
                         </NavLink>
+                        {index != 0 && index !=1 && index != 4 && <span className='upcoming'>UPCOMING</span>}
                     </li>
                 ))}
             </ul>

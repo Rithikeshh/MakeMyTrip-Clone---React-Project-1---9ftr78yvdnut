@@ -7,6 +7,7 @@
     border-radius: 12px;
     padding: 65px 30px 0px 30px;
     width: 1200px;
+    min-height: 200px;
     /* flex-grow: 1; */
 }
 .checkbox-ticket-active{

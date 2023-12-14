@@ -28,7 +28,7 @@ function SearchNavbar() {
                     {navbarElements.map((item, index)=>(
                         <li className='makeRelative' key={index}>
                             <Link 
-                                to={item.path+"s"} 
+                                to={`${(index == 0 || index == 1 || index == 4) ? item.path+"s" : "/"}`} 
                                 className={`${location.pathname.includes(item.path) ? "active":""} makeFlex column make-align-center headerIcons ${index != 0 && index != 1 && index !=4 && 'not-allowed'}`}
                             >
                                 <span className='headerIconWrapper'>
