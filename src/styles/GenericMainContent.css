@@ -1117,6 +1117,16 @@
         }
     }
 }
+.trainBookingPage-addTraveler{
+    color: #0084ff;
+    padding: 1rem;
+    font-weight: 600;
+    font-size: 15px;
+    border: none;
+    background-color: inherit;
+    display: inline-block;
+    cursor: pointer;
+}
 .user-detail-modal{
     position: fixed;
     top: 0;

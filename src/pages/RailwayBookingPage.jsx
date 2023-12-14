@@ -167,7 +167,7 @@ function RailwayBookingPage() {
                                 </div>
                             ))}
                             <div>
-                                <span onClick={()=>{
+                                <span className='trainBookingPage-addTraveler' onClick={()=>{
                                 setShowModal(true)
                             }}>
                                 + ADD TRAVELLER
