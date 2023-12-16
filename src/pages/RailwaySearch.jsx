@@ -56,7 +56,7 @@ function RailwaySearch() {
   return (
     <div>
       <SearchPageHeaderForTrain setLoading={setLoading} setSuggestedTrainList={setSuggestedTrainList}/>
-      {loading && <FlightLoader/>}
+      
       <div className='trainSearchPage-main-container'>
         <div className='trainSearchPage-filter-container'>
           <div className='flight-filters' style={{top:'80px'}}>
@@ -93,19 +93,24 @@ function RailwaySearch() {
           </div>
         </div>
         <div className='trainSearchPage-card-container'>
-              {trainList.map((train)=>(
-                <TrainCard key={train._id} train={train} filters={filters}/>
-              )) }
-              {
-                trainList.length == 0 && 
-                <div className='trainSearchPage-no-train-container'>
-                  <h3>No trains found for the given day.</h3>
-                </div>
+              {loading ? <FlightLoader/>
+                : 
+                <>
+                  {trainList.map((train)=>(
+                    <TrainCard key={train._id} train={train} filters={filters}/>
+                  )) }
+                  {
+                    trainList.length == 0 && 
+                    <div className='trainSearchPage-no-train-container'>
+                      <h3>No trains found for the given day.</h3>
+                    </div>
+                  }
+                  <h3 style={{color:'#0084ff'}}>Suggested Journey</h3>
+                  {suggestedTrainList.map((train)=>(
+                    <TrainCard key={train._id} train={train} filters={filters}/>
+                  )) }
+                </>
               }
-              <h3 style={{color:'#0084ff'}}>Suggested Journey</h3>
-              {suggestedTrainList.map((train)=>(
-                <TrainCard key={train._id} train={train} filters={filters}/>
-              )) }
         </div>
       </div>
     </div>

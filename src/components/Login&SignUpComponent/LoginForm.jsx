@@ -11,6 +11,7 @@ function LoginForm() {
         email:"",
         password:""
     })
+    const [error, setError] = useState("")
     const isButtonActive = useRef(false)
 
     if(userDetails.email && userDetails.password){
@@ -49,7 +50,10 @@ function LoginForm() {
             }
 
         } catch(error){
-            
+            setError(error.response.data.message)
+            setTimeout(()=>{
+                setError("");
+            },5000)
         }
     }
     function handleSubmit(e){
@@ -78,6 +82,7 @@ function LoginForm() {
             onChange={handleInputChange}
             value={userDetails.password}
         />
+        <span style={{color:'red', fontSize:'10px', fontWeight:"500"}}>{error}</span>
         <input className={`loginBtn ${isButtonActive.current && 'active-loginBtn'}`} disabled={!isButtonActive.current}   type="submit" value='CONTINUE'/>
     </form>
   )

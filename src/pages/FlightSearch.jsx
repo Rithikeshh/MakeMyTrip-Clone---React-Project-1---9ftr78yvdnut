@@ -224,8 +224,8 @@ function FlightSearch() {
           {loading  ? <FlightLoader/> :
           <>
           {
-            flightList.length == 0 ? 
-            <div style={{color:'white', textAlign:'center'}}>Oops No Hotel Found In This City!!</div> 
+            filteredFlights.length == 0 ? 
+            <div style={{color:'grey',display:"flex",alignItems:"center",justifyContent:"center" , height: "200px", backgroundColor:"inherit"}}>Oops No Flight Found!!</div> 
             :
             <ul className='flight-card-container'>
               

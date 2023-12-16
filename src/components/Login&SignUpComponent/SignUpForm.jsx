@@ -12,7 +12,7 @@ function SignUpForm() {
         email: "",
         password: ""
     };
-    
+    const [error, setError] = useState("")
     const [userDetails, setUserDetails] = useState(initialUserData);
     const isButtonActive = useRef(false)
     if(userDetails.name && userDetails.email && userDetails.password){
@@ -36,11 +36,8 @@ function SignUpForm() {
                 "https://academics.newtonschool.co/api/v1/bookingportals/signup",
                 config
             )
-            console.log(response);
             const result = await response.json();
-            console.log(result);
             const token = result.token
-            console.log(token)
             if(token){
                 
                 localStorage.setItem("userToken", token);
@@ -55,22 +52,22 @@ function SignUpForm() {
                 setIsLoginModalVisible(false)
                 setIsLoggedIn(true);
             }
+            else{
+                setError(result.message)
+                setTimeout(()=>{
+                    setError("");
+                },5000)
+            }
         } catch(error){
-            console.log("Error in creating user ", error)
+            setError("Internal Server Error")
+                setTimeout(()=>{
+                    setError("");
+                },5000)
         }
       }
       function handleInputChange(e){
         setUserDetails({...userDetails,[e.target.name]: e.target.value})
       }
-    //   useEffect(()=>{
-    //     if(userDetails.name && userDetails.email && userDetails.password){
-    //         setButtonActive(true)
-    //     }
-    //     else{
-    //         setButtonActive(false)
-    //     }
-    //   },[userDetails])
-
       function handleSubmit(e){
         e.preventDefault();
         createUser()
@@ -105,6 +102,7 @@ function SignUpForm() {
                 onChange={handleInputChange}
                 value={userDetails.password}
             />
+            <span style={{color:'red', fontSize:'10px', fontWeight:"500"}}>{error}</span>
             <input className={`loginBtn ${isButtonActive.current && 'active-loginBtn'}`} disabled={!isButtonActive.current} type="submit" value='CONTINUE'/>
         </form>
     )

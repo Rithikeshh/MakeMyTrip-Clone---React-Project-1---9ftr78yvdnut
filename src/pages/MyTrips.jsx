@@ -43,23 +43,39 @@ function MyTrips() {
                     <ul id="upcoming">
                         {activeValue == 0 ?
                         <>
-                            {allTrips.filter((item,index)=>{
-                                if(compareDate(item.start_date)){
-                                    return true
-                                }
-                            }).map((item, index)=>(
-                                <Trips key={item._id} item={item}/>
-                            ))}
+                            {
+                                allTrips.filter((item,index)=>{
+                                    if(compareDate(item.start_date)){
+                                        return true
+                                    }
+                                }).length == 0 ? <EmptyList/> 
+                                : 
+                                allTrips.filter((item,index)=>{
+                                    if(compareDate(item.start_date)){
+                                        return true
+                                    }
+                                }).map((item, index)=>(
+                                    <Trips key={item._id} item={item}/>
+                                ))
+                            }
                         </>
                         :
                         <>
-                            {allTrips.filter((item,index)=>{
-                                if(!compareDate(item.start_date)){
-                                    return true
-                                }
-                            }).map((item, index)=>(
-                                <Trips key={item._id} item={item}/>
-                            ))}
+                            {
+                                allTrips.filter((item,index)=>{
+                                    if(!compareDate(item.start_date)){
+                                        return true
+                                    }
+                                }).length == 0 ? <EmptyList/>
+                                :
+                                allTrips.filter((item,index)=>{
+                                    if(!compareDate(item.start_date)){
+                                        return true
+                                    }
+                                }).map((item, index)=>(
+                                    <Trips key={item._id} item={item}/>
+                                ))
+                            }
                         </>}
                     </ul>
                 </div>
