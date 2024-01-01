@@ -20,7 +20,7 @@ function Header() {
     }
   return (
     <div className='makeFlex make-justify-center'>
-        <div className='makeFlex make-align-center make-justify-space gap-140 padding-t-5 padding-b-50'>
+        <div className='responsive-header makeFlex make-align-center make-justify-space gap-140 padding-t-5 padding-b-50'>
             <div style={{cursor:'pointer'}} onClick={()=>navigate('/')}>
                 <img className='mainLogo' src={mmtLogo} />
             </div>

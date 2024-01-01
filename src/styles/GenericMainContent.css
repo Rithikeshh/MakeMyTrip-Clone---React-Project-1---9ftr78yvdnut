@@ -1788,14 +1788,15 @@
     .checkbox-ticket-container{
         flex-direction: column;
         align-items: flex-start;
+        gap: 8px;
         >div{
             width: 100%;
             >p{
-                white-space: nowrap;
                 overflow: hidden;
                 text-overflow: ellipsis;
             }
         }
+        
     }
     .booking-details-container{
         display: flex;
@@ -1832,6 +1833,15 @@
                 >div{
                     text-align: start;
                 }
+            }
+        }
+    }
+}
+@media only screen and (max-width: 650px) {
+    .checkbox-ticket-container{
+        >div:first-child{
+            >label:not(:first-child){
+                display: none;
             }
         }
     }

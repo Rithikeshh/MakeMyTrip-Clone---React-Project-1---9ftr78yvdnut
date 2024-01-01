@@ -18,12 +18,12 @@ function Navbar() {
     <div className='navbar-container makeFlex make-justify-center make-align-center'>
         <div className='navbarWrapper makeFlex make-justify-center make-align-center'>
         <nav className='bg-white navbar'>
-            <ul className=' makeFlex font12 headerIconsGap'>
+            <ul className='responsive-navbar makeFlex font12 headerIconsGap'>
                 {navbarElements.map((item, index)=>(
                     <li className='makeRelative' key={index}>
                         <NavLink to={item.path} className={({isActive})=>{
                             let classNames = 'makeFlex column make-align-center headerIcons'
-                            index == 7 && (classNames+=' min-w-75');
+                            index == 7 && (classNames+=' min-w-75 w-unset');
                             index != 0 && index !=1 && index != 4 && (classNames += ' not-allowed') 
                             location.pathname == '/' && index == 0 && (classNames+=' active');   
                             return isActive ? classNames+' active' : classNames

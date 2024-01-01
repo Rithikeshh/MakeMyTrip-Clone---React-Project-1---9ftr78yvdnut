@@ -11,7 +11,7 @@ a{
 }
 .container{
   background-image: url("../assets/images/gradient-bg.webp");
-  min-height: 81vh;
+  min-height: fit-content;
   background-size: cover;
   background-repeat: no-repeat;
   background-color: #f2f2f2;
@@ -418,5 +418,35 @@ input[type=number]::-webkit-outer-spin-button {
     position: relative;
     left: -10px;
     top: -16px;
+  }
+}
+
+
+
+@media screen and (max-width: 1200px){
+  .responsive-header{
+    width: 80%;
+    gap: 0;
+  }
+  .header-userLists{
+    >li:nth-child(1), li:nth-child(2), li:nth-child(5){
+      display: none;
+    }
+  }
+}
+@media screen and (max-width: 630px){
+  .responsive-header{
+    width: 100%;
+    padding-left: 12px;
+    padding-right: 12px;
+    gap: 0;
+  }
+}
+@media screen and (max-width: 585px) {
+  .responsive-header{
+    padding-bottom: 95px;
+  }
+  .userLoggedOut{
+    width: 140px;
   }
 }

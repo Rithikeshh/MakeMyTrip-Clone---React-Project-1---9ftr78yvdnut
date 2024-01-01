@@ -79,6 +79,7 @@
     margin-bottom: 1rem;
     display: flex;
     justify-content: space-between;
+    gap: 1rem;
 }
 .download--icons{
     background: url(https://imgak.mmtcdn.com/pwa_v3/pwa_mmt_ui_assets/app-sprite.webp) no-repeat;
@@ -162,5 +163,27 @@
         >p:last-child{
             font-size: 14px;
         }
+    }
+}
+@media screen and (max-width: 912px){
+    .flight--exploreMore-ad{
+        width: 100%;
+        overflow-x: scroll;
+    }
+    .flight--exploreMore-ad::-webkit-scrollbar {
+        width: 5px;
+        height: 3px;
+    }
+    .flight--exploreMore-ad::-webkit-scrollbar-thumb {
+        background: #d3d0d0;
+        border-radius: 10px;
+    }
+}
+@media screen and (max-width: 750px) {
+    .downloadApp-ad{
+        flex-direction: column;
+        padding: 1rem;
+        gap: 1rem;
+        align-items: center;
     }
 }
