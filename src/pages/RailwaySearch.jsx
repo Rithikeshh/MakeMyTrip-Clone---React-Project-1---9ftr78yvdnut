@@ -202,6 +202,9 @@ function FilterPortal({portalRef, filters, handleFIlters, setShowFilterPortal}){
                     Sleeper SL
                   </label>
                 </div>
+                <div onClick={()=>{
+                  setShowFilterPortal(false)
+                }} className='filter-apply-btn'>close</div>
               </div>
             </div>
           </div>

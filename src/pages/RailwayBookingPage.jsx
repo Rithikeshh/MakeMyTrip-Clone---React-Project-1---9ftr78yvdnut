@@ -207,6 +207,25 @@ function RailwayBookingPage() {
                             <label style={{paddingLeft:"4px", fontSize:"14px", cursor:"pointer"}} htmlFor="confirm">Confirm</label>
                         </div>
                     </div>
+                    <div className='trainBookingPage-fare-details-container responsive-trainBookingPage-fare-details-container'>
+                        <div onClick={handleBookNow}>
+                            <button>PAY & BOOK NOW</button>
+                        </div>
+                        <div>
+                            <div>
+                                <span>Base fare per adult</span>
+                                <span>₹{train.fare}</span>
+                            </div>
+                            <div>
+                                <span>Reservation charge</span>
+                                <span>₹20</span>
+                            </div>
+                        </div>
+                        <div>
+                            <span>Total Price per adult</span>
+                            <span>₹{train.fare+20}</span>
+                        </div>
+                    </div>
                     {/* <div>
                         <h3>Yout State</h3>
                     </div> */}

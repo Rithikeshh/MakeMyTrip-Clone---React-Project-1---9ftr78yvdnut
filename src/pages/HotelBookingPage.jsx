@@ -211,13 +211,38 @@ function bookTicket(){
                 <label htmlFor="confirm">Confirm</label>
               </div>
             </div>
-            {showPaymentModal && <PaymentModal totalPrice={room.costDetails.baseCost * diffDate * hotelBookingState.room + room.costDetails.taxesAndFees} callback={bookTicket}/>}
+            <div className='hotelBooking-price-details responsive-hotelBooking-price-details'>
+                <h4>Price Breakup</h4>
+                <div className='hotelBooking-room-price'>
+                  <div>
+                    <span>{hotelBookingState.room} {hotelBookingState.room > 1 ? 'Rooms' : 'Room'} x {diffDate} {diffDate > 1 ? 'Nights' : 'Night'}</span>
+                    <span>Base Price</span>
+                  </div>
+                  <div>
+                    <span>₹ {room.costDetails.baseCost * diffDate * hotelBookingState.room}</span>
+                  </div>
+                </div>
+                <div className='hotelBooking-room-tax'>
+                  <div>
+                    <span>Hotel Taxes</span>
+                    <span>₹ {room.costDetails.taxesAndFees}</span>
+                  </div>
+                </div>
+                <div className='hotelBooking-room-totalPrice'>
+                  <div>
+                    <span>Total Amount to be paid</span>
+                    <span>₹ {room.costDetails.baseCost * diffDate * hotelBookingState.room + room.costDetails.taxesAndFees}</span>
+                  </div>
+                </div>
+            </div>
             {!showPaymentModal && <div>
               <div className='hotelBooking-errorMsg'>{errorMsg}</div>
               <button onClick={checkDetails} className='hotelBooking-payNow-button'>
                 PAY NOW
               </button>
             </div>}
+            
+            {showPaymentModal && <PaymentModal totalPrice={room.costDetails.baseCost * diffDate * hotelBookingState.room + room.costDetails.taxesAndFees} callback={bookTicket}/>}
           </div>
           <div>
             <div className='non-scrollable'>

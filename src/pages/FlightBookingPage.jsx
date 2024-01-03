@@ -154,7 +154,7 @@ function FlightBookingPage() {
                                 <img style={{width:'28px', height:'28px'}} src={flightIcons[flight.flightID.slice(0,2)].img} alt="" />
                                 <span style={{fontWeight:'500'}}>{flightIcons[flight.flightID.slice(0,2)].name}</span>
                                 <span >{flight.flightID.slice(0,2) +" "+flight.flightID.slice(-3)}</span>
-                                <span style={{border:'1px solid grey', borderRadius:'12px', fontSize:'12px', fontWeight:'500', padding:'0 8px', color:'grey'}}>Airbus A320</span>
+                                <span style={{marginRight: '0.5rem', border:'1px solid grey', borderRadius:'12px', fontSize:'12px', fontWeight:'500', padding:'0 8px', color:'grey'}}>Airbus A320</span>
                             </div>
                             <div>
                                 <span>{flightBookingState.ticketClass}</span> {/*make dynamic*/}
@@ -300,6 +300,51 @@ function FlightBookingPage() {
                             })
                         }} type="checkbox" checked={address.checked} name="" id="confirm" />
                         <label style={{paddingLeft:"4px", fontSize:"14px", cursor:"pointer"}} htmlFor="confirm">Confirm</label>
+                    </div>
+                </div>
+                <div className='flightBookingPage-fareDetails responsive-flightBookingPage-fareDetails'>
+                    <h3>Fare Summary</h3>
+                    <div onClick={handleBaseFare}>
+                        <div>
+                            <div>
+                                {!showBaseFare ? 
+                                    <img className='flightBookingPage-addIcon' src="https://jsak.mmtcdn.com/flights/assets/media/ic_expand.68dc8068.png" alt="" />
+                                    :
+                                    <img className='flightBookingPage-addIcon' src="https://jsak.mmtcdn.com/flights/assets/media/ic_collapse.83c3e92a.png" alt=""/>
+                                }
+                                <span>Base Fare</span>
+                            </div>
+                            {!showBaseFare && 
+                                <div>₹ {(flightBookingState.travellers.adults + flightBookingState.travellers.children + flightBookingState.travellers.infant)*flight.ticketPrice}</div> 
+                            }{/**price depend on number of travellers */}
+                        </div>
+                        {showBaseFare && 
+                            <div>
+                                <span> Traveller(s) ({`${flightBookingState.travellers.adults + flightBookingState.travellers.children + flightBookingState.travellers.infant} X ₹ ${flight.ticketPrice}`})</span>
+                                <div>₹ {(flightBookingState.travellers.adults + flightBookingState.travellers.children + flightBookingState.travellers.infant)*flight.ticketPrice}</div>
+                            </div>
+                        }
+                    </div>
+                    <div onClick={handleTaxes}>
+                        <div>
+                            <div>
+                                {!showTaxes ? 
+                                    <img className='flightBookingPage-addIcon' src="https://jsak.mmtcdn.com/flights/assets/media/ic_expand.68dc8068.png" alt="" />
+                                    :
+                                    <img className='flightBookingPage-addIcon' src="https://jsak.mmtcdn.com/flights/assets/media/ic_collapse.83c3e92a.png" alt=""/>
+                                }
+                                <span>Taxes and Surcharges</span>
+                            </div>
+                            {!showTaxes &&<div>₹ {parseInt(((flightBookingState.travellers.adults + flightBookingState.travellers.children + flightBookingState.travellers.infant)*flight.ticketPrice*5)/100)}</div>} 
+                        </div>
+                        {showTaxes && <div>
+                            <span>Airline Taxes and Surcharges</span>
+                            <div>₹ {parseInt(((flightBookingState.travellers.adults + flightBookingState.travellers.children + flightBookingState.travellers.infant)*flight.ticketPrice*5)/100)}</div>
+                        </div>}
+                    </div>
+                    <div>
+                        <span>Total Amount</span>
+                        <span>₹ {(flightBookingState.travellers.adults + flightBookingState.travellers.children + flightBookingState.travellers.infant)*flight.ticketPrice + parseInt(((flightBookingState.travellers.adults + flightBookingState.travellers.children + flightBookingState.travellers.infant)*flight.ticketPrice*5)/100)}</span>
                     </div>
                 </div>
                 <div>
