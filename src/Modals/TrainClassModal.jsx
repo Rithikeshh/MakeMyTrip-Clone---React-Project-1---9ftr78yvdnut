@@ -17,19 +17,19 @@ function TrainClassModal({myElementRef, setShowModal, value, dispatch , search})
     <div  onClick={(e)=>{
      }} className={`train-class-hidden ${search ? 'train-class-hidden-search' : ''}`}>
       <ul>
-        <li onClick={(e)=>{
+        <li className='stations' onClick={(e)=>{
             dispatch({type: 'updateClass', payload:{head: 'All', text: 'All Class'}})
         }}>All Class</li>
-        <li onClick={(e)=>{
+        <li className='stations' onClick={(e)=>{
             dispatch({type: 'updateClass', payload:{head: 'SL', text: 'Sleeper Class'}})
         }}>Sleeper Class</li>
-        <li onClick={(e)=>{
+        <li className='stations' onClick={(e)=>{
             dispatch({type: 'updateClass', payload:{head: '3A', text: 'Third AC'}})
         }}>Third AC</li>
-        <li onClick={(e)=>{
+        <li className='stations' onClick={(e)=>{
             dispatch({type: 'updateClass', payload:{head: '2A', text: 'Second AC'}})
         }}>Second AC</li>
-        <li onClick={(e)=>{
+        <li className='stations' onClick={(e)=>{
             dispatch({type: 'updateClass', payload:{head: '1A', text: 'First AC'}})
         }}>First AC</li>
       </ul>

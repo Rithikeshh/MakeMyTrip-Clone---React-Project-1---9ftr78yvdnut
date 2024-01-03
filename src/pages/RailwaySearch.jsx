@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
 import SearchPageHeaderForTrain from '../components/Navbar/SearchPageHeaderForTrain'
@@ -6,6 +6,7 @@ import FlightLoader from '../components/FlightLoader'
 import { useTrainListContext } from '../provider/TrainListProvider';
 import { useTrainBookingDetailsContext } from '../provider/TrainBookingDetailsProvider';
 import TrainCard from '../components/TrainCard';
+import { createPortal } from 'react-dom';
 
 function RailwaySearch() {
   
@@ -53,6 +54,22 @@ function RailwaySearch() {
     const key = e.target.name;
     setFilters({...filters,[key]:!filters[key]})
   }
+  const [showFilterPortal, setShowFilterPortal] = useState(false)
+  function handlePortalOnResize(){
+
+      if (window.innerWidth > 810){
+          setShowFilterPortal(false)
+      }
+  }
+  const portalRef = useRef()
+  useEffect(()=>{
+    document.body.style.backgroundColor = '#E5EEF4'
+    window.addEventListener('resize', handlePortalOnResize)
+    return ()=>{
+      document.body.style.backgroundColor = ''
+      window.removeEventListener('resize', handlePortalOnResize)
+    }
+  },[])
   return (
     <div>
       <SearchPageHeaderForTrain setLoading={setLoading} setSuggestedTrainList={setSuggestedTrainList}/>
@@ -96,6 +113,17 @@ function RailwaySearch() {
               {loading ? <FlightLoader/>
                 : 
                 <>
+                  <div onClick={()=>{
+                    setShowFilterPortal(n=>!n)
+                  }} ref={portalRef} className='train-filter-btn'>Filters</div>
+                  {showFilterPortal && 
+                    <FilterPortal
+                      portalRef={portalRef}
+                      handleFIlters={handleFIlters}
+                      setShowFilterPortal={setShowFilterPortal}
+                      filters={filters}
+                    />
+                  }
                   {trainList.map((train)=>(
                     <TrainCard key={train._id} train={train} filters={filters}/>
                   )) }
@@ -118,3 +146,69 @@ function RailwaySearch() {
 }
 
 export default RailwaySearch
+
+function FilterPortal({portalRef, filters, handleFIlters, setShowFilterPortal}){
+
+  const myElementRef = useRef()
+  function handlePortal(e){
+    
+    if(!portalRef.current?.contains(e.target) && !myElementRef.current?.contains(e.target) && e.target.type !== 'checkbox'){
+      setShowFilterPortal(false);
+    }
+  }
+  useEffect(()=>{
+    document.body.addEventListener('click', handlePortal)
+    return ()=>{
+      document.body.removeEventListener('click', handlePortal)
+    }
+  },[])
+
+  return(
+    <>
+      {
+        createPortal(
+          <div onClick={(e)=>{
+            e.stopPropagation()
+          }} ref={myElementRef} className='show-filter-portal-container'>
+            <div className='show-filter-portal-flight'>
+              <div  className='flight-filters' style={{top:'80px'}}>
+                <div className='flight-popularFilter'>
+                  <h4>Quick Filters</h4>
+                  <label htmlFor="ac">
+                    <input onChange={handleFIlters} checked={filters['AC']} name='AC' type="checkbox" id='ac'/>
+                    AC
+                  </label>
+                  <label htmlFor="available">
+                    <input type="checkbox" id='available'/>
+                    Available
+                  </label>
+                </div>
+                <div className='flight-popularFilter'>
+                  <h4>Journey Class Filters</h4>
+                  <label htmlFor="1-ac">
+                    <input onChange={handleFIlters} checked={filters['1A']} name='1A' type="checkbox" id='1-ac'/>
+                    1st Class AC
+                  </label>
+                  <label htmlFor="2-ac">
+                    <input onChange={handleFIlters} checked={filters['2A']} name='2A' type="checkbox" id='2-ac'/>
+                    2 Tier AC
+                  </label>
+                  <label htmlFor="3-ac">
+                    <input onChange={handleFIlters} checked={filters['3A']} name='3A' type="checkbox" id='3-ac'/>
+                    3 Tier AC
+                  </label>
+                  <label htmlFor="sleeper">
+                    <input onChange={handleFIlters} checked={filters['SL']} name='SL' type="checkbox" id='sleeper' />
+                    Sleeper SL
+                  </label>
+                </div>
+              </div>
+            </div>
+          </div>
+          ,
+          document.body
+        )
+      }
+    </>
+  )
+}

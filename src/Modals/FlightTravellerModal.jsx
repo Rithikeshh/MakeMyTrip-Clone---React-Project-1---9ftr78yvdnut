@@ -22,9 +22,9 @@ function FlightTravellerModal({setShowModal, value, dispatch , search}) {
       setShowModal(false)
     }
     useEffect(()=>{
-      document.body.addEventListener('click', setModalFalse)
+      document.addEventListener('click', setModalFalse)
       return ()=>{
-        document.body.removeEventListener('click',setModalFalse);
+        document.removeEventListener('click',setModalFalse);
       }
     },[])
   return (

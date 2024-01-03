@@ -9,6 +9,7 @@ import { useFlightListContext } from '../provider/FlightListProvider'
 import { useFlightBookingDetailsContext } from '../provider/FlightBookingDetailsProvider'
 import FlightCard from '../components/FlightCard'
 import FlightLoader from '../components/FlightLoader'
+import { createPortal } from 'react-dom'
 
 const flightIcons = {
   '6E' :{img: "https://imgak.mmtcdn.com/flights/assets/media/dt/common/icons/6E.png?v=17", name: 'IndiGo'},
@@ -39,12 +40,22 @@ function FlightSearch() {
       'before6Am' : false, '6AmTo12Pm': false, '12PmTo6Pm': false, 'after6Pm': false
     }
   })
-
+  
   const [loading, setLoading] = useState(true)
+  const [showFilterPortal, setShowFilterPortal] = useState(false)
+  function handlePortalOnResize(){
+
+      if (window.innerWidth > 810){
+          setShowFilterPortal(false)
+      }
+  }
+  const portalRef = useRef()
   useEffect(()=>{
     document.body.style.backgroundColor = '#E5EEF4'
+    window.addEventListener('resize', handlePortalOnResize)
     return ()=>{
       document.body.style.backgroundColor = ''
+      window.removeEventListener('resize', handlePortalOnResize)
     }
   },[])
   function handleFilter(){
@@ -105,7 +116,7 @@ function FlightSearch() {
       <SearchPageHeaderForFlight flightSourceRef={flightSourceRef} flightDestinationRef={flightDestinationRef} setLoading={setLoading}/>
       <div className='flightList-container'>
         
-        <div>
+        <div className='show-filter'>
           <div className='flight-filters'>
             <div className='flight-popularFilter'>
               <h4>Popular Filters</h4>
@@ -194,6 +205,20 @@ function FlightSearch() {
         </div>
         <div>
           <div className='bold-text font24' style={{color:'#fff'}}>Flights from {flightSourceRef.current} to {flightDestinationRef.current}</div>
+          <div onClick={()=>{
+            setShowFilterPortal(n=>!n)
+            
+          }} ref={portalRef} className='filght-filter-btn'>Filters
+          {showFilterPortal && <FilterPortal
+           handleFlightID={handleFlightID} 
+           handleStops={handleStops}
+           handleSorting={handleSorting}
+           filters={filters}
+           setShowFilterPortal={setShowFilterPortal}
+           flightSourceRef={flightSourceRef}
+           portalRef={portalRef}
+           />}
+          </div>
           <div className='flight-add-bar'>
             <div className='makeFlex'>
               <img src="https://imgak.mmtcdn.com/flights/assets/media/dt/listing/amex.png" alt="" />
@@ -238,8 +263,124 @@ function FlightSearch() {
           }</>}
         </div>
       </div>
+      
     </div>
   )
 }
 
 export default FlightSearch
+
+function FilterPortal({portalRef, setShowFilterPortal, handleFlightID, handleSorting, handleStops, filters, flightSourceRef}){
+
+  const myElementRef = useRef()
+  function handlePortal(e){
+    
+    if(!portalRef.current?.contains(e.target) && !myElementRef.current?.contains(e.target) && e.target.type !== 'checkbox'){
+      setShowFilterPortal(false);
+    }
+  }
+  useEffect(()=>{
+    document.body.addEventListener('click', handlePortal)
+    return ()=>{
+      document.body.removeEventListener('click', handlePortal)
+    }
+  },[])
+  return(
+    createPortal(
+      <div onClick={(e)=>{
+        e.stopPropagation()
+      }} ref={myElementRef} className='show-filter-portal-container'>
+      <div className='show-filter-portal-flight'>
+          <div onClick={(e)=>e.stopPropagation} className='flight-filters'>
+            <div className='flight-popularFilter'>
+              <h4>Popular Filters</h4>
+              <label htmlFor="non-stop">
+                <input onChange={handleStops} name='0' checked={filters.stops['0']} id='non-stop' type="checkbox" />
+                Non Stop
+              </label>
+              <label htmlFor="indigo">
+                <input onChange={handleFlightID} id='indigo' checked={filters.flights['6E']} name='6E' type="checkbox" />
+                <img src={flightIcons['6E'].img} alt="" />
+                IndiGo
+              </label>
+              <label htmlFor="vistara">
+                <input onChange={handleFlightID} id='vistara' checked={filters.flights['UK']} name='UK' type="checkbox" />
+                <img src={flightIcons['UK'].img} alt="" />
+                Vistara
+              </label>
+              <label htmlFor="airindia">
+                <input onChange={handleFlightID} id='airindia' checked={filters.flights['AI']} name='AI' type="checkbox" />
+                <img src={flightIcons['AI'].img} alt="" />
+                Air India
+              </label>
+            </div>
+            <div className='flight-popularFilter'>
+              <h4>Sort By Price</h4>
+              <label htmlFor="asec">
+                <input onChange={handleSorting} name='asec' checked={filters.sort.asec} id='asec' type="checkbox" />
+                Low to High
+              </label><label htmlFor="dsec">
+                <input onChange={handleSorting} name='dsec' checked={filters.sort.dsec} id='dsec' type="checkbox" />
+                High to Low
+              </label>
+            </div>
+            <div className='flight-popularFilter'>
+              <h4>Stops From {flightSourceRef.current}</h4>
+              <label htmlFor="non-stop">
+                <input onChange={handleStops} name='0' checked={filters.stops['0']} id='non-stop' type="checkbox" />
+                Non Stop
+              </label>
+              <label htmlFor="1-stop">
+                <input onChange={handleStops} name='1' checked={filters.stops['1']} id='1-stop' type="checkbox" />
+                1 Stop
+              </label>
+              <label htmlFor="2-stop">
+                <input onChange={handleStops} name='2' checked={filters.stops['2']} id='2-stop' type="checkbox" />
+                2 Stop
+              </label>
+            </div>
+            <div className='flight-popularFilter'>
+              <h4>Airlines</h4>
+              <label htmlFor="indigo">
+                <input onChange={handleFlightID} id='indigo' checked={filters.flights['6E']} name='6E' type="checkbox" />
+                <img src={flightIcons['6E'].img} alt="" />
+                IndiGo
+              </label>
+              <label htmlFor="vistara">
+                <input onChange={handleFlightID} id='vistara' checked={filters.flights['UK']} name='UK' type="checkbox" />
+                <img src={flightIcons['UK'].img} alt="" />
+                Vistara
+              </label>
+              <label htmlFor="airindia">
+                <input onChange={handleFlightID} id='airindia' checked={filters.flights['AI']} name='AI' type="checkbox" />
+                <img src={flightIcons['AI'].img} alt="" />
+                Air India
+              </label>
+              <label htmlFor="spicejet">
+                <input onChange={handleFlightID} id='spicejet' checked={filters.flights['SG']} name='SG' type="checkbox" />
+                <img src={flightIcons['SG'].img} alt="" />
+                Spice Jet
+              </label>
+              <label htmlFor="gofirst">
+                <input onChange={handleFlightID} id='gofirst' checked={filters.flights['G8']} name='G8' type="checkbox" />
+                <img src={flightIcons['G8'].img} alt="" />
+                Go First
+              </label>
+            </div>
+            {/* <div className='flight-departureFilter'>
+              <h4>Departure From {flightSourceRef.current}</h4>
+              <div>
+                <img src="https://imgak.mmtcdn.com/flights/assets/media/dt/listing/left-filters/morning_active.png?v=1" alt="" />
+                <img src="https://imgak.mmtcdn.com/flights/assets/media/dt/listing/left-filters/morning_inactive.png?v=1" alt="" />
+              </div>
+            </div> */}
+            <div onClick={()=>{
+              setShowFilterPortal(false)
+            }} className='filter-apply-btn'>close</div>
+          </div>
+        </div>
+        </div>,
+        document.body
+    )
+  )
+}

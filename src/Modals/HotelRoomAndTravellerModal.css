@@ -11,6 +11,7 @@
     background: white;
     width: 100%;
     min-width: 200px;
+    max-width: 200px;
 }
 .hotel-passenger-hidden-search{
     left: 0;

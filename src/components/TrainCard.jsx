@@ -22,7 +22,7 @@ function TrainCard({train, filters}) {
         const startDate = new Date(year, month, date, hours, minutes)
         startDate.setHours(startDate.getHours() + addHour)
         // const newDate = startDate.getDay()
-        return [startDate.getDay(), startDate.getDate(), startDate.getMonth(), startDate.getFullYear(), addHour, ];
+        return [startDate.getDay(), startDate.getDate(), startDate.getMonth(), startDate.getFullYear(), addHour];
     }
     function handleNavigate(e, coach){
 

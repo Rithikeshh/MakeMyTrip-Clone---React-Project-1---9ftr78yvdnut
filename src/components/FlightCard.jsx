@@ -41,8 +41,13 @@ function FlightCard({flight}) {
         startDate.setHours(startDate.getHours() + addHour)
         return [startDate.getDay(), startDate.getDate(), startDate.getMonth(), startDate.getFullYear(), addHour ];
     }
+    function book(){
+        if(window.innerWidth <= 470){
+            handleNavigation()
+        }
+    }
   return (
-    <li className='flight-card'>
+    <li className='flight-card' onClick={book}>
         <div>
             <div className='flightIcon-container'>
                 <img className='flightIcon' src={flightIcons[flight.flightID.slice(0,2)].img} alt="" />

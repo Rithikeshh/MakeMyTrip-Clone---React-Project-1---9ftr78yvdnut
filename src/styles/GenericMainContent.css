@@ -1735,12 +1735,46 @@
         flex-grow: 1;
     }
 }
-
-
-
-
-
-
+.filght-filter-btn{
+    display: none;
+}
+.show-filter-portal-container{
+    position: fixed;
+    width: 255px;
+    height: 100vh;
+    top: 0;
+    z-index: 1000;
+    /* overflow-y: scroll; */
+    background-color: #fff;
+    >div{
+        height: 100vh;
+        >div{
+            height: 100vh;
+            overflow-y: scroll;
+        }
+    }
+}   
+.filter-apply-btn{
+    background-color: #0084ff;
+    color: #fff;
+    font-weight: 500;
+    text-align: center;
+    padding: 8px;
+    border-radius: 0.3rem;
+    cursor: pointer;
+}
+.non-scrollable{
+    overflow-y: hidden;
+}
+.hotel-sortAndFilter-btn{
+    display: none;
+}
+.responsive-sort-bar{
+    display: unset;
+}
+.train-filter-btn{
+    display: none;
+}
 
 
 
@@ -1760,30 +1794,84 @@
         justify-content: flex-start;
     }
 }
-
-
-@media only screen and (max-width: 700px){
-    .hotels-filter-bar{
-        >ul{
-            flex-direction: column;
-            gap: 0.7rem;
-            margin: 0 2rem;
-            border: 1px solid grey;
-            padding: 4px;
-            border-radius: 0.25rem;
-            >li{
-                width: fit-content;
-            }
-            >.active span:after{
-                background: none;
-                
-            }
-            >.active{
-                color: #0084ff;
+@media only screen and (max-width: 1080px){
+    .flightList-container{
+        padding-left: 16px;
+        padding-right: 16px;
+    }
+}
+@media only screen and (max-width: 930px){
+    .flightList-container{
+        >div:first-child{
+            min-width: 225px;   
+        }
+    }
+}
+@media only screen and (max-width: 810px){
+    .flightList-container{
+        >div:first-child{
+            display: none;
+        }
+    }
+    .filght-filter-btn{
+        display: block;
+        background-color: #fff;
+        margin: 12px 0;
+        padding: 8px;
+        text-align: center;
+        cursor: pointer;
+        font-size: 18px;
+        font-weight: 500;
+        color: rgb(0 0 0/.7);
+    }
+    .trainSearchPage-filter-container {
+        display: none;
+    }
+    .trainSearchPage-main-container{
+        padding-top: 1rem;
+    }
+    .train-filter-btn{
+        display: block;
+        background-color: rgb(0 0 0/.1);
+        border-radius: 0.3rem;
+        margin: 12px 0;
+        padding: 8px;
+        text-align: center;
+        cursor: pointer;
+        font-size: 18px;
+        font-weight: 500;
+        color: rgb(0 0 0/.7);
+    }
+}
+@media only screen and (max-width: 550px){
+    .flight-card-container{
+        > .flight-card{
+            >div:nth-child(1) {
+                display: grid;
+                grid-template-columns: repeat(4,auto);
+                grid-template-rows: auto;
+                row-gap: 16px;
+                >div:first-child{
+                    grid-column-start: 1;
+                    grid-column-end: 5;
+                }
             }
         }
     }
 }
+@media only screen and (max-width: 470px){
+    
+    .flight-card-container
+        > .flight-card{
+        cursor: pointer;
+        > div:nth-child(1)
+        > div:nth-child(5)
+        >div:nth-child(2) {
+            display: none;
+        }
+    }
+}
+
 @media only screen and (max-width:940px) {
     .checkbox-ticket-container{
         flex-direction: column;
@@ -1825,6 +1913,9 @@
 
         >.hotel-card{
             flex-direction: column;
+            >img{
+                width: 100%;
+            }
             >section{
                 border-left: none;
                 border-top: 1px solid grey;
@@ -1837,6 +1928,56 @@
         }
     }
 }
+@media only screen and (max-width: 705px) {
+    .hotels-filter-bar{
+        display: none;
+    }
+    .hotel-searchPage-list-container
+    >div:first-child {
+        display: none;
+    }
+    .hotel-sortAndFilter-btn{
+        display: flex;
+        justify-content: space-between;
+        background-color: rgb(0 0 0/.1);
+        color: rgb(0 0 0/.7);
+        border-radius: 0.3rem;
+        padding: 0.8rem;
+        >span{
+            flex-grow: 1;
+            text-align: center;
+            font-weight: 500;
+            cursor: pointer;
+        }
+        >span:first-child{
+            border-right: 1px solid rgb(0 0 0/.3);
+        }
+    }
+    .responsive-sort-bar{
+        display: block;
+        overflow-y: scroll;
+        >ul{
+            flex-direction: column;
+            gap: 1rem;
+            margin: 0 1rem;
+            padding: 4px;
+            border-radius: 0.25rem;
+            >li{
+                width: fit-content;
+            }
+            >.active span:after{
+                background: none;
+                
+            }
+            >.active{
+                color: #0084ff;
+            }
+        }
+    }
+    .hotel-searchPage-list-container{
+        padding: 1rem;
+    }
+}
 @media only screen and (max-width: 650px) {
     .checkbox-ticket-container{
         >div:first-child{
@@ -1844,5 +1985,20 @@
                 display: none;
             }
         }
+    }
+    .trainSearchPage-main-container{
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
+    .train-details {
+        display: grid;
+        grid-template-columns: repeat(3, auto);
+        grid-template-rows: auto;
+        row-gap: 16px;
+        >div:first-child{
+            grid-column-start: 1;
+            grid-column-end: 4;
+        }
+        
     }
 }

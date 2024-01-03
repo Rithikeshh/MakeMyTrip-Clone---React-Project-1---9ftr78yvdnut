@@ -20,11 +20,11 @@ function SearchNavbar() {
   return (
     <div className='searchPage-navbar'>
       <section className='makeFlex'>
-            <div style={{cursor:'pointer', marginRight:"2rem"}} onClick={()=>navigate('/')}>
+            <div className='mainLogo-container' onClick={()=>navigate('/')}>
                 <img className='mainLogo' src={'//imgak.mmtcdn.com/pwa_v3/pwa_hotel_assets/header/logo@2x.png'} />
             </div>
-            <nav >
-                <ul className=' makeFlex font12 headerIconsGap'>
+            <nav className='makeFlex make-align-center'>
+                <ul className='responsive-search-navbar makeFlex font12 headerIconsGap'>
                     {navbarElements.map((item, index)=>(
                         <li className='makeRelative' key={index}>
                             <Link 

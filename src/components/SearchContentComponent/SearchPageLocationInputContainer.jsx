@@ -4,14 +4,18 @@ import { airportAndCity, cities, fromStations, toStations } from '../../utils/ai
 
 function SearchPageLocationInputContainer({children, inputId, spanHeading, value, dispatch, type, modal}) {
   const [showModal, setShowModal] = useState(false);
+  function closeModal(){
+    setShowModal(false)
+  }
   useEffect(()=>{
-    document.body.addEventListener('click', (e)=>{
-      setShowModal(false)
-    })
+    document.addEventListener('click', closeModal)
+    return ()=>{
+      document.removeEventListener('click', closeModal)
+    }
   },[])
   return (
     <div onClick={(e)=>{e.stopPropagation()}} className='searchPage-booking-input'>
-        <label  htmlFor={inputId} className='searchPage-booking-inputBox'>
+        <label htmlFor={inputId} className='searchPage-booking-inputBox'>
             <span>{spanHeading}</span>
             <input onClick={()=>{
               setShowModal(n=>!n)
@@ -43,15 +47,15 @@ function FlightsLocationModal({dispatch, type, setShowModal, spanHeading}){
         {
           airport.map((city, index)=>{
             return(
-              <li key={index} onClick={()=>{
+              <li className='airports' key={index} onClick={()=>{
                 dispatch({type:type, payload: airportAndCity[city].city})
                 setShowModal(false)
               }}>
-                <div>
-                <span>{city}</span>
+                <div className='airports'>
+                <span className='airports'>{city}</span>
                 </div>
-                <div>
-                <span>{airportAndCity[city].city}</span>
+                <div className='airports'>
+                <span className='airports'>{airportAndCity[city].city}</span>
                 </div>
               </li>
             )
@@ -78,11 +82,11 @@ function TrainsLocationModal({dispatch, type, setShowModal, spanHeading}){
                 dispatch({type:type, payload: station})
                 setShowModal(false)
               }}>
-                <div>
+                <div className='stations'>
                 {/* <span>{city}</span> */}
                 </div>
-                <div style={{marginLeft:'0rem'}}>
-                <span>{station}</span>
+                <div className='stations' style={{marginLeft:'0rem'}}>
+                <span className='stations'>{station}</span>
                 </div>
               </li>
             )
@@ -104,15 +108,15 @@ export function HotelsLocationModal({dispatch, type, setShowModal, spanHeading})
         {
           citiesArr.map((city, index)=>{
             return(
-              <li key={index} onClick={()=>{
+              <li className='cities' key={index} onClick={()=>{
                 dispatch({type:type, payload: city})
                 setShowModal(false)
               }}>
-                <div>
+                <div className='cities'>
                 {/* <span>{city}</span> */}
                 </div>
-                <div style={{marginLeft:'0rem'}}>
-                <span>{city}</span>
+                <div className='cities' style={{marginLeft:'0rem'}}>
+                <span className='cities'>{city}</span>
                 </div>
               </li>
             )
