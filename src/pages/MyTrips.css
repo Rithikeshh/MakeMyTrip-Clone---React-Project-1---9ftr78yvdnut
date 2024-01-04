@@ -201,3 +201,43 @@
         color: #454545;
     }
 }
+
+@media only screen and (max-width: 1090px){
+    .mytrips-history-container{
+        width: 80%;
+    }
+}
+@media only screen and (max-width: 830px){
+    .mytrips-container{
+        padding: 0 1rem;
+    }
+    .mytrips-history-container{
+        width: 100%;
+    }
+}
+@media only screen and (max-width: 660px){
+    .bookings {
+       
+        display: grid;
+        grid-template-columns: repeat(4, auto);
+        grid-template-rows: auto;
+        row-gap: 1rem;
+        
+        >div:first-child{
+            grid-column-start: 1;
+            grid-column-end: 5;
+        }
+    }
+}
+@media only screen and (max-width: 590px){
+    .bookings {
+       
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .myTrips-empty{
+        flex-direction: column;
+        align-items: flex-start;
+    }
+}

@@ -33,7 +33,7 @@
     position: absolute;
     right: 8%;
     top: 30%;
-    height: 100%;
+    height: 92%;
     
 }
 .fix-book-hotel-non-scrollable{
@@ -208,11 +208,17 @@
     display: flex;
     justify-content: space-between;
     >div{
-        width: 100%;
+        /* width: 100%; */
         padding: 1rem;
     }
     >div:not(:last-child){
         border-right: 1px solid grey;
+    }
+    >div:last-child{
+        min-width: 300px;
+    }
+    >div:first-child{
+        flex-grow: 1;
     }
 }
 .singleHotel-card-heading{
@@ -430,9 +436,63 @@
     font-size: 14px;
     margin-top: 0.3rem;
 }
+.responsive-fix-hotel{
+    display: none;
+}
 
-
-
+@media only screen and (max-width: 1140px) {
+    .singleHotel-card-container{
+        width: 100%;
+        padding: 0 1rem;
+    }
+    .singleHotel-location{
+        width: 100%;
+        padding: 0 1rem;
+    }
+    .singleHotel-amenities{
+        width: 100%;
+        padding: 0 1rem;
+    }
+    .sinigleHotel-propertyRules{
+        width: 100%;
+        padding: 0 1rem;
+    }
+    .singleHotel-review-container{
+        width: 100%;
+        padding: 0 1rem;
+        padding-top: 1rem;
+    }
+    .rating{
+        width: 58%;
+    }
+}
+@media only screen and (max-width: 835px) {
+    .singleHotel-card{
+        flex-direction: column;
+        >div:not(:last-child) {
+            border-right: none;
+        }
+    }
+    .fix-book-hotel{
+        display: none;
+    }
+    .rating{
+        width: 100%;
+    }
+    .responsive-fix-hotel-container{
+        padding: 0 1rem;
+        margin-top: 1rem;
+    }
+    .responsive-fix-hotel{
+        display: block;
+        position: unset;
+        width: 100%;
+        >img{
+            aspect-ratio: 4/2;
+            height: auto;
+        }
+    }
+}
 
 
 

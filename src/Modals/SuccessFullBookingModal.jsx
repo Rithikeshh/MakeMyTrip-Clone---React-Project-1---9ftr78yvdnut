@@ -17,7 +17,7 @@ function SuccessFullBookingModal({setShowSuccessFullModal}) {
                 <Link className ="success-navlink" to="/mytrips">
                     <div className ="success-button">GO TO YOUR TRIPS</div>
                 </Link>
-                <p>To view your travelling information, visit <strong>my trips</strong> in your profile section or simply click the above link to view your trips.</p>
+                <p style={{padding: "0 1rem", textAlign: "center"}}>To view your travelling information, visit <strong>my trips</strong> in your profile section or simply click the above link to view your trips.</p>
             </div>
         </div>,document.body)}
     </>

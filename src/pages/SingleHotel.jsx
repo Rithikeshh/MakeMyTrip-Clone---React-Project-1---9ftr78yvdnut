@@ -8,6 +8,7 @@ import { useHotelsListContext } from '../provider/HotelsListProvider';
 import getHotel from '../utils/getHotel';
 import './SingleHotel.css'
 import { SearchPageTravellerAndRoomInput } from '../components/Navbar/SearchPageHeaderForHotel';
+import { createPortal } from 'react-dom';
  
  function SingleHotel() {
     const {hotelId} = useParams()
@@ -22,14 +23,36 @@ import { SearchPageTravellerAndRoomInput } from '../components/Navbar/SearchPage
     const stopMoveCarouselRef = useRef();
     const startMoveCarouselRef = useRef()
 
+    const [portal, setPortal] = useState(false)
+    const [showPortal, setShowPortal] = useState(false)
+    const portalRef = useRef()
+
+    
+
+    function handlePortalOnResize(){
+
+      if(window.innerWidth <= 895){
+        setPortal(true)
+      }
+      else{
+        setPortal(false)
+        setShowPortal(false)
+      }
+    }
+    
     useEffect(()=>{
       getHotel(hotelId, sethotel, setHotelName, setLoading)
       moveCarousel();
-      
+      window.addEventListener('resize', handlePortalOnResize)
+      if(window.innerWidth <= 895){
+          setPortal(true)
+        }
       return ()=>{
         clearInterval(stopMoveCarouselRef.current)
+        window.removeEventListener('resize', handlePortalOnResize)
       }
     },[])
+
     function moveCarousel(){
       stopMoveCarouselRef.current =setInterval(()=>{
         scrollRight()
@@ -77,22 +100,23 @@ import { SearchPageTravellerAndRoomInput } from '../components/Navbar/SearchPage
      <div>
        <SearchNavbar/>
        <div className='searchPage-header-container'>
-       <div className='makeFlex'>
+       {!portal ? <div className='makeFlex'>
         <section className='searchPage-booking-details-container'>
             
-            <div className='searchPage-booking-input'>
+            {/* <div className='searchPage-booking-input'>
                 <label  htmlFor='location' className='searchPage-booking-inputBox'>
                     <span>{'City, Area Or Property'}</span>
                     <input type="text" id={'location'} onChange={(e)=>setHotelName(e.target.value)} value={hotelName}/> 
                 </label>
-            </div>
-            {/* <SearchPageLocationInputContainer
+            </div> */}
+            <SearchPageLocationInputContainer
             inputId={'location'} 
             spanHeading={'City, Area Or Property'}
-            value={hotelBookingState.city}
+            value={hotelName}
             dispatch={dispatchHotelBookingState}
             type={'hotelLocation'}
-            /> */}
+            modal={'hotel'}
+            />
             <SearchPageCalendarInputContainer
             labelFor={'checkIn'}
             spanHeading={'Check-In'}
@@ -137,7 +161,24 @@ import { SearchPageTravellerAndRoomInput } from '../components/Navbar/SearchPage
             <Link><span>{hotelName}</span></Link>
           </div>
         </div>
+        :
+        <div ref={portalRef} className='responsive-search-bar'>
+            <div>
+                <p>{hotelName}, {hotelBookingState.city}, India</p>
+                <p>{hotelBookingState.checkIn.date} {hotelBookingState.checkIn.month} - {hotelBookingState.checkOut.date} {hotelBookingState.checkOut.month}, {hotelBookingState.room} Room(s), {hotelBookingState.adults} Adult(s)</p>
+            </div>
+            <div onClick={()=>{
+                setShowPortal(true)
+            }}>
+                <img src="https://imgak.mmtcdn.com/flights/assets/media/mobile/common/xhdpi/edit_icon.png" alt="" />
+                <span>Edit</span>
+            </div>
+        
+        </div>
+        }
       </div>
+      {showPortal && <SearchPortal portalRef={portalRef} setShowPortal={setShowPortal} />}
+      
       {loading ? 
         <div>Loading...</div> :
         <>
@@ -203,6 +244,28 @@ import { SearchPageTravellerAndRoomInput } from '../components/Navbar/SearchPage
                 window.scrollBy({top:rect.top-100, left:0, behavior: "smooth"})
               }}>View On Map</span>
             </div>
+        </div>
+        <div className='responsive-fix-hotel-container'>
+          <div className='fix-book-hotel-non-scrollable responsive-fix-hotel'>
+            <img src={hotel.images[0]} alt="" />
+            <h3>Recommended room</h3>
+            <div className='fix-book-hotel-room-details'>
+              <div>
+                <span><span>Room 1: </span>{hotel.rooms[0].roomType}</span>
+                <span><span>Bed : </span>{hotel.rooms[0].bedDetail}</span>
+              </div>
+              <div>
+                <span>Price per night </span>
+                <span>₹ {hotel.rooms[0].costDetails.baseCost}</span>
+                <span>+₹ {hotel.rooms[0].costDetails.taxesAndFees} taxes & fees</span>
+              </div>
+            </div>
+            <div className='fix-book-hotel-bookNow'>
+              <button onClick={(e)=>{
+                handleNavigate(e, hotel.rooms[0])
+              }}>Book Now</button>
+            </div>
+          </div>
         </div>
         <div className='singleHotel-about'>
           <h1>About {hotelName}</h1>
@@ -368,3 +431,78 @@ const reviewArr = [
   {heading: 'A stay that was value for money', rate: '5.0', by: 'by Subodh Goel . Solo Traveller . Nov 27, 2023', review: "Very comfortable stay and services offered also were upto the standards. Great hospitality with great team."},
   {heading: 'Good infrastructure with average services', rate: '4.0', by: 'by Sanjan Das . Solo Traveller . Nov 26, 2023', review: "Hotel has a grand appearance. Rooms are old. Few years later it might turn into a heritage hotel. Found the staff little rude, specifically the in house dining staff."},
 ]
+
+function SearchPortal({ portalRef, setShowPortal}){
+
+  const {hotelBookingState, dispatchHotelBookingState} = useHotelBookingDetailsContext()
+  
+  const myElementRef = useRef()
+
+  function handlePortal(e){
+      if(!portalRef.current?.contains(e.target) && !myElementRef.current?.contains(e.target) && !e.target.classList.contains('cities')){
+          setShowPortal(false);
+      }
+  }
+  useEffect(()=>{
+      document.body.addEventListener('click', handlePortal)
+      return ()=>{
+      document.body.removeEventListener('click', handlePortal)
+      }
+  },[])
+  return(
+      <>
+          {
+              createPortal(
+                  <div ref={myElementRef} className='search-bar-portal-flight'>
+                      <section className='searchPage-booking-details-container'>
+                          <SearchPageLocationInputContainer
+                          inputId={'location'} 
+                          spanHeading={'City, Area Or Property'}
+                          value={hotelBookingState.city}
+                          dispatch={dispatchHotelBookingState}
+                          type={'hotelLocation'}
+                          modal={'hotel'}
+                          />
+                          <SearchPageCalendarInputContainer
+                          labelFor={'checkIn'}
+                          spanHeading={'Check-In'}
+                          value={hotelBookingState.checkIn}
+                          dispatch={dispatchHotelBookingState}
+                          type={'hotleCheckIn'}
+                          />
+                          <SearchPageCalendarInputContainer
+                          labelFor={'checkOut'}
+                          spanHeading={'Check-Out'}
+                          value={hotelBookingState.checkOut}
+                          dispatch={dispatchHotelBookingState}
+                          type={'hotleCheckOut'}
+                          />
+                          <SearchPageTravellerAndRoomInput
+                              value={hotelBookingState}
+                              dispatch={dispatchHotelBookingState}
+                          />
+                      </section>
+                      {/* <section>
+                          <p className='makeFlex make-justify-center'>
+                              <button onClick={()=>{
+                                  getHotelList(setHotelList ,hotelBookingState.city)
+                                  setShowPortal(false)
+                                  hotelCityRef.current = hotelBookingState.city
+                              }} className='primaryBtn widgetSearchBtn bold-text' >SEARCH</button>
+                          </p>
+                      </section> */}
+                      <section>
+                        <p className='makeFlex make-justify-center'>
+                            <button onClick={()=>{
+                                // dispatchHotelBookingState({type:'hotelLocation', payload: hotelName})
+                                navigate('/hotel/search')
+                            }} className='primaryBtn widgetSearchBtn bold-text' to="/hotel/search">SEARCH</button>
+                        </p>
+                      </section>
+                  </div>,
+                  document.body
+              )
+          }
+      </>
+  )
+}
