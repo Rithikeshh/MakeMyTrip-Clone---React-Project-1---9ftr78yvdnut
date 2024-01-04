@@ -26,6 +26,7 @@
     overflow-y: hidden;
     >.carousel-picture{
         scroll-snap-align: start;
+        position: relative;
         >img{
             object-fit: cover;
             overflow: hidden;
@@ -47,6 +48,7 @@
     width: 70%;
     padding: 1rem 0.8rem;
     color: #fff;
+    text-align: center;
 }
 .login-form-container{
     background-color: #fff;
@@ -148,5 +150,21 @@
         >button:last-child{
             border-bottom: none;
         }
+    
+}
+@media only screen and (max-width: 880px) {
+    .carousel-image-container{
+        display: none;
+    }
+    .login-modal{
+        height: 70%;
+        padding: 0 1rem;
+    }
+    
+}
+@media only screen and (max-width: 550px) {
+    .login-form-container {
+        width: fit-content;
+    }
     
 }
