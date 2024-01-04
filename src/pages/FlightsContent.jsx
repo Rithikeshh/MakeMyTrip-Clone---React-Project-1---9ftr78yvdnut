@@ -13,6 +13,12 @@ const checkboxForTickets = [
   { id: 2, name: "Round Trip" },
   { id: 3, name: "Multi City" },
 ]
+const arr = [
+  {name:'Regular', text: ''},
+  {name:'Armed Forces', text: "Applicable for serving and retired personnel of Armed Forces and Paramilitary Forces, their recognised dependants like spouses and children, and war widows. It is mandatory to show a valid ID or dependant card at the airport, without which boarding might be denied."},
+  {name:'Student', text: "Only students above 12 years of age are eligible for special fares and/or additional baggage allowances. Carrying valid student ID cards and student visas (where applicable) is mandatory, else the passenger may be denied boarding or asked to pay for extra baggage."},
+  {name:'Senior Citizen', text: "Only senior citizens above the age of 60 years can avail this special fare. It is mandatory to produce proof of Date of Birth at the airport, without which prevailing fares will be charged."},
+]
 const paraText = 'Book Domestic Flights'
 function FlightsContent() {
 
@@ -86,11 +92,10 @@ function FlightsContent() {
                Select A <br/> Fare Type:
              </span>
              <ul className='specialFareNew'>
-               {/* Edit Details */}
-               <FareItems/>  
-               <FareItems/> 
-               <FareItems/> 
-               <FareItems/> 
+               
+               {arr.map((item, index)=>(
+                <FareItems key={index} name={item.name} text={item.text} index={index}/>
+               ))}
              </ul>
            </div>
            <div className='recentSearchGrid margin-l-10 makeFlex make-align-center make-justify-center'>
@@ -126,16 +131,17 @@ function FlightsContent() {
     </div>
   )
 }
-function FareItems(){
+
+function FareItems({name, text, index}){
   return(
-    <li className='font12 wrapFilter '>
-      <p>{"Regular"}<br/>{"Fares"}</p>
+    <li style={{cursor: "not-allowed"}} className={`font12 wrapFilter ${index == 0 ? 'activeItem' : ''}`}>
+      <p>{name}<br/>{"Fares"}</p>
       <div className='specialFareTooltip whiteText'>
         <p className="font12 bold-text margin-b-5">
-          {"Armed Forces Fares"}
+          {`${name} Fares`}
         </p>
         <p className='font11'>
-          Applicable for serving and retired personnel of Armed Forces and Paramilitary Forces, their recognised dependants like spouses and children, and war widows. It is mandatory to show a valid ID or dependant card at the airport, without which boarding might be denied.
+          {text}
         </p>
       </div>
     </li>

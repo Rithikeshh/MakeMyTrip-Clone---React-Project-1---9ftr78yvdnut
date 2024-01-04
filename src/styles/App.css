@@ -434,6 +434,13 @@ input[type=number]::-webkit-outer-spin-button {
     }
   }
 }
+@media screen and (max-width: 940px){
+  .flight-booking-fare{
+    >div:first-child{
+      display: none;
+    }
+  }
+}
 @media screen and (max-width: 630px){
   .responsive-header{
     width: 100%;

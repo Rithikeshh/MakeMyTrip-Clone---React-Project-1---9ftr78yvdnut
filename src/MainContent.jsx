@@ -9,6 +9,7 @@ import Navbar from './components/Navbar/Navbar';
 import FligthPageAds1, { FligthPageAds2 } from './components/FligthPageAds';
 import Footer from './components/Footer';
 import HotelPageAds1 from './components/HotelPageAds';
+import PageNotFound from './pages/PageNotFound';
 
 function MainContent() {
 
@@ -27,7 +28,7 @@ function MainContent() {
           <Route path='flights' element={<FlightsContent/>}/>
           <Route path='hotels' element={<HotelsContent/>}/>
           <Route path='railways' element={<RailwaysContent/>}/>
-          <Route path='*' element={<div>Page Not Found!!</div>}/>
+          <Route path='*' element={<PageNotFound/>}/>
         </Routes>
       </div>
     </div>
