@@ -26,7 +26,7 @@ function Header() {
             </div>
             <div>
                 <ul className="header-userLists makeFlex">
-                <li key={0} className="header-userList-item makeFlex makeCenter">
+                <li style={{cursor: "not-allowed"}} key={0} className="header-userList-item makeFlex makeCenter">
                     <span className="headerOfferIcon-container">
                     <span className="headerOfferIcon-text">%</span>
                     <span className="headerOfferIcon-logo chSprite"></span>
@@ -36,7 +36,7 @@ function Header() {
                     <p className="font10 margin-y-3 grayText ">Explore great deals & offers</p>
                     </div>
                 </li>
-                <li key={1} className="header-userList-item makeFlex makeCenter">
+                <li style={{cursor: "not-allowed"}} key={1} className="header-userList-item makeFlex makeCenter">
                     <span className="myBizIcon landingSprite"></span>
                     <div className="margin-r-5">
                     <p className="font16 whiteText bold-text">Introducing myBiz</p>

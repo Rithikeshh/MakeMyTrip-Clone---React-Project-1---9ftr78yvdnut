@@ -1945,7 +1945,7 @@
             border: none;
             border-top: 1px solid #e7e7e7;
         }
-        >div:last-child{
+        >div:nth-child(5){
             display: none;
         }
     }
