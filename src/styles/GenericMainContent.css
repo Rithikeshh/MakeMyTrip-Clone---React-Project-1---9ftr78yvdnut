@@ -37,6 +37,11 @@
     >div:not(:first-child){
         border-left: 1px solid #e7e7e7;
     }
+    >div:last-child:hover{
+        >label{
+            cursor: not-allowed;
+        }
+    }
 }
 .booking-inputBox{
     padding: 10px 16px;
@@ -1940,6 +1945,9 @@
             border: none;
             border-top: 1px solid #e7e7e7;
         }
+        >div:last-child{
+            display: none;
+        }
     }
     .trainBookingPage-bookingDetails-container
     >div:last-child {
@@ -2059,8 +2067,6 @@
 @media only screen and (max-width: 602px){
     .flightBookingPage-userNameAndGender-input-container{
         flex-direction: column;
-    }
-    .flightBookingPage-userNameAndGender-input-container{
         >div {
             width: 100%;
         }
