@@ -2,7 +2,6 @@ import React, { useEffect, useRef, useState } from 'react'
 import SearchPageLocationInputContainer from '../SearchContentComponent/SearchPageLocationInputContainer'
 import SearchPageCalendarInputContainer from '../SearchContentComponent/SearchPageCalendarInputContainer'
 import { useHotelBookingDetailsContext } from '../../provider/HotelBookingDetailsProvider'
-import { Link } from 'react-router-dom'
 import getHotelList from '../../utils/getHotelList'
 import { useHotelsListContext } from '../../provider/HotelsListProvider'
 import HotelRoomAndTravellerModal from '../../Modals/HotelRoomAndTravellerModal'
@@ -205,6 +204,7 @@ function SearchPortal({hotelCityRef, portalRef, setShowPortal}){
         <>
             {
                 createPortal(
+                    <div style={{position: "fixed", zIndex: '1000', width: '100vw', height: '100vh', backdropFilter: "blur(5px)", left: '0', top: '0'}}>
                     <div ref={myElementRef} className='search-bar-portal-flight'>
                         <section className='searchPage-booking-details-container'>
                             <SearchPageLocationInputContainer
@@ -243,6 +243,7 @@ function SearchPortal({hotelCityRef, portalRef, setShowPortal}){
                                 }} className='primaryBtn widgetSearchBtn bold-text' >SEARCH</button>
                             </p>
                         </section>
+                    </div>
                     </div>,
                     document.body
                 )
@@ -271,6 +272,7 @@ function SortPortal({portalSortRef, setShowSortPortal,handlePriceLowestFirst, ha
         <>
             {
                 createPortal(
+                    <div style={{position: "fixed", zIndex: '1000', width: '100vw', height: '100vh', backdropFilter: "blur(5px)", left: '0', top: '0'}}>
                     <div onClick={(e)=>{
                         e.stopPropagation()
                     }} ref={myElementRef} className='show-filter-portal-container'>
@@ -294,6 +296,7 @@ function SortPortal({portalSortRef, setShowSortPortal,handlePriceLowestFirst, ha
                         }} className='filter-apply-btn'>close</div>
                         </ul>
              
+                    </div>
                     </div>
                     </div>,
                     document.body

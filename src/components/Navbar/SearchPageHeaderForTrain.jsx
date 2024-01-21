@@ -161,6 +161,7 @@ function SearchPortal({portalRef, setShowPortal, setLoading, setSuggestedTrainLi
         <>
             {
                 createPortal(
+                    <div style={{position: "fixed", zIndex: '1000', width: '100vw', height: '100vh', backdropFilter: "blur(5px)", left: '0', top: '0'}}>
                     <div ref={myElementRef} className='search-bar-portal-flight'>
                         <section className='searchPage-booking-details-container'>
                             <SearchPageLocationInputContainer
@@ -207,12 +208,11 @@ function SearchPortal({portalRef, setShowPortal, setLoading, setSuggestedTrainLi
                                     const destination = trainBookingState.toCity;
                                     setLoading(true)
                                     getTrainList(source, destination, trainBookingState.travelDate.day.substring(0,3), setTrainList, setLoading, setSuggestedTrainList)
-                                    // flightSourceRef.current = flightBookingState.fromCity
-                                    // flightDestinationRef.current = flightBookingState.toCity
                                     setShowPortal(false)
                                 }} className='primaryBtn widgetSearchBtn bold-text'>SEARCH</button>
                             </p>
                         </section>
+                    </div>
                     </div>,
                     document.body
                 )

@@ -165,68 +165,6 @@ function TravellersInputContainer({value, dispatch}){
     </div>
   )
 }
-// function InputBoxForCity({
-//   mainDivClass,
-//   inputId, 
-//   spanText, 
-//   paraTitle, 
-//   inputValue
-// }){
-//   return(
-//     <div className={`flight-inputBox ${mainDivClass}`}>
-//       <label htmlFor={inputId}>
-//         <span className='label-input margin-b-10'>{spanText}</span>
-//         <input 
-//           className='flight-inputField lineHeight-36 font30 strongBold-text' 
-//           type="text" 
-//           id={inputId}
-//           value={inputValue}
-//         />
-//         <p 
-//           className='makeRelative'
-//           title={paraTitle}
-//         >
-//           <span title='' className='airPortName'>
-//             {paraTitle}
-//           </span>
-//         </p>
-//       </label>
-//     </div>
-//   )
-// }
 
-// function InputBoxForDateAndTravel({
-//   mainDivClass,
-//   inputId,
-//   spanText,
-//   lastParaValue
-// }){
-//   return(
-//     <div className={`flight-inputBox ${mainDivClass}`}>
-//       <label htmlFor={inputId}>
-//         <span className='label-input margin-b-10'>{spanText}</span>
-//         <p className='lineHeight-36 font20'>
-//           {mainDivClass == 'dates' && 
-//           <><span className='font30 strongBold-text'>
-//             {"1"}{" "}
-//           </span>
-//           <span>{"Nov"}</span>
-//           <span className="shortYear">
-//             {"23"}
-//           </span></>}
-//           {mainDivClass == 'flightTravellers' && 
-//             <>
-//               <span>
-//                 <span className='font30 strongBold-text'>{"4"}</span>
-//                 {" Travellers"}
-//               </span>
-//             </>
-//           }
-//         </p>
-//         <p>{lastParaValue}</p>
-//       </label>
-//     </div>
-//   )
-// }
 
 export default FlightsContent

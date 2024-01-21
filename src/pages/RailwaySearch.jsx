@@ -167,6 +167,7 @@ function FilterPortal({portalRef, filters, handleFIlters, setShowFilterPortal}){
     <>
       {
         createPortal(
+          <div style={{position: "fixed", zIndex: '1000', width: '100vw', height: '100vh', backdropFilter: "blur(5px)", left: '0', top: '0'}}>
           <div onClick={(e)=>{
             e.stopPropagation()
           }} ref={myElementRef} className='show-filter-portal-container'>
@@ -207,6 +208,7 @@ function FilterPortal({portalRef, filters, handleFIlters, setShowFilterPortal}){
                 }} className='filter-apply-btn'>close</div>
               </div>
             </div>
+          </div>
           </div>
           ,
           document.body
